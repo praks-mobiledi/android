@@ -43,9 +43,9 @@ public class RestfulService extends Service{
   			json=json.concat("]");	
   			String toSendJSON = json.substring(0, 1) + json.substring(1 + 1);	
   			Log.d("App Detail",+ toSendJSON.length()+toSendJSON);
-  			//new RestRequest("http://192.168.1.2:8080/appstrender_service/appstrender/appdata/insert/makaa", toSendJSON);
-  			new RestRequest("http://192.168.1.2:8080/appstrender_service/appstrender/appdata/insert/makaa", "[{\"appName\":\"JUST A TEST MAN\",\"timeStamp\":null,\"carrier\":null,\"category\":\"Downloaded\",\"deviceId\":\"23nznzhujh132\",\"sent\":0,\"recieved\":0,\"phoneNum\":0,\"appUid\":10085}]");
-  		  
+  			new RestRequest("http://192.168.43.180:8080/appstrender_service/appstrender/appdata/insert/makaa", toSendJSON);
+  		//	new RestRequest("http://192.168.43.180:8080/appstrender_service/appstrender/appdata/insert/makaa", "[{\"appName\":\"Testing Purpose\",\"timeStamp\":null,\"carrier\":\"CHOKOMO\",\"category\":\"Downloaded\",\"deviceId\":\"45544sdf6df5sdf54sd8\",\"sent\":3654,\"recieved\":5478,\"phoneNum\":78964412,\"appUid\":1095}]");
+	
 		  }
 		  catch (Exception e){
 			 Log.d("ERROR",e.getMessage()); 

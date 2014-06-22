@@ -14,7 +14,7 @@ public class MyScheduleReceiver extends BroadcastReceiver {
 
   @Override
   public void onReceive(Context context, Intent intent) {
-    AlarmManager service = (AlarmManager) context
+    /*AlarmManager service = (AlarmManager) context
         .getSystemService(Context.ALARM_SERVICE);
     Intent i = new Intent(context, MyStartServiceReceiver.class);
     PendingIntent pending = PendingIntent.getBroadcast(context, 0, i,
@@ -25,10 +25,19 @@ public class MyScheduleReceiver extends BroadcastReceiver {
     // fetch every 30 seconds
     // InexactRepeating allows Android to optimize the energy consumption
     service.setInexactRepeating(AlarmManager.RTC_WAKEUP,
-        cal.getTimeInMillis(), REPEAT_TIME, pending);
+        cal.getTimeInMillis(), REPEAT_TIME, pending);*/
 
     // service.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(),
     // REPEAT_TIME, pending);
 
+    Calendar cur_cal = Calendar.getInstance();
+	Intent intent1 = new Intent(context, MyStartServiceReceiver.class);
+	PendingIntent pintent = PendingIntent.getBroadcast(context, 0, intent1, 0);
+	AlarmManager alarm = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+	alarm.setRepeating(AlarmManager.RTC_WAKEUP, cur_cal.getTimeInMillis(), 10*1000, pintent);
+    
+    
+    
+    
   }
 } 
