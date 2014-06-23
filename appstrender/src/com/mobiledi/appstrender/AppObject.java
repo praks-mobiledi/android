@@ -2,12 +2,16 @@ package com.mobiledi.appstrender;
 
 import java.sql.Timestamp;
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+
 import android.graphics.drawable.Drawable;
 
-
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class AppObject {
+	
 	@JsonIgnore
 	int id=0;
+	
 	String appName;
 	int appUid;
 	String carrier;
