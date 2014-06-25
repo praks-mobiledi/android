@@ -1,11 +1,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:sord.ids_connect="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.mobiledi.appstrender.Home" >
 
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
-        android:showAsAction="never"
+        android:showAsAction="withText"
         android:title="@string/action_settings"/>
+    <item android:id="@+id/item1" android:title="All Apps Usage" />
 
 </menu>

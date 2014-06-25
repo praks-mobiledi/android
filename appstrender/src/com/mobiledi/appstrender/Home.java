@@ -12,6 +12,7 @@ import android.os.IBinder;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.view.Menu;
 import android.widget.Toast;
 
 import com.mobiledi.appstrender.adapters.TabsPagerAdapter;
@@ -32,8 +33,9 @@ ActionBar.TabListener{
         setContentView(R.layout.activity_home);
         Intent i= new Intent(Home.this,RestfulService.class);
         startService(i);
+        UpdateTabs();
        // Initilization
-        viewPager = (ViewPager) findViewById(R.id.pager);
+/*        viewPager = (ViewPager) findViewById(R.id.pager);
         actionBar = getActionBar();
         mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
  
@@ -44,8 +46,40 @@ ActionBar.TabListener{
         for (String tab_name : tabs) {
             actionBar.addTab(actionBar.newTab().setText(tab_name)
                     .setTabListener(this));
-        }  
+        } */
+  
        }
+    
+    public void UpdateTabs(){
+    	
+        viewPager = (ViewPager) findViewById(R.id.pager);
+        actionBar = getActionBar();
+        mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
+ 
+        viewPager.setAdapter(mAdapter);
+       actionBar.setHomeButtonEnabled(false);
+       
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);        
+        // Adding Tabs
+        for (String tab_name : tabs) {
+            actionBar.addTab(actionBar.newTab().setText(tab_name)
+                    .setTabListener(this));
+        } 
+        
+     /////////   
+        
+        viewPager
+        .setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                actionBar.setSelectedNavigationItem(position);
+            }
+        });  
+        
+    /////////////	
+        
+    	
+    }
 
     @Override
     protected void onResume() {
@@ -119,10 +153,23 @@ ActionBar.TabListener{
 	public void onTabSelected(Tab arg0, FragmentTransaction arg1) {
 		// TODO Auto-generated method stub
 		Log.d("Tab", arg0.toString());
-		
+		viewPager.setCurrentItem(arg0.getPosition());
 		
 	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// TODO Auto-generated method stub
+		//inflater.inflate(R.menu.home, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
+
+
+	
 }
+
+
+
 /*  @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

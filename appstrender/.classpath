@@ -6,5 +6,6 @@
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry kind="lib" path="F:/Programming/Android/adt-bundle-windows-x86_64-20131030/sdk/extras/android/support/v4/android-support-v4.jar" sourcepath=""/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
+	<classpathentry exported="true" kind="lib" path="F:/Mobile-Di/Installers/Android/achartengine-1.1.0.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
