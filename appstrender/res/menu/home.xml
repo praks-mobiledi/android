@@ -8,6 +8,7 @@
         android:orderInCategory="100"
         android:showAsAction="withText"
         android:title="@string/action_settings"/>
-    <item android:id="@+id/item1" android:title="All Apps Usage" />
+    <item android:id="@+id/allApps" 
+        android:title="All Apps Usage" />
 
 </menu>

@@ -45,7 +45,7 @@ public class RestfulService extends Service{
   			Log.d("App Detail",+ toSendJSON.length()+toSendJSON);
   			//new RestRequest("http://192.168.43.180:8080/appstrender_service/appstrender/appdata/insert/makaa", toSendJSON);
   			//new RestRequest("http://192.168.1.2:8080/appstrender_service/appstrender/appdata/readAll/Xperia_l", "[{\"appName\":\"Testing Purpose\",\"timeStamp\":null,\"carrier\":\"CHOKOMO\",\"category\":\"Downloaded\",\"deviceId\":\"45544sdf6df5sdf54sd8\",\"sent\":3654,\"recieved\":5478,\"phoneNum\":78964412,\"appUid\":1095}]","POSTING");
-  			new RestRequest("http://192.168.1.3:8080/appstrender_service/appstrender/appdata/readAll/23nznzhujh132", "JUST a messaghe","GETTING");
+  			new RestRequest("http://192.168.1.4:8080/appstrender_service/appstrender/appdata/readAll/23nznzhujh132", "JUST a messaghe","GETTING");
   			
   			
 		  }
