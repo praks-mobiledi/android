@@ -58,6 +58,6 @@ public class ShowPieChart {
             renderer.setDisplayValues(true);
            
             Intent intent= ChartFactory.getPieChartIntent(context, series, renderer, AppName);
-        context.startActivity(intent);
+            context.startActivity(intent);
 	}
     }

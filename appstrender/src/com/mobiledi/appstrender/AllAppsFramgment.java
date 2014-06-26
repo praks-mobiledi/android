@@ -2,6 +2,7 @@ package com.mobiledi.appstrender;
 
 import java.util.ArrayList;
 
+import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -20,6 +21,7 @@ import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 
 import com.mobiledi.appstrender.adapters.CustomAdapter;
+import com.mobiledi.appstrender.datausagetabs.DataUsageTabs;
 import com.mobiledi.appstrender.graph.ShowBarChart;
 import com.mobiledi.appstrender.graph.ShowPieChart;
 
@@ -70,7 +72,7 @@ public class AllAppsFramgment extends Fragment {
 					 */
 
 					// ///////
-if(returnedList.get(arg2).getSent()!=0){
+/*if(returnedList.get(arg2).getSent()!=0){
 	ShowPieChart showPie = new ShowPieChart(getActivity(),
 			returnedList.get(arg2));
 	showPie.openChart();	
@@ -78,7 +80,9 @@ if(returnedList.get(arg2).getSent()!=0){
 else {
 	Toast.makeText(getActivity(),returnedList.get(arg2).getAppName()+" have no data Usage History", Toast.LENGTH_LONG).show();
 	
-}
+}*/
+					Intent s=new Intent(getActivity(),DataUsageTabs.class);
+					startActivity(s);
 
 					// ////////////s
 
@@ -103,10 +107,6 @@ else {
 
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
-		/*
-		 * AdapterContextMenuInfo info = (AdapterContextMenuInfo) item
-		 * .getMenuInfo();
-		 */
 
 		switch (item.getItemId()) {
 		case R.id.allApps:

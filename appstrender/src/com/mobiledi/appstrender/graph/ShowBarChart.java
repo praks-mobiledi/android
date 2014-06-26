@@ -3,6 +3,7 @@ package com.mobiledi.appstrender.graph;
 import java.util.ArrayList;
 
 import org.achartengine.ChartFactory;
+import org.achartengine.GraphicalView;
 import org.achartengine.chart.BarChart.Type;
 import org.achartengine.model.XYMultipleSeriesDataset;
 import org.achartengine.model.XYSeries;
@@ -69,7 +70,7 @@ public class ShowBarChart{
         
   
     
-    public void openChart(){
+    public GraphicalView openChart(){
     	// Creating an  XYSeries for Income
     	//CategorySeries incomeSeries = new CategorySeries("Income");
     	XYSeries incomeSeries = new XYSeries("Sent");
@@ -121,13 +122,13 @@ public class ShowBarChart{
     	// should be same
     	multiRenderer.addSeriesRenderer(sentRenderer);
     	multiRenderer.addSeriesRenderer(recievedRenderer);
-    	
+    	//ChartFactory.getBarChartView(context, dataset, multiRenderer, type)
     	// Creating an intent to plot bar chart using dataset and multipleRenderer    	
-    	Intent intent = ChartFactory.getBarChartIntent(basecon, dataset, multiRenderer, Type.DEFAULT);
+    	/////Intent intent = ChartFactory.getBarChartIntent(basecon, dataset, multiRenderer, Type.DEFAULT);
     	
-    	// Start Activity
-    	basecon.startActivity(intent);
-    	
+    	///// Start Activity
+    	/////basecon.startActivity(intent);
+    	return ChartFactory.getBarChartView(basecon, dataset, multiRenderer, Type.STACKED);
     }
 
 }
