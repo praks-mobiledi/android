@@ -8,45 +8,45 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import org.codehaus.jackson.map.ObjectMapper;
 
 import com.mobiledi.appstrender.AppObject;
 
+import android.app.DownloadManager.Request;
 import android.os.AsyncTask;
 import android.util.Log;
 
 //do this wherever you are wanting to POST
 public class RestRequest {
-	
+	public ArrayList<AppObject> returnObject;
 	private String tosendJSON;
 	private String url;
 	private String MODE; // 1=post,2=get,3=put,4=delete;
-
-	public RestRequest(String _url, String _tosendJSON,String _MODE) {
+ 	public RestRequest(String _url, String _tosendJSON,String _MODE) throws InterruptedException, ExecutionException {
 		// TODO Auto-generated constructor stub
 		this.url = _url;
 		this.tosendJSON = _tosendJSON;
 		this.MODE=_MODE;
 		
-		MakeRequest request= new MakeRequest();
+		final MakeRequest request= new MakeRequest();
 		request.execute(url,tosendJSON,MODE);
+		returnObject=request.get();
 		Log.d(_url, tosendJSON);
 	}
 	
-	
-	
-	
 }
 
-class MakeRequest extends AsyncTask<String,Void,String> {
+class MakeRequest extends AsyncTask<String,Void,ArrayList<AppObject>> {
 	//String url;
 	//static String tosendJSON;
 	HttpURLConnection urlConnection = null;
-	
+	ArrayList<AppObject> returnObject;
+
 
 	@Override
-	protected String doInBackground(String... url) {
+	protected ArrayList<AppObject> doInBackground(String... url) {
 		//super.onPostExecute(result)
 		
 		if(url[2]=="POSTING"){ //POST OPERATION
@@ -78,7 +78,7 @@ class MakeRequest extends AsyncTask<String,Void,String> {
 			e.printStackTrace();
 		}
 		// handle issues
-		
+		 return null;
 		
 		} /// END POST OPERATION
 		if(url[2]=="GETTING"){ //GET OPERATION
@@ -105,12 +105,12 @@ class MakeRequest extends AsyncTask<String,Void,String> {
                    // Append Server Response To Content String 
                  String Content = sb.toString();
                  ObjectMapper mapper=new ObjectMapper();
-                 List<AppObject> myObjects = mapper.readValue(Content, mapper.getTypeFactory().constructCollectionType(List.class, AppObject.class));
+                 ArrayList<AppObject> myObjects = mapper.readValue(Content, mapper.getTypeFactory().constructCollectionType(List.class, AppObject.class));
                  
-                 
-                 for(int i=0;i<myObjects.size();i++){
+                 return myObjects;
+                /* for(int i=0;i<myObjects.size();i++){
                 	 Log.d(myObjects.get(i).getAppName(),String.valueOf(myObjects.get(i).getAppUid()));
-                 }
+                 }*/
                  
                  //Log.d("The Content from DB Content", Content);
               
@@ -133,12 +133,15 @@ class MakeRequest extends AsyncTask<String,Void,String> {
 			
 			
 		}
+		return null;
 			
 		
-		return null;
+		//return null;
 	}
+
 	@Override
-	protected void onPostExecute(String n) {
+	protected void onPostExecute(ArrayList<AppObject> result) {
+		//RestRequest.returnObject=result;
 		if (urlConnection != null) {
 			urlConnection.disconnect();
 		}

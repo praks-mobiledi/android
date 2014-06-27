@@ -2,6 +2,7 @@ package com.mobiledi.appstrender.datausagetabs;
 
 import org.achartengine.GraphicalView;
 
+import com.mobiledi.appstrender.AllAppsFramgment;
 import com.mobiledi.appstrender.PInfo;
 import com.mobiledi.appstrender.R;
 import com.mobiledi.appstrender.graph.ShowBarChart;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 public class WeekFragments extends Fragment {
 
@@ -21,7 +23,7 @@ public class WeekFragments extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.fragment_alldata, container,
+		View rootView = inflater.inflate(R.layout.fragment_week, container,
 				false);
 		// setHasOptionsMenu(true);
 		return rootView;
@@ -31,22 +33,18 @@ public class WeekFragments extends Fragment {
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onViewCreated(view, savedInstanceState);
-		try {
-			ShowBarChart s= new ShowBarChart(getActivity(), new PInfo(getActivity())
-						.getInstalledComponentList(0));
-		
-		GraphicalView Gv=s.openChart();
-		
-		LinearLayout layout = (LinearLayout) getActivity().findViewById(R.id.dashboard_chart_layout);	    
-	    //layout.removeAllViews();
-	    layout.addView(Gv, new LayoutParams(960,LayoutParams.MATCH_PARENT));
-		
-		
-		
-		} catch (NameNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		if(AllAppsFramgment.responseAppsList.size()>0){
+			ShowBarChart s= new ShowBarChart(getActivity(), AllAppsFramgment.responseAppsList);
+			GraphicalView Gv=s.openChart();
+			LinearLayout layout = (LinearLayout) getActivity().findViewById(R.id.dashboard_chart_layoutWeek);	    
+			layout.removeAllViews();
+			layout.addView(Gv, new LayoutParams(960,LayoutParams.MATCH_PARENT));
+			}
+			else {
+				Toast.makeText(getActivity(), "No Data to Display", Toast.LENGTH_LONG).show();
+			}
+			
+			
 		
 	}
 }

@@ -1,6 +1,7 @@
 package com.mobiledi.appstrender;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -24,8 +25,10 @@ import com.mobiledi.appstrender.adapters.CustomAdapter;
 import com.mobiledi.appstrender.datausagetabs.DataUsageTabs;
 import com.mobiledi.appstrender.graph.ShowBarChart;
 import com.mobiledi.appstrender.graph.ShowPieChart;
+import com.mobiledi.appstrender.service.RestRequest;
 
 public class AllAppsFramgment extends Fragment {
+	public static ArrayList<AppObject> responseAppsList;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -124,4 +127,25 @@ else {
 		}
 		return false;
 	}
+
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onActivityCreated(savedInstanceState);
+		RestRequest getRequest;
+		try {
+			getRequest = new RestRequest("http://192.168.1.3:8080/appstrender_service/appstrender/appdata/readAll/Xperia_l", "JUST a messaghe","GETTING");
+			responseAppsList=getRequest.returnObject;
+			
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
 }

@@ -5,7 +5,7 @@
     android:orientation="vertical" >
 
     <LinearLayout 
-		android:id="@+id/dashboard_chart_layout"
+		android:id="@+id/dashboard_chart_layoutmonth"
 		android:orientation="horizontal"
 		android:layout_width="fill_parent"
 		android:layout_height="0dp"
