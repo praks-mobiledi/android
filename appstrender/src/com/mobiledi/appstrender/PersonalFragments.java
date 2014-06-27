@@ -12,30 +12,34 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-public class PersonalFragments  extends Fragment {
- 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
- 
-        View rootView = inflater.inflate(R.layout.fragment_personal, container, false);
-         
-        return rootView;
-    }
+public class PersonalFragments extends Fragment {
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+
+		View rootView = inflater.inflate(R.layout.fragment_personal, container,
+				false);
+
+		return rootView;
+	}
+
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onViewCreated(view, savedInstanceState);
-		 ListView mainLV=(ListView)getView().findViewById(R.id.mainLvP);
-	        
-	        try {
-	    			ArrayList<AppObject> returnedList= new PInfo(getActivity()).getInstalledComponentList(2);
-	    			CustomAdapter adapter= new CustomAdapter(getActivity(),returnedList,R.layout.single_row);
-	    		    mainLV.setAdapter(adapter); 
-	}catch (NameNotFoundException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
+		ListView mainLV = (ListView) getView().findViewById(R.id.mainLvP);
+
+		try {
+			ArrayList<AppObject> returnedList = new PInfo(getActivity())
+					.getInstalledComponentList(2);
+			CustomAdapter adapter = new CustomAdapter(getActivity(),
+					returnedList, R.layout.single_row);
+			mainLV.setAdapter(adapter);
+		} catch (NameNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 }

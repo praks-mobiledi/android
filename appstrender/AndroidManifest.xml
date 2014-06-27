@@ -27,17 +27,17 @@
         </activity>
 
         <service
-            android:name="com.mobiledi.appstrender.service.RestfulService"
+            android:name="com.mobiledi.appstrender.servicePUSH.UploadService"
             android:icon="@drawable/ic_launcher"
             android:singleUser="true" >
         </service>
 
-        <receiver android:name="com.mobiledi.appstrender.service.MyScheduleReceiver" >
+        <receiver android:name="com.mobiledi.appstrender.servicePUSH.PushTimerService" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-        <receiver android:name="com.mobiledi.appstrender.service.MyStartServiceReceiver" >
+        <receiver android:name="com.mobiledi.appstrender.servicePUSH.PushServiceStarter" >
         </receiver>
 	<activity
             android:name="com.mobiledi.appstrender.datausagetabs.DataUsageTabs"

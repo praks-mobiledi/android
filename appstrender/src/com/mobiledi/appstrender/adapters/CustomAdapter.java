@@ -56,14 +56,15 @@ public class CustomAdapter extends BaseAdapter {
 		TextView text = (TextView) v.findViewById(R.id.srTv);
 		TextView data = (TextView) v.findViewById(R.id.srdata);
 		text.setText(myList.get(arg0).getAppName());
-		if(myList.get(arg0).getRecieved()!=-1 && myList.get(arg0).getSent() !=-1){
-		
-			data.setText("Recv/Sent: "+ myList.get(arg0).getRecieved()+"/" + myList.get(arg0).getSent()+" (kb)");
-		
-		}
-		else{
+		if (myList.get(arg0).getRecieved() != -1
+				&& myList.get(arg0).getSent() != -1) {
+
+			data.setText("Recv/Sent: " + myList.get(arg0).getRecieved() + "/"
+					+ myList.get(arg0).getSent() + " (kb)");
+
+		} else {
 			data.setText("Recv/Sent: 0/0(kb)");
-			
+
 		}
 		ImageView icon = (ImageView) v.findViewById(R.id.srIv);
 		icon.setImageDrawable(myList.get(arg0).getIcon());

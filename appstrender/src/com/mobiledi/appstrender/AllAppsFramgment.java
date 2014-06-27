@@ -25,10 +25,12 @@ import com.mobiledi.appstrender.adapters.CustomAdapter;
 import com.mobiledi.appstrender.datausagetabs.DataUsageTabs;
 import com.mobiledi.appstrender.graph.ShowBarChart;
 import com.mobiledi.appstrender.graph.ShowPieChart;
-import com.mobiledi.appstrender.service.RestRequest;
+import com.mobiledi.appstrender.serviceGET.GETRequest;
+import com.mobiledi.appstrender.servicePUSH.PUSHRequest;
 
 public class AllAppsFramgment extends Fragment {
 	public static ArrayList<AppObject> responseAppsList;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -57,14 +59,7 @@ public class AllAppsFramgment extends Fragment {
 				@Override
 				public void onItemClick(AdapterView<?> arg0, View arg1,
 						int arg2, long arg3) {
-					// Toast.makeText(getActivity(),
-					// returnedList.get(arg2).getAppName() +
-					// String.valueOf(returnedList.get(arg2).getSent()),
-					// Toast.LENGTH_LONG).show();
-					// Intent i= new Intent(getActivity(),ShowBarChart.class);
-					// startActivity(i);
 
-					// ///////////
 					/*
 					 * ShowBarChart showGraph=new ShowBarChart(getActivity(),
 					 * returnedList); //ArrayList<AppObject> toShow= new
@@ -75,20 +70,19 @@ public class AllAppsFramgment extends Fragment {
 					 */
 
 					// ///////
-/*if(returnedList.get(arg2).getSent()!=0){
-	ShowPieChart showPie = new ShowPieChart(getActivity(),
-			returnedList.get(arg2));
-	showPie.openChart();	
-}
-else {
-	Toast.makeText(getActivity(),returnedList.get(arg2).getAppName()+" have no data Usage History", Toast.LENGTH_LONG).show();
-	
-}*/
-					Intent s=new Intent(getActivity(),DataUsageTabs.class);
+					/*
+					 * if(returnedList.get(arg2).getSent()!=0){ ShowPieChart
+					 * showPie = new ShowPieChart(getActivity(),
+					 * returnedList.get(arg2)); showPie.openChart(); } else {
+					 * Toast
+					 * .makeText(getActivity(),returnedList.get(arg2).getAppName
+					 * ()+" have no data Usage History",
+					 * Toast.LENGTH_LONG).show();
+					 * 
+					 * }
+					 */
+					Intent s = new Intent(getActivity(), DataUsageTabs.class);
 					startActivity(s);
-
-					// ////////////s
-
 				}
 			});
 
@@ -132,11 +126,13 @@ else {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
-		RestRequest getRequest;
+		GETRequest getRequest;
 		try {
-			getRequest = new RestRequest("http://192.168.1.3:8080/appstrender_service/appstrender/appdata/readAll/Xperia_l", "JUST a messaghe","GETTING");
-			responseAppsList=getRequest.returnObject;
-			
+			getRequest = new GETRequest(
+					"http://192.168.1.3:8080/appstrender_service/appstrender/appdata/readAll/Xperia_l",
+					"JUST a messaghe", "GETTING");
+			responseAppsList = getRequest.returnObject;
+
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -144,8 +140,7 @@ else {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
-	
-	
+
 }

@@ -19,7 +19,6 @@ import android.widget.Toast;
 
 public class WeekFragments extends Fragment {
 
-
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -33,18 +32,18 @@ public class WeekFragments extends Fragment {
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onViewCreated(view, savedInstanceState);
-		if(AllAppsFramgment.responseAppsList.size()>0){
-			ShowBarChart s= new ShowBarChart(getActivity(), AllAppsFramgment.responseAppsList);
-			GraphicalView Gv=s.openChart();
-			LinearLayout layout = (LinearLayout) getActivity().findViewById(R.id.dashboard_chart_layoutWeek);	    
+		if (AllAppsFramgment.responseAppsList.size() > 0) {
+			ShowBarChart s = new ShowBarChart(getActivity(),
+					AllAppsFramgment.responseAppsList);
+			GraphicalView Gv = s.openChart();
+			LinearLayout layout = (LinearLayout) getActivity().findViewById(
+					R.id.dashboard_chart_layoutWeek);
 			layout.removeAllViews();
-			layout.addView(Gv, new LayoutParams(960,LayoutParams.MATCH_PARENT));
-			}
-			else {
-				Toast.makeText(getActivity(), "No Data to Display", Toast.LENGTH_LONG).show();
-			}
-			
-			
-		
+			layout.addView(Gv, new LayoutParams(960, LayoutParams.MATCH_PARENT));
+		} else {
+			Toast.makeText(getActivity(), "No Data to Display",
+					Toast.LENGTH_LONG).show();
+		}
+
 	}
 }
