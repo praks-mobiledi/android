@@ -1,4 +1,4 @@
-package com.mobiledi.appstrender.servicePUSH;
+package com.mobiledi.appstrender.servicepush;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

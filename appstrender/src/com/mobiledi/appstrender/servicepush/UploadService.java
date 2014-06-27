@@ -1,8 +1,10 @@
-package com.mobiledi.appstrender.servicePUSH;
+package com.mobiledi.appstrender.servicepush;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import org.codehaus.jackson.map.ObjectMapper;
+import org.joda.time.DateTime;
 
 import android.app.Service;
 import android.content.Intent;
@@ -32,12 +34,14 @@ public class UploadService extends Service {
 		try {
 			ArrayList<AppObject> returnedList = new PInfo(getApplication()
 					.getApplicationContext()).getInstalledComponentList(0);
+			Timestamp ts=new Timestamp(new DateTime().getMillis());
 			// Log.d("Context",getApplicationContext().toString());
 			String json = "[";
 			for (int i = 0; i < returnedList.size(); i++) {
 				AppObject tempObj = returnedList.get(i);
-				tempObj.setDeviceId("23nznzhujh132");
-				tempObj.setCategory("System");
+				tempObj.setDeviceId("Xperia_M");
+				tempObj.setCategory("Downloaded/System");
+				tempObj.setTimeStamp(ts);
 				ObjectMapper mapper = new ObjectMapper();
 				json = json.concat("," + mapper.writeValueAsString(tempObj));
 			}
@@ -47,7 +51,7 @@ public class UploadService extends Service {
 
 			// SEND DATA TO SERVER
 			new PUSHRequest(
-					"http://192.168.1.3:8080/appstrender_service/appstrender/appdata/insert/datas",
+					"http://192.168.1.2:8080/appstrender_service/appstrender/appdata/insert/datas",
 					toSendJSON, "POSTING");
 
 			// new

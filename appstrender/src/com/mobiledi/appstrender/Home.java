@@ -16,7 +16,7 @@ import android.view.Menu;
 import android.widget.Toast;
 
 import com.mobiledi.appstrender.adapters.TabsPagerAdapter;
-import com.mobiledi.appstrender.servicePUSH.UploadService;
+import com.mobiledi.appstrender.servicepush.UploadService;
 
 public class Home extends FragmentActivity implements ActionBar.TabListener {
 	private ViewPager viewPager;

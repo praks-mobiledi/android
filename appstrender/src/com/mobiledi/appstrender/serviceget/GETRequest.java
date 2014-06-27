@@ -1,4 +1,4 @@
-package com.mobiledi.appstrender.serviceGET;
+package com.mobiledi.appstrender.serviceget;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

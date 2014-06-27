@@ -20,7 +20,7 @@ import com.mobiledi.appstrender.AppObject;
 import com.mobiledi.appstrender.PInfo;
 import com.mobiledi.appstrender.R;
 import com.mobiledi.appstrender.graph.ShowBarChart;
-import com.mobiledi.appstrender.servicePUSH.PUSHRequest;
+import com.mobiledi.appstrender.servicepush.PUSHRequest;
 
 import android.view.ViewGroup.LayoutParams;
 

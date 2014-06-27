@@ -25,8 +25,8 @@ import com.mobiledi.appstrender.adapters.CustomAdapter;
 import com.mobiledi.appstrender.datausagetabs.DataUsageTabs;
 import com.mobiledi.appstrender.graph.ShowBarChart;
 import com.mobiledi.appstrender.graph.ShowPieChart;
-import com.mobiledi.appstrender.serviceGET.GETRequest;
-import com.mobiledi.appstrender.servicePUSH.PUSHRequest;
+import com.mobiledi.appstrender.serviceget.GETRequest;
+import com.mobiledi.appstrender.servicepush.PUSHRequest;
 
 public class AllAppsFramgment extends Fragment {
 	public static ArrayList<AppObject> responseAppsList;
@@ -129,7 +129,7 @@ public class AllAppsFramgment extends Fragment {
 		GETRequest getRequest;
 		try {
 			getRequest = new GETRequest(
-					"http://192.168.1.3:8080/appstrender_service/appstrender/appdata/readAll/Xperia_l",
+					"http://192.168.1.2:8080/appstrender_service/appstrender/appdata/readAll/Xperia_l",
 					"JUST a messaghe", "GETTING");
 			responseAppsList = getRequest.returnObject;
 

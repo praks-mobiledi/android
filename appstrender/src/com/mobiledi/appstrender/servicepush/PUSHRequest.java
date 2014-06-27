@@ -1,4 +1,4 @@
-package com.mobiledi.appstrender.servicePUSH;
+package com.mobiledi.appstrender.servicepush;
 
 import java.io.BufferedReader;
 import java.io.IOException;
