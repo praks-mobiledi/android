@@ -1,28 +1,18 @@
 package com.mobiledi.appstrender.datausagetabs;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.ExecutionException;
-
 import org.achartengine.GraphicalView;
-
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.mobiledi.appstrender.AllAppsFramgment;
-import com.mobiledi.appstrender.AppObject;
-import com.mobiledi.appstrender.PInfo;
 import com.mobiledi.appstrender.R;
 import com.mobiledi.appstrender.graph.ShowBarChart;
-import com.mobiledi.appstrender.servicepush.PUSHRequest;
-
-import android.view.ViewGroup.LayoutParams;
 
 public class AllDataFramgment extends Fragment {
 

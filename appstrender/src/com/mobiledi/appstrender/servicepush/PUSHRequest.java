@@ -9,12 +9,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
-
 import org.codehaus.jackson.map.ObjectMapper;
-
 import com.mobiledi.appstrender.AppObject;
-
-import android.app.DownloadManager.Request;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -47,33 +43,38 @@ class MakeRequest extends AsyncTask<String, Void, ArrayList<AppObject>> {
 	@Override
 	protected ArrayList<AppObject> doInBackground(String... url) {
 		// super.onPostExecute(result)
-
+Log.d("Value of URL 1:" , url[1]);
 		if (url[2] == "POSTING") { // POST OPERATION
 
 			try {
 				URL urlToRequest = new URL(url[0]);
-				urlConnection = (HttpURLConnection) urlToRequest
-						.openConnection();
+				
+				urlConnection = (HttpURLConnection) urlToRequest.openConnection();
 				if (url[1] != null) {
 					urlConnection.setDoOutput(true);
 					urlConnection.setRequestMethod("POST");
-					urlConnection
-							.setFixedLengthStreamingMode(url[1].getBytes().length);
-					urlConnection.setRequestProperty("Content-Type",
-							"application/json");
-					urlConnection.setReadTimeout(5 * 1000);
+					//System.setProperty("http.keepAlive", "false");
+					urlConnection.setFixedLengthStreamingMode(url[1].getBytes().length);
+					Log.d("BYTES LENGTH", String.valueOf(url[1].getBytes().length));
+					urlConnection.setRequestProperty("Content-Type","application/json");
+					urlConnection.setReadTimeout(30 * 1000);
 					PrintWriter out;
 					out = new PrintWriter(urlConnection.getOutputStream());
 					out.print(url[1]);
-					/*
-					 * int statusCode = urlConnection.getResponseCode(); if
-					 * (statusCode != HttpURLConnection.HTTP_OK) {
-					 * Log.d("ASync Task", "Something Wrong"); // throw some
-					 * exception }
-					 */
+					out.flush();
+					int statusCode = urlConnection.getResponseCode(); 
+					if(statusCode != HttpURLConnection.HTTP_OK) {
+						Log.d("ASync Task", "Something Wrong"); // throw some  exception 
+					  }
+					 
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
+			}
+			finally{
+				if (urlConnection != null) {
+					urlConnection.disconnect();
+				}
 			}
 			// handle issues
 			return null;

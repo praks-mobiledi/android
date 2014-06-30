@@ -44,7 +44,9 @@ public class MonthFragment extends Fragment {
 			for(AppObject x: AllAppsFramgment.responseAppsList){
 				if(x.getTimeStamp().after(new Timestamp(new DateTime().minusMonths(1).getMillis()))){
 					
-				toplot.add(x);
+				
+					
+					toplot.add(x);
 					
 					//Log.d("t1",x.getTimeStamp().toString());
 				Log.d("t2",new Timestamp(new DateTime().minusMonths(1).getMillis()).toString());//after

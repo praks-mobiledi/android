@@ -13,24 +13,23 @@ import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Toast;
-import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.mobiledi.appstrender.adapters.CustomAdapter;
 import com.mobiledi.appstrender.datausagetabs.DataUsageTabs;
 import com.mobiledi.appstrender.graph.ShowBarChart;
 import com.mobiledi.appstrender.graph.ShowPieChart;
 import com.mobiledi.appstrender.serviceget.GETRequest;
-import com.mobiledi.appstrender.servicepush.PUSHRequest;
 
 public class AllAppsFramgment extends Fragment {
 	public static ArrayList<AppObject> responseAppsList;
-
+ ImageButton allGraph;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -47,7 +46,9 @@ public class AllAppsFramgment extends Fragment {
 		super.onViewCreated(view, savedInstanceState);
 		ListView mainLV = (ListView) getView().findViewById(R.id.mainLv);
 		registerForContextMenu(mainLV);
-		// setHasOptionsMenu(true);
+		allGraph=(ImageButton) getView().findViewById(R.id.imageButton1);
+		
+				// setHasOptionsMenu(true);
 		try {
 			final ArrayList<AppObject> returnedList = new PInfo(getActivity())
 					.getInstalledComponentList(0);
@@ -70,19 +71,18 @@ public class AllAppsFramgment extends Fragment {
 					 */
 
 					// ///////
-					/*
-					 * if(returnedList.get(arg2).getSent()!=0){ ShowPieChart
-					 * showPie = new ShowPieChart(getActivity(),
-					 * returnedList.get(arg2)); showPie.openChart(); } else {
-					 * Toast
-					 * .makeText(getActivity(),returnedList.get(arg2).getAppName
-					 * ()+" have no data Usage History",
-					 * Toast.LENGTH_LONG).show();
-					 * 
-					 * }
-					 */
-					Intent s = new Intent(getActivity(), DataUsageTabs.class);
-					startActivity(s);
+					
+					  if(returnedList.get(arg2).getSent()!=0){ 
+						  ShowPieChart  showPie = new ShowPieChart(getActivity(),returnedList.get(arg2)); showPie.openChart(); } else {
+					  Toast
+					  .makeText(getActivity(),returnedList.get(arg2).getAppName
+					 ()+" have no data Usage History",
+					  Toast.LENGTH_LONG).show();
+					 
+					  }
+					 
+					//Intent s = new Intent(getActivity(), DataUsageTabs.class);
+					//startActivity(s);
 				}
 			});
 
@@ -90,7 +90,15 @@ public class AllAppsFramgment extends Fragment {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+allGraph.setOnClickListener(new OnClickListener() {
+	
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		Intent s = new Intent(getActivity(), DataUsageTabs.class);
+		startActivity(s);
+	}
+});
 	}
 
 	@Override
@@ -129,8 +137,8 @@ public class AllAppsFramgment extends Fragment {
 		GETRequest getRequest;
 		try {
 			getRequest = new GETRequest(
-					"http://192.168.1.2:8080/appstrender_service/appstrender/appdata/readAll/Xperia_l",
-					"JUST a messaghe", "GETTING");
+					"http://192.168.1.3:8080/appstrender_service/appstrender/appdata/readAll/Xperia_M",
+					"JUST a message", "GETTING");
 			responseAppsList = getRequest.returnObject;
 
 		} catch (InterruptedException e) {

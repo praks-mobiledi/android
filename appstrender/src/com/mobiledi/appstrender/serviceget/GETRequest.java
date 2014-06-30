@@ -75,6 +75,11 @@ class MakeRequest extends AsyncTask<String, Void, ArrayList<AppObject>> {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			finally{
+				if (urlConnection != null) 
+					urlConnection.disconnect();
+				
+			}
 
 		}
 		return null;

@@ -41,7 +41,6 @@ public class DataUsageTabs extends FragmentActivity implements
 						actionBar.setSelectedNavigationItem(position);
 					}
 				});
-
 	}
 
 	@Override

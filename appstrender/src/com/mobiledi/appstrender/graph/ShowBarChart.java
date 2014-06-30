@@ -25,13 +25,15 @@ public class ShowBarChart {
 	int recieved[];
 	int[] count;
 	String[] appName;
-
+	int totalS=0,totalR=0;
 	public ShowBarChart(Context context, ArrayList<AppObject> filledList) {
 		// TODO Auto-generated constructor stub
 		this.basecon = context;
 		for (AppObject x : filledList) {
 			if (x.getSent() != 0) {
 				this.returnedList.add(x);
+				this.totalS= (int) (this.totalS+x.getSent());
+				this.totalR=(int) (this.totalR+x.getRecieved());
 			}
 		}
 		setVariables();
@@ -43,12 +45,12 @@ public class ShowBarChart {
 		sent = new int[size];
 		recieved = new int[size];
 		count = new int[size];
-
+		
 		for (int i = 0; i < returnedList.size(); i++) {
 
 			appName[i] = returnedList.get(i).getAppName();
-			sent[i] = (int) returnedList.get(i).getSent();
-			recieved[i] = (int) returnedList.get(i).getRecieved();
+			sent[i] = (int) ((returnedList.get(i).getSent()*100)/totalS);
+			recieved[i] = (int) ((returnedList.get(i).getRecieved()*100)/totalR);
 			count[i] = i;
 		}
 		// openChart();
@@ -66,9 +68,9 @@ public class ShowBarChart {
 	public GraphicalView openChart() {
 		// Creating an XYSeries for Income
 		// CategorySeries incomeSeries = new CategorySeries("Income");
-		XYSeries incomeSeries = new XYSeries("Sent");
+		XYSeries incomeSeries = new XYSeries("Sent in  %");
 		// Creating an XYSeries for Income
-		XYSeries expenseSeries = new XYSeries("Recieved");
+		XYSeries expenseSeries = new XYSeries("Recieved in %");
 		// Adding data to Income and Expense Series
 		for (int i = 0; i < count.length; i++) {
 			incomeSeries.add(i, sent[i]);
@@ -101,7 +103,7 @@ public class ShowBarChart {
 		multiRenderer.setXLabels(0);
 		multiRenderer.setChartTitle("Data Usage");
 		multiRenderer.setXTitle("An Application");
-		multiRenderer.setYTitle("Data in Kilobytes");
+		multiRenderer.setYTitle("Data Usage in %");
 		multiRenderer.setZoomButtonsVisible(true);
 		for (int i = 0; i < count.length; i++) {
 			multiRenderer.addXTextLabel(i, appName[i]);

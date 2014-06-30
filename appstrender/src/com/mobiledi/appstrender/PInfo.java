@@ -16,7 +16,6 @@ public class PInfo {
 	Context con;
 	// List<String> listOfApps;
 	ArrayList<AppObject> listofApps = new ArrayList<AppObject>();
-
 	public PInfo(Context _con) {
 		con = _con;
 		// getInstalledComponentList();

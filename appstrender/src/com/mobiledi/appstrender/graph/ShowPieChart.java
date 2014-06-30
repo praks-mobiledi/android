@@ -38,7 +38,7 @@ public class ShowPieChart {
 		series.add("Recieved", dataUsage[1]);
 		// series.add("Email",Performance[2]);
 		// add three colors for three series respectively
-		int[] colors = new int[] { Color.BLUE, Color.GRAY };
+		int[] colors = new int[] { Color.BLUE, Color.LTGRAY };
 		// set style for series
 		DefaultRenderer renderer = new DefaultRenderer();
 		for (int color : colors) {
@@ -60,6 +60,7 @@ public class ShowPieChart {
 		renderer.setShowLabels(true);
 		renderer.setLabelsTextSize(20);
 		renderer.setLegendTextSize(25);
+		
 		renderer.setDisplayValues(true);
 
 		Intent intent = ChartFactory.getPieChartIntent(context, series,
