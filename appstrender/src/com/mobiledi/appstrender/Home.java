@@ -51,6 +51,7 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
 
 	public void UpdateTabs() {
 
+		
 		viewPager = (ViewPager) findViewById(R.id.pager);
 		actionBar = getActionBar();
 		mAdapter = new TabsPagerAdapter(getSupportFragmentManager());

@@ -137,7 +137,7 @@ allGraph.setOnClickListener(new OnClickListener() {
 		GETRequest getRequest;
 		try {
 			getRequest = new GETRequest(
-					"http://192.168.1.3:8080/appstrender_service/appstrender/appdata/readAll/Xperia_M",
+					"http://192.168.1.2:8080/appstrender_service/appstrender/appdata/readAll/Xperia_M",
 					"JUST a message", "GETTING");
 			responseAppsList = getRequest.returnObject;
 

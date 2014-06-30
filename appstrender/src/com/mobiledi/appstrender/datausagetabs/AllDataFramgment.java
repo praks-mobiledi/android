@@ -35,7 +35,7 @@ public class AllDataFramgment extends Fragment {
 		 * , "JUST a messaghe","GETTING"); ArrayList<AppObject>
 		 * objs=getRequest.returnObject;
 		 */
-		if (AllAppsFramgment.responseAppsList.size() > 0) {
+		if (AllAppsFramgment.responseAppsList.size() > 0 && AllAppsFramgment.responseAppsList!=null) {
 			ShowBarChart s = new ShowBarChart(getActivity(),
 					AllAppsFramgment.responseAppsList);
 			GraphicalView Gv = s.openChart();
