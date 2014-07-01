@@ -73,7 +73,10 @@ public class AllAppsFramgment extends Fragment {
 					// ///////
 					
 					  if(returnedList.get(arg2).getSent()!=0){ 
-						  ShowPieChart  showPie = new ShowPieChart(getActivity(),returnedList.get(arg2)); showPie.openChart(); } else {
+						  ShowPieChart  showPie = new ShowPieChart(getActivity(),returnedList.get(arg2));
+						  showPie.openChart(); 
+						  }
+					  else {
 					  Toast
 					  .makeText(getActivity(),returnedList.get(arg2).getAppName
 					 ()+" have no data Usage History",

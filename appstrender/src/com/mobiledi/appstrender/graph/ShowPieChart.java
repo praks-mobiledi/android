@@ -54,8 +54,15 @@ public class ShowPieChart {
 		renderer.setZoomButtonsVisible(true); // set zoom button in Graph
 		renderer.setApplyBackgroundColor(true);
 		renderer.setBackgroundColor(Color.BLACK); // set background color
-		renderer.setChartTitle("Total Data Usage by :" + AppName + " "
-				+ (dataUsage[0] + dataUsage[1]) / 1024 + "MB");
+		int x=dataUsage[0] + dataUsage[1];
+		int check=x/1048576;
+		if(check>0)
+		renderer.setChartTitle("Total Data Usage by " + AppName + ": "
+				+ (check + "MB"));
+		else {
+			renderer.setChartTitle("Total Data Usage by " + AppName + ": "
+					+ (x/1024 + "KB"));
+		}		
 		renderer.setChartTitleTextSize((float) 25);
 		renderer.setShowLabels(true);
 		renderer.setLabelsTextSize(20);

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.mobiledi.appstrender.adapters.CustomAdapter;
 import com.mobiledi.appstrender.datausagetabs.DataUsageTabs;
+import com.mobiledi.appstrender.graph.ShowPieChart;
 
 import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -13,8 +14,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class SocialFragment extends Fragment {
 	ImageButton allGraph;
@@ -37,11 +41,26 @@ public class SocialFragment extends Fragment {
 		ListView mainLV = (ListView) getView().findViewById(R.id.mainLvS);
 
 		try {
-			ArrayList<AppObject> returnedList = new PInfo(getActivity())
+			final ArrayList<AppObject> returnedList = new PInfo(getActivity())
 					.getInstalledComponentList(1);
 			CustomAdapter adapter = new CustomAdapter(getActivity(),
 					returnedList, R.layout.single_row);
 			mainLV.setAdapter(adapter);
+			mainLV.setOnItemClickListener(new OnItemClickListener() {
+
+				@Override
+				public void onItemClick(AdapterView<?> arg0, View arg1,
+						int arg2, long arg3) {
+					  if(returnedList.get(arg2).getSent()!=0){ 
+						  ShowPieChart  showPie = new ShowPieChart(getActivity(),returnedList.get(arg2)); showPie.openChart(); } else {
+					  Toast
+					  .makeText(getActivity(),returnedList.get(arg2).getAppName
+					 ()+" have no data Usage History",
+					  Toast.LENGTH_LONG).show(); 
+					  }
+
+				}
+			});
 		} catch (NameNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

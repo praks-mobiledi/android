@@ -102,9 +102,12 @@ public class ShowBarChart {
 		XYMultipleSeriesRenderer multiRenderer = new XYMultipleSeriesRenderer();
 		multiRenderer.setXLabels(0);
 		multiRenderer.setChartTitle("Data Usage");
-		multiRenderer.setXTitle("An Application");
+		multiRenderer.setXTitle("All Application");
 		multiRenderer.setYTitle("Data Usage in %");
 		multiRenderer.setZoomButtonsVisible(true);
+		multiRenderer.setPanEnabled(true, false);
+		multiRenderer.setXLabelsPadding(7);
+		
 		for (int i = 0; i < count.length; i++) {
 			multiRenderer.addXTextLabel(i, appName[i]);
 		}
@@ -123,8 +126,10 @@ public class ShowBarChart {
 
 		// /// Start Activity
 		// ///basecon.startActivity(intent);
+		//multiRenderer.set`
+		//ChartFactory.
 		return ChartFactory.getBarChartView(basecon, dataset, multiRenderer,
-				Type.STACKED);
+				Type.DEFAULT);
 	}
 
 }
