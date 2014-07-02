@@ -23,13 +23,14 @@ import android.widget.Toast;
 
 import com.mobiledi.appstrender.adapters.CustomAdapter;
 import com.mobiledi.appstrender.datausagetabs.DataUsageTabs;
+import com.mobiledi.appstrender.graph.PieChartActivity;
 import com.mobiledi.appstrender.graph.ShowBarChart;
 import com.mobiledi.appstrender.graph.ShowPieChart;
 import com.mobiledi.appstrender.serviceget.GETRequest;
 
 public class AllAppsFramgment extends Fragment {
 	public static ArrayList<AppObject> responseAppsList;
- ImageButton allGraph;
+	ImageButton allGraph;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -72,7 +73,7 @@ public class AllAppsFramgment extends Fragment {
 
 					// ///////
 					
-					  if(returnedList.get(arg2).getSent()!=0){ 
+			/*		  if(returnedList.get(arg2).getSent()!=0){ 
 						  ShowPieChart  showPie = new ShowPieChart(getActivity(),returnedList.get(arg2));
 						  showPie.openChart(); 
 						  }
@@ -82,10 +83,17 @@ public class AllAppsFramgment extends Fragment {
 					 ()+" have no data Usage History",
 					  Toast.LENGTH_LONG).show();
 					 
-					  }
+					  }*/
+					
+					/* if(returnedList.get(arg2).getSent()!=0){ 
+						 Intent i= new Intent(getActivity(),PieChartActivity.class);
+						 i.putExtra("Selected", String.valueOf(arg2));
+						 startActivity(i);
+						 
+					 }*/
 					 
-					//Intent s = new Intent(getActivity(), DataUsageTabs.class);
-					//startActivity(s);
+					Intent s = new Intent(getActivity(), PieChartActivity.class);
+					startActivity(s);
 				}
 			});
 
@@ -139,8 +147,7 @@ allGraph.setOnClickListener(new OnClickListener() {
 		super.onActivityCreated(savedInstanceState);
 		GETRequest getRequest;
 		try {
-			getRequest = new GETRequest(
-					"http://192.168.1.2:8080/appstrender_service/appstrender/appdata/readAll/Xperia_M",
+			getRequest = new GETRequest(Home.SERVER_URL_ADD+"readAll/Xperia_M",
 					"JUST a message", "GETTING");
 			responseAppsList = getRequest.returnObject;
 

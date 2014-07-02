@@ -7,7 +7,7 @@
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="19" />
-
+<uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
@@ -47,7 +47,9 @@
             android:name="com.mobiledi.appstrender.graph.ShowBarChart"
             android:label="Usage Graph" />
         <activity android:name="org.achartengine.GraphicalActivity" />
-
+ <activity
+            android:name="com.mobiledi.appstrender.graph.PieChartActivity"
+            android:label="Data Usage" />
     </application>
 
 </manifest>

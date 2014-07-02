@@ -7,11 +7,14 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.joda.time.DateTime;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import com.mobiledi.appstrender.AppObject;
+import com.mobiledi.appstrender.Home;
 import com.mobiledi.appstrender.PInfo;
 
 public class UploadService extends Service {
@@ -30,6 +33,8 @@ public class UploadService extends Service {
 	}
 
 	public int onStartCommand(Intent intent, int flags, int startId) {
+		TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE); 		
+		
 		Log.d("Prakash :", "This is a Timed Service");
 		try {
 			ArrayList<AppObject> returnedList = new PInfo(getApplication()
@@ -39,8 +44,10 @@ public class UploadService extends Service {
 			String json = "[";
 			for (int i = 0; i < returnedList.size(); i++) {
 				AppObject tempObj = returnedList.get(i);
-				tempObj.setDeviceId("Xperia_M");
-				tempObj.setCategory("System");
+				tempObj.setDeviceId(telephonyManager.getDeviceId());
+				tempObj.setCarrier(telephonyManager.getNetworkOperatorName());
+				tempObj.setCategory("Application");
+				tempObj.setPhoneNum(Integer.valueOf(telephonyManager.getLine1Number()));
 				tempObj.setTimeStamp(ts);
 				ObjectMapper mapper = new ObjectMapper();
 				json = json.concat("," + mapper.writeValueAsString(tempObj));
@@ -50,8 +57,7 @@ public class UploadService extends Service {
 			Log.d("App Detail", +toSendJSON.length() + toSendJSON);
 
 			// SEND DATA TO SERVER UnCOMMENT WHEN  in PRODUCTION
-			/*new PUSHRequest(
-					"http://192.168.1.3:8080/appstrender_service/appstrender/appdata/insert/datas",
+			/*new PUSHRequest(Home.SERVER_URL_ADD+"insert/datas",
 					toSendJSON, "POSTING");*/
 
 

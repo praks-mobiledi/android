@@ -1,6 +1,7 @@
 package com.mobiledi.appstrender.graph;
 
 import org.achartengine.ChartFactory;
+import org.achartengine.GraphicalView;
 import org.achartengine.model.CategorySeries;
 import org.achartengine.renderer.DefaultRenderer;
 import org.achartengine.renderer.SimpleSeriesRenderer;
@@ -10,7 +11,7 @@ import com.mobiledi.appstrender.AppObject;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-
+///returns a pie chart
 public class ShowPieChart {
 	int dataUsage[] = { 0, 0 };
 	String AppName;
@@ -24,11 +25,8 @@ public class ShowPieChart {
 
 	}
 
-	public void openChart() {
-		// this is my data of performance; data is collected in array.
-
-		// dataUsage = {42, 15, 19}; // [0] for Call, [1] for Meeting, [2] for
-		// Email
+	//public void openChart() {
+	public GraphicalView openChart() {
 		CategorySeries series = new CategorySeries("pie"); // adding series to
 															// charts. //collect
 															// 3 value in array.
@@ -38,7 +36,7 @@ public class ShowPieChart {
 		series.add("Recieved", dataUsage[1]);
 		// series.add("Email",Performance[2]);
 		// add three colors for three series respectively
-		int[] colors = new int[] { Color.BLUE, Color.LTGRAY };
+		int[] colors = new int[] { Color.BLUE, Color.RED };
 		// set style for series
 		DefaultRenderer renderer = new DefaultRenderer();
 		for (int color : colors) {
@@ -67,11 +65,13 @@ public class ShowPieChart {
 		renderer.setShowLabels(true);
 		renderer.setLabelsTextSize(20);
 		renderer.setLegendTextSize(25);
-		
+		int[] margins={0,-90,0,0};
+		renderer.setMargins(margins);
 		renderer.setDisplayValues(true);
 
-		Intent intent = ChartFactory.getPieChartIntent(context, series,
+	/*	Intent intent = ChartFactory.getPieChartIntent(context, series,
 				renderer, AppName);
-		context.startActivity(intent);
+		context.startActivity(intent);*/
+		return ChartFactory.getPieChartView(context, series, renderer);
 	}
 }

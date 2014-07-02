@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.Menu;
 import android.widget.Toast;
@@ -22,6 +23,7 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
 	private ViewPager viewPager;
 	private TabsPagerAdapter mAdapter;
 	private ActionBar actionBar;
+	public static String SERVER_URL_ADD="http://192.168.1.7:8080/appstrender_service/appstrender/appdata/";
 	// Tab titles
 	private String[] tabs = { "All Apps", "Downloaded", "System" };
 	protected Object s;
@@ -33,6 +35,7 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
 		Intent i = new Intent(Home.this, UploadService.class);
 		startService(i);
 		UpdateTabs();
+		
 		// Initilization
 		/*
 		 * viewPager = (ViewPager) findViewById(R.id.pager); actionBar =

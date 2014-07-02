@@ -35,6 +35,7 @@ public class AllDataFramgment extends Fragment {
 		 * , "JUST a messaghe","GETTING"); ArrayList<AppObject>
 		 * objs=getRequest.returnObject;
 		 */
+		try{
 		if (AllAppsFramgment.responseAppsList.size() > 0 && AllAppsFramgment.responseAppsList!=null) {
 			ShowBarChart s = new ShowBarChart(getActivity(),
 					AllAppsFramgment.responseAppsList);
@@ -47,7 +48,10 @@ public class AllDataFramgment extends Fragment {
 			Toast.makeText(getActivity(), "No Data to Display",
 					Toast.LENGTH_LONG).show();
 		}
-
+		}
+		catch(Exception e){
+			Toast.makeText(getActivity(), "You Are Not Connected to the Service", Toast.LENGTH_LONG).show();
+		}
 	}
 
 }
