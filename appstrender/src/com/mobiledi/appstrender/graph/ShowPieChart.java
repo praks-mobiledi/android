@@ -27,15 +27,9 @@ public class ShowPieChart {
 
 	//public void openChart() {
 	public GraphicalView openChart() {
-		CategorySeries series = new CategorySeries("pie"); // adding series to
-															// charts. //collect
-															// 3 value in array.
-															// therefore add
-															// three series.
+		CategorySeries series = new CategorySeries("pie"); 
 		series.add("Sent", dataUsage[0]);
 		series.add("Recieved", dataUsage[1]);
-		// series.add("Email",Performance[2]);
-		// add three colors for three series respectively
 		int[] colors = new int[] { Color.BLUE, Color.RED };
 		// set style for series
 		DefaultRenderer renderer = new DefaultRenderer();
@@ -68,10 +62,8 @@ public class ShowPieChart {
 		renderer.setShowLabels(true);
 		renderer.setLabelsTextSize(20);
 		renderer.setLegendTextSize(25);
-		//int[] margins={0,-90,0,0};
-		//renderer.setMargins(margins);
 		renderer.setDisplayValues(true);
-renderer.setPanEnabled(false);
+		renderer.setPanEnabled(false);
 
 	/*	Intent intent = ChartFactory.getPieChartIntent(context, series,
 				renderer, AppName);
