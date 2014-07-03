@@ -91,9 +91,20 @@ public class AllAppsFramgment extends Fragment {
 						 startActivity(i);
 						 
 					 }*/
-					 
+					
+					if(returnedList.get(arg2).getSent()!=0){ 	 
 					Intent s = new Intent(getActivity(), PieChartActivity.class);
+					//returnedList.get(arg2).getAppName();
+					s.putExtra("SELECT", returnedList.get(arg2).getAppName());
 					startActivity(s);
+					}
+					 else {
+						  Toast
+						  .makeText(getActivity(),returnedList.get(arg2).getAppName
+						 ()+" have no data Usage History",
+						  Toast.LENGTH_LONG).show();
+						 
+						  }
 				}
 			});
 

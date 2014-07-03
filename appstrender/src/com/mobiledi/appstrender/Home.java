@@ -24,7 +24,7 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
 	private ViewPager viewPager;
 	private TabsPagerAdapter mAdapter;
 	private ActionBar actionBar;
-	public static String SERVER_URL_ADD="http://192.168.1.3:8080/appstrender_service/appstrender/appdata/";
+	public static String SERVER_URL_ADD="http://192.168.1.2:8080/appstrender_service/appstrender/appdata/";
 
 	private String[] tabs = { "All Apps", "Downloaded", "System" };
 	protected Object s;

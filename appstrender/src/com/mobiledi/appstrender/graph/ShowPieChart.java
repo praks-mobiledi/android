@@ -50,8 +50,8 @@ public class ShowPieChart {
 		}
 		renderer.setBackgroundColor(Color.WHITE);
 		renderer.setShowAxes(true);
-		//renderer.isInScroll();
-		renderer.setZoomButtonsVisible(true); // set zoom button in Graph
+		renderer.isInScroll();
+		//renderer.setZoomButtonsVisible(true); // set zoom button in Graph
 		renderer.setApplyBackgroundColor(true);
 		//renderer.setBackgroundColor(Color.BLACK); // set background color
 		int x=dataUsage[0] + dataUsage[1];
@@ -71,6 +71,7 @@ public class ShowPieChart {
 		//int[] margins={0,-90,0,0};
 		//renderer.setMargins(margins);
 		renderer.setDisplayValues(true);
+renderer.setPanEnabled(false);
 
 	/*	Intent intent = ChartFactory.getPieChartIntent(context, series,
 				renderer, AppName);

@@ -1,31 +1,40 @@
 package com.mobiledi.appstrender.graph;
 
 import java.util.ArrayList;
-import java.util.Random;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.view.ViewPager;
+import android.util.Log;
 
 import com.mobiledi.appstrender.AllAppsFramgment;
 import com.mobiledi.appstrender.AppObject;
 import com.mobiledi.appstrender.R;
 import com.mobiledi.appstrender.adapters.PieChartPagerAdapter;
 
-import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.view.ViewPager;
-import android.view.Menu;
-
 public class PieChartActivity extends FragmentActivity {
 public static  ArrayList<AppObject> listofApps=new ArrayList<AppObject>();
-    @Override
+static int selectedItem;
+@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.piechart_activity);
-        
+        Intent i= getIntent();
+        String setSelected=i.getStringExtra("SELECT");
+        Log.d("Selected Item ",setSelected);
         for(AppObject app: AllAppsFramgment.responseAppsList){
-        	if(app.getSent()>0)
-        	listofApps.add(app);
-        	
+        	if(app.getSent()>0){
+        		Log.d("APP OBJECT ",app.getAppName());           
+        		listofApps.add(app);
+        		Log.d("Selected Item ",String.valueOf(listofApps.size()));
+        		if(app.getAppName().equals(setSelected)){
+        			selectedItem=listofApps.size();
+        			Log.d("Selected Item Number",String.valueOf(selectedItem));
+        			Log.d("Selected Item ",app.getAppName());
+        		}
+        		}
         }
         //listofApps = AllAppsFramgment.responseAppsList;
 /*         for(int i=0;i<6;i++)
@@ -53,7 +62,9 @@ public static  ArrayList<AppObject> listofApps=new ArrayList<AppObject>();
     
         /** Setting the pagerAdapter to the pager object */
         pager.setAdapter(pagerAdapter);
-        
+       
+        /** Set Page*/
+        pager.setCurrentItem(selectedItem-1);
        
     }
 
