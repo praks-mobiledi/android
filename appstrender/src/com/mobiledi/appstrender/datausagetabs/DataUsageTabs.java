@@ -1,6 +1,7 @@
 package com.mobiledi.appstrender.datausagetabs;
 
 import com.mobiledi.appstrender.R;
+import com.mobiledi.appstrender.adapters.DataUsageTabsPagerAdapter;
 import com.mobiledi.appstrender.adapters.TabsPagerAdapter;
 
 import android.app.ActionBar;

@@ -48,10 +48,12 @@ public class ShowPieChart {
 			r.setChartValuesTextSize(15);
 			renderer.addSeriesRenderer(r);
 		}
-		renderer.isInScroll();
+		renderer.setBackgroundColor(Color.WHITE);
+		renderer.setShowAxes(true);
+		//renderer.isInScroll();
 		renderer.setZoomButtonsVisible(true); // set zoom button in Graph
 		renderer.setApplyBackgroundColor(true);
-		renderer.setBackgroundColor(Color.BLACK); // set background color
+		//renderer.setBackgroundColor(Color.BLACK); // set background color
 		int x=dataUsage[0] + dataUsage[1];
 		int check=x/1048576;
 		if(check>0)
@@ -60,13 +62,14 @@ public class ShowPieChart {
 		else {
 			renderer.setChartTitle("Total Data Usage by " + AppName + ": "
 					+ (x/1024 + "KB"));
-		}		
+		}	
+		renderer.setLabelsColor(Color.BLACK);
 		renderer.setChartTitleTextSize((float) 25);
 		renderer.setShowLabels(true);
 		renderer.setLabelsTextSize(20);
 		renderer.setLegendTextSize(25);
-		int[] margins={0,-90,0,0};
-		renderer.setMargins(margins);
+		//int[] margins={0,-90,0,0};
+		//renderer.setMargins(margins);
 		renderer.setDisplayValues(true);
 
 	/*	Intent intent = ChartFactory.getPieChartIntent(context, series,

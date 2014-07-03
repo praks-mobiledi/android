@@ -151,11 +151,9 @@ allGraph.setOnClickListener(new OnClickListener() {
 					"JUST a message", "GETTING");
 			responseAppsList = getRequest.returnObject;
 
-		} catch (InterruptedException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ExecutionException e) {
-			// TODO Auto-generated catch block
+			Toast.makeText(getActivity(), "You are Not Connected to the Internet", Toast.LENGTH_LONG).show();
 			e.printStackTrace();
 		}
 

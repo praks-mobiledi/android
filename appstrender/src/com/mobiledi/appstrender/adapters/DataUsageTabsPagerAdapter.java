@@ -1,4 +1,4 @@
-package com.mobiledi.appstrender.datausagetabs;
+package com.mobiledi.appstrender.adapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -8,6 +8,9 @@ import android.util.Log;
 import com.mobiledi.appstrender.AllAppsFramgment;
 import com.mobiledi.appstrender.PersonalFragments;
 import com.mobiledi.appstrender.SocialFragment;
+import com.mobiledi.appstrender.datausagetabs.AllDataFramgment;
+import com.mobiledi.appstrender.datausagetabs.MonthFragment;
+import com.mobiledi.appstrender.datausagetabs.WeekFragments;
 
 public class DataUsageTabsPagerAdapter extends FragmentPagerAdapter {
 
