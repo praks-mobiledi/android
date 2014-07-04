@@ -11,7 +11,6 @@ import org.achartengine.renderer.XYMultipleSeriesRenderer;
 import org.achartengine.renderer.XYSeriesRenderer;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 
 import com.mobiledi.appstrender.AppObject;
@@ -25,15 +24,16 @@ public class ShowBarChart {
 	int recieved[];
 	int[] count;
 	String[] appName;
-	int totalS=0,totalR=0;
+	int totalS = 0, totalR = 0;
+
 	public ShowBarChart(Context context, ArrayList<AppObject> filledList) {
 		// TODO Auto-generated constructor stub
 		this.basecon = context;
 		for (AppObject x : filledList) {
 			if (x.getSent() != 0) {
 				this.returnedList.add(x);
-				this.totalS= (int) (this.totalS+x.getSent());
-				this.totalR=(int) (this.totalR+x.getRecieved());
+				this.totalS = (int) (this.totalS + x.getSent());
+				this.totalR = (int) (this.totalR + x.getRecieved());
 			}
 		}
 		setVariables();
@@ -45,25 +45,16 @@ public class ShowBarChart {
 		sent = new int[size];
 		recieved = new int[size];
 		count = new int[size];
-		
+
 		for (int i = 0; i < returnedList.size(); i++) {
 
 			appName[i] = returnedList.get(i).getAppName();
-			sent[i] = (int) ((returnedList.get(i).getSent()*100)/totalS);
-			recieved[i] = (int) ((returnedList.get(i).getRecieved()*100)/totalR);
+			sent[i] = (int) ((returnedList.get(i).getSent() * 100) / totalS);
+			recieved[i] = (int) ((returnedList.get(i).getRecieved() * 100) / totalR);
 			count[i] = i;
 		}
 		// openChart();
 	}
-
-	// Getting reference to the button btn_chart
-	// Button btnChart = (Button) findViewById(R.id.btn_chart);
-
-	// Defining click event listener for the button btn_chart
-
-	// Setting event click listener for the button btn_chart of the MainActivity
-	// layout
-	// btnChart.setOnClickListener(clickListener);
 
 	public GraphicalView openChart() {
 		// Creating an XYSeries for Income
@@ -86,28 +77,32 @@ public class ShowBarChart {
 
 		// Creating XYSeriesRenderer to customize incomeSeries
 		XYSeriesRenderer sentRenderer = new XYSeriesRenderer();
-		sentRenderer.setColor(Color.rgb(0, 174, 255));
+		sentRenderer.setColor(Color.parseColor("#0d90d1"));
 		sentRenderer.setFillPoints(true);
-		sentRenderer.setLineWidth(2);
+		sentRenderer.setLineWidth(4);
 		sentRenderer.setDisplayChartValues(true);
 
 		// Creating XYSeriesRenderer to customize expenseSeries
 		XYSeriesRenderer recievedRenderer = new XYSeriesRenderer();
-		recievedRenderer.setColor(Color.rgb(5, 245, 61));
+		recievedRenderer.setColor(Color.parseColor("#ee5a56"));
 		recievedRenderer.setFillPoints(true);
-		recievedRenderer.setLineWidth(2);
+		recievedRenderer.setLineWidth(4);
 		recievedRenderer.setDisplayChartValues(true);
 
 		// Creating a XYMultipleSeriesRenderer to customize the whole chart
 		XYMultipleSeriesRenderer multiRenderer = new XYMultipleSeriesRenderer();
-		multiRenderer.setXLabels(0);
+		multiRenderer.setLabelsTextSize(13);
 		multiRenderer.setChartTitle("Data Usage");
 		multiRenderer.setXTitle("All Application");
 		multiRenderer.setYTitle("Data Usage in %");
-		multiRenderer.setZoomButtonsVisible(true);
+		//multiRenderer.setXLabelsColor();
+		multiRenderer.setLabelsColor(Color.parseColor("#e3e3e4"));
 		multiRenderer.setPanEnabled(true, false);
-		multiRenderer.setXLabelsPadding(7);
-		
+		multiRenderer.setXLabelsPadding(15);
+		//multiRenderer.setScale(1.5f);
+		multiRenderer.setXLabelsAngle(45);
+		multiRenderer.setBackgroundColor(Color.parseColor("#b3bfce"));
+		multiRenderer.setShowGrid(true);
 		for (int i = 0; i < count.length; i++) {
 			multiRenderer.addXTextLabel(i, appName[i]);
 		}
@@ -126,8 +121,8 @@ public class ShowBarChart {
 
 		// /// Start Activity
 		// ///basecon.startActivity(intent);
-		//multiRenderer.set`
-		//ChartFactory.
+		// multiRenderer.set`
+		// ChartFactory.
 		return ChartFactory.getBarChartView(basecon, dataset, multiRenderer,
 				Type.DEFAULT);
 	}

@@ -21,7 +21,6 @@ public class AllDataFramgment extends Fragment {
 			Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_alldata, container,
 				false);
-		// setHasOptionsMenu(true);
 		return rootView;
 	}
 
@@ -35,23 +34,21 @@ public class AllDataFramgment extends Fragment {
 		 * , "JUST a messaghe","GETTING"); ArrayList<AppObject>
 		 * objs=getRequest.returnObject;
 		 */
-		try{
-		if (AllAppsFramgment.responseAppsList.size() > 0 && AllAppsFramgment.responseAppsList!=null) {
-			ShowBarChart s = new ShowBarChart(getActivity(),
-					AllAppsFramgment.responseAppsList);
-			GraphicalView Gv = s.openChart();
-			LinearLayout layout = (LinearLayout) getActivity().findViewById(
-					R.id.dashboard_chart_layout);
-			layout.removeAllViews();
-			layout.addView(Gv, new LayoutParams(960, LayoutParams.MATCH_PARENT));
-		} else {
-			Toast.makeText(getActivity(), "No Data to Display",
-					Toast.LENGTH_LONG).show();
-		}
-		}
-		catch(Exception e){
-			Toast.makeText(getActivity(), "You Are Not Connected to the Service", Toast.LENGTH_LONG).show();
+
+			if (AllAppsFramgment.getResponseStatus()) {
+				ShowBarChart s = new ShowBarChart(getActivity(),
+						AllAppsFramgment.getResponseAppsList());
+				GraphicalView Gv = s.openChart();
+				LinearLayout layout = (LinearLayout) getActivity()
+						.findViewById(R.id.dashboard_chart_layout);
+				layout.removeAllViews();
+				layout.addView(Gv, new LayoutParams(960,
+						LayoutParams.MATCH_PARENT));
+			} else {
+				Toast.makeText(getActivity(), "No Data to Display",
+						Toast.LENGTH_LONG).show();
+			}
 		}
 	}
 
-}
+

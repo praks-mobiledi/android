@@ -30,7 +30,8 @@ public class ShowPieChart {
 		CategorySeries series = new CategorySeries("pie"); 
 		series.add("Sent", dataUsage[0]);
 		series.add("Recieved", dataUsage[1]);
-		int[] colors = new int[] { Color.BLUE, Color.RED };
+		//int[] colors = new int[] { Color.parseColor("#E6E6DC"), Color.parseColor("#00628B") };
+		int[] colors = new int[] { Color.parseColor("#ee5f5b"), Color.parseColor("#29a1cb")};
 		// set style for series
 		DefaultRenderer renderer = new DefaultRenderer();
 		for (int color : colors) {
@@ -42,7 +43,8 @@ public class ShowPieChart {
 			r.setChartValuesTextSize(15);
 			renderer.addSeriesRenderer(r);
 		}
-		renderer.setBackgroundColor(Color.WHITE);
+		
+		renderer.setBackgroundColor(Color.parseColor("#fcf8e3"));
 		renderer.setShowAxes(true);
 		renderer.isInScroll();
 		//renderer.setZoomButtonsVisible(true); // set zoom button in Graph

@@ -1,7 +1,8 @@
 
  <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content" >
+    android:layout_height="wrap_content" 
+    android:background="#fbeed5">
 
     <ImageView
         android:id="@+id/srIv"
@@ -20,7 +21,7 @@
         android:layout_toRightOf="@+id/srIv"
         android:text="Medium Text"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="#ff0000" />
+        android:textColor="#3a3a3a" />
 
     <TextView
         android:id="@+id/srdata"
@@ -29,6 +30,7 @@
         android:layout_alignLeft="@+id/srTv"
         android:layout_below="@+id/srTv"
         android:text="Small Text"
+         android:textColor="#7bbc47"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </RelativeLayout> 

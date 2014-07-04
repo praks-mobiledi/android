@@ -21,6 +21,7 @@ import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class SocialFragment extends Fragment {
+	
 	ImageButton allGraph;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -70,8 +71,14 @@ allGraph.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent s = new Intent(getActivity(), DataUsageTabs.class);
-				startActivity(s);
+				if(AllAppsFramgment.getResponseStatus()){
+					Intent s = new Intent(getActivity(), DataUsageTabs.class);
+					startActivity(s);
+					}
+					else{
+						Toast.makeText(getActivity(), "Not Connected to Appstrender Server", Toast.LENGTH_LONG).show();
+						
+					}
 			}
 		});
 

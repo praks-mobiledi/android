@@ -22,6 +22,7 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class PersonalFragments extends Fragment {
 	ImageButton allGraph;
+	//public static boolean isSetResList=false;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -70,8 +71,14 @@ public class PersonalFragments extends Fragment {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent s = new Intent(getActivity(), DataUsageTabs.class);
-				startActivity(s);
+				if(AllAppsFramgment.getResponseStatus()){
+					Intent s = new Intent(getActivity(), DataUsageTabs.class);
+					startActivity(s);
+					}
+					else{
+						Toast.makeText(getActivity(), "Not Connected to Appstrender Server", Toast.LENGTH_LONG).show();
+						
+					}
 			}
 		});
 		

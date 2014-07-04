@@ -30,14 +30,15 @@ import com.mobiledi.appstrender.serviceget.GETRequest;
 
 public class AllAppsFramgment extends Fragment {
 	public static ArrayList<AppObject> responseAppsList;
+	public static boolean isSetResList = false;
 	ImageButton allGraph;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
 		View rootView = inflater.inflate(R.layout.fragment_all_apps, container,
 				false);
-		// setHasOptionsMenu(true);
 		return rootView;
 	}
 
@@ -47,9 +48,9 @@ public class AllAppsFramgment extends Fragment {
 		super.onViewCreated(view, savedInstanceState);
 		ListView mainLV = (ListView) getView().findViewById(R.id.mainLv);
 		registerForContextMenu(mainLV);
-		allGraph=(ImageButton) getView().findViewById(R.id.imageButton1);
-		
-				// setHasOptionsMenu(true);
+		allGraph = (ImageButton) getView().findViewById(R.id.imageButton1);
+
+		// setHasOptionsMenu(true);
 		try {
 			final ArrayList<AppObject> returnedList = new PInfo(getActivity())
 					.getInstalledComponentList(0);
@@ -62,49 +63,21 @@ public class AllAppsFramgment extends Fragment {
 				public void onItemClick(AdapterView<?> arg0, View arg1,
 						int arg2, long arg3) {
 
-					/*
-					 * ShowBarChart showGraph=new ShowBarChart(getActivity(),
-					 * returnedList); //ArrayList<AppObject> toShow= new
-					 * ArrayList<AppObject>();
-					 * //toShow.add(returnedList.get(arg2)); //ShowBarChart
-					 * showGraph=new ShowBarChart(getActivity(), toShow);
-					 * showGraph.openChart();
-					 */
+					if (returnedList.get(arg2).getSent() != 0) {
+						Intent s = new Intent(getActivity(),
+								PieChartActivity.class);
+						// returnedList.get(arg2).getAppName();
+						s.putExtra("SELECT", returnedList.get(arg2)
+								.getAppName());
+						startActivity(s);
+					} else {
+						Toast.makeText(
+								getActivity(),
+								returnedList.get(arg2).getAppName()
+										+ " have no data Usage History",
+								Toast.LENGTH_LONG).show();
 
-					// ///////
-					
-			/*		  if(returnedList.get(arg2).getSent()!=0){ 
-						  ShowPieChart  showPie = new ShowPieChart(getActivity(),returnedList.get(arg2));
-						  showPie.openChart(); 
-						  }
-					  else {
-					  Toast
-					  .makeText(getActivity(),returnedList.get(arg2).getAppName
-					 ()+" have no data Usage History",
-					  Toast.LENGTH_LONG).show();
-					 
-					  }*/
-					
-					/* if(returnedList.get(arg2).getSent()!=0){ 
-						 Intent i= new Intent(getActivity(),PieChartActivity.class);
-						 i.putExtra("Selected", String.valueOf(arg2));
-						 startActivity(i);
-						 
-					 }*/
-					
-					if(returnedList.get(arg2).getSent()!=0){ 	 
-					Intent s = new Intent(getActivity(), PieChartActivity.class);
-					//returnedList.get(arg2).getAppName();
-					s.putExtra("SELECT", returnedList.get(arg2).getAppName());
-					startActivity(s);
 					}
-					 else {
-						  Toast
-						  .makeText(getActivity(),returnedList.get(arg2).getAppName
-						 ()+" have no data Usage History",
-						  Toast.LENGTH_LONG).show();
-						 
-						  }
 				}
 			});
 
@@ -112,21 +85,24 @@ public class AllAppsFramgment extends Fragment {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-allGraph.setOnClickListener(new OnClickListener() {
-	
-	@Override
-	public void onClick(View v) {
-		// TODO Auto-generated method stub
-		Intent s = new Intent(getActivity(), DataUsageTabs.class);
-		startActivity(s);
-	}
-});
-	}
+		allGraph.setOnClickListener(new OnClickListener() {
 
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				if (isSetResList) {
+					Intent s = new Intent(getActivity(), DataUsageTabs.class);
+					startActivity(s);
+				} else {
+					Toast.makeText(getActivity(),
+							"Not Connected to Appstrender Server",
+							Toast.LENGTH_LONG).show();
+				}
+			}});
+	}
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v,
 			ContextMenuInfo menuInfo) {
-		// TODO Auto-generated method stub
 		super.onCreateContextMenu(menu, v, menuInfo);
 		MenuInflater inflater = getActivity().getMenuInflater();
 		inflater.inflate(R.menu.home, menu);
@@ -158,16 +134,25 @@ allGraph.setOnClickListener(new OnClickListener() {
 		super.onActivityCreated(savedInstanceState);
 		GETRequest getRequest;
 		try {
-			getRequest = new GETRequest(Home.SERVER_URL_ADD+"readAll/Xperia_M",
-					"JUST a message", "GETTING");
+			getRequest = new GETRequest(Home.SERVER_URL_ADD
+					+ "readAll/Xperia_M", "Fetching Data from Appstrender Server..", "GETTING");
 			responseAppsList = getRequest.returnObject;
-
+			isSetResList = (responseAppsList.size() > 0 ? true : false);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			Toast.makeText(getActivity(), "You are Not Connected to the Internet", Toast.LENGTH_LONG).show();
+			// Toast.makeText(getActivity(),
+			// "You are Not Connected to the Internet",
+			// Toast.LENGTH_LONG).show();
 			e.printStackTrace();
 		}
 
+	}
+	
+	public static boolean getResponseStatus(){
+		return (isSetResList==true?true:false);
+	}
+	public static ArrayList<AppObject> getResponseAppsList() {
+		return responseAppsList;
 	}
 
 }

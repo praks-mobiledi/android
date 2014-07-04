@@ -24,15 +24,15 @@ static int selectedItem;
         Intent i= getIntent();
         String setSelected=i.getStringExtra("SELECT");
         Log.d("Selected Item ",setSelected);
-        for(AppObject app: AllAppsFramgment.responseAppsList){
+        for(AppObject app: AllAppsFramgment.getResponseAppsList()){
         	if(app.getSent()>0){
-        		Log.d("APP OBJECT ",app.getAppName());           
+        		//Log.d("APP OBJECT ",app.getAppName());           
         		listofApps.add(app);
-        		Log.d("Selected Item ",String.valueOf(listofApps.size()));
+        		//Log.d("Selected Item ",String.valueOf(listofApps.size()));
         		if(app.getAppName().equals(setSelected)){
         			selectedItem=listofApps.size();
-        			Log.d("Selected Item Number",String.valueOf(selectedItem));
-        			Log.d("Selected Item ",app.getAppName());
+        			//Log.d("Selected Item Number",String.valueOf(selectedItem));
+        			//Log.d("Selected Item ",app.getAppName());
         		}
         		}
         }

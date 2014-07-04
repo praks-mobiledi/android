@@ -38,33 +38,24 @@ public class WeekFragments extends Fragment {
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onViewCreated(view, savedInstanceState);
-		if (AllAppsFramgment.responseAppsList.size() > 0) {
-			ArrayList<AppObject> toplot=new ArrayList<AppObject>();
-			for(AppObject x: AllAppsFramgment.responseAppsList){
-				if(x.getTimeStamp().after(new Timestamp(new DateTime().minusWeeks(1).getMillis()))){
-					
-				toplot.add(x);
-					
-					//Log.d("t1",x.getTimeStamp().toString());
-				Log.d("t2",new Timestamp(new DateTime().minusMonths(1).getMillis()).toString());//after
-				
-			}
-			
+		if (AllAppsFramgment.getResponseStatus()) {
+		ArrayList<AppObject> toplot=new ArrayList<AppObject>();
+		for(AppObject x: AllAppsFramgment.getResponseAppsList()){
+			if(x.getTimeStamp().after(new Timestamp(new DateTime().minusWeeks(1).getMillis()))){			
+			toplot.add(x);
+			}		
 		}
-			
-			
-			
-			ShowBarChart s = new ShowBarChart(getActivity(),
-					toplot);
-			GraphicalView Gv = s.openChart();
-			LinearLayout layout = (LinearLayout) getActivity().findViewById(
+		ShowBarChart s = new ShowBarChart(getActivity(),toplot);
+		GraphicalView Gv = s.openChart();
+		LinearLayout layout = (LinearLayout) getActivity().findViewById(
 					R.id.dashboard_chart_layoutWeek);
-			layout.removeAllViews();
-			layout.addView(Gv, new LayoutParams(960, LayoutParams.MATCH_PARENT));
-		} else {
-			Toast.makeText(getActivity(), "No Data to Display",
-					Toast.LENGTH_LONG).show();
+		layout.removeAllViews();
+		layout.addView(Gv, new LayoutParams(960, LayoutParams.MATCH_PARENT));
 		}
-
+		else {
+			Toast.makeText(getActivity(),
+					"Not Connected to Appstrender Server",
+					Toast.LENGTH_LONG).show();
 	}
+}
 }
