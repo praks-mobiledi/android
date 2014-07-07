@@ -70,6 +70,7 @@ public class AllAppsFramgment extends Fragment {
 						// returnedList.get(arg2).getAppName();
 						s.putExtra("SELECT", returnedList.get(arg2)
 								.getAppName());
+						//s.put
 						startActivity(s);
 					} else {
 						Toast.makeText(
@@ -141,13 +142,23 @@ public class AllAppsFramgment extends Fragment {
 			responseAppsList = getRequest.returnObject;
 			isSetResList = (responseAppsList.size() > 0 ? true : false);
 		} catch (Exception e) {		
-			Toast.makeText(getActivity(), "Oops! Something went Wrong! Try again Later", Toast.LENGTH_LONG).show();
+			Toast.makeText(getActivity(), "Oops! Couldn't connect to Server", Toast.LENGTH_LONG).show();
 		e.printStackTrace();
+		updateWithDefault();
 		}
 		}
 		else{
 			Toast.makeText(getActivity(), "You are Not Connected to the Internet", Toast.LENGTH_LONG).show();
-			//responseAppsList=null;
+			updateWithDefault();
+		}
+	}
+	public void updateWithDefault(){
+		try {
+			responseAppsList= new PInfo(
+					getActivity()).getInstalledComponentList(0);
+		} catch (NameNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 	

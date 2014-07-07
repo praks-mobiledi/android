@@ -27,7 +27,7 @@ static int selectedItem;
         Log.d("Selected Item ",setSelected);
         
         
-        if(AllAppsFramgment.isSetResList){
+      //  if(AllAppsFramgment.isSetResList){
         for(AppObject app: AllAppsFramgment.getResponseAppsList()){
         	if(app.getSent()>0){
         		//Log.d("APP OBJECT ",app.getAppName());           
@@ -54,11 +54,11 @@ static int selectedItem;
        
         /** Set Page*/
         pager.setCurrentItem(selectedItem-1);
-        }
+        /*}
         else{
         	Toast.makeText(this, "No Data Available", Toast.LENGTH_LONG).show();
 			this.finish();
-        }
+        }*/
     }
 
    

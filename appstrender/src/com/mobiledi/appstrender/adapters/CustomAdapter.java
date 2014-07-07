@@ -17,6 +17,8 @@ public class CustomAdapter extends BaseAdapter {
 	Context _con;
 	ArrayList<AppObject> myList;
 	int resId;
+	long sent;
+	long recieve;
 
 	public CustomAdapter(Context con, ArrayList<AppObject> filledList, int resId) {
 		// TODO Auto-generated constructor stub
@@ -58,9 +60,16 @@ public class CustomAdapter extends BaseAdapter {
 		text.setText(myList.get(arg0).getAppName());
 		if (myList.get(arg0).getRecieved() != -1
 				&& myList.get(arg0).getSent() != -1) {
-
-			data.setText("Recv/Sent: " + myList.get(arg0).getRecieved() + "/"
-					+ myList.get(arg0).getSent() + " (kb)");
+			
+			sent=myList.get(arg0).getSent()/1048576;
+			recieve=myList.get(arg0).getRecieved()/1048576;
+			if(sent>1 && recieve>1){
+			data.setText("Recv/Sent: " + recieve + "/"
+					+ sent + " (MB)");}
+			else{
+				data.setText("Recv/Sent: " + (myList.get(arg0).getRecieved()/1024) + "/"
+						+ (myList.get(arg0).getSent()/1024) + " (KB)");
+			}
 
 		} else {
 			data.setText("Recv/Sent: 0/0(kb)");
