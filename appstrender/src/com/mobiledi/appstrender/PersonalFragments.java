@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.mobiledi.appstrender.adapters.CustomAdapter;
 import com.mobiledi.appstrender.datausagetabs.DataUsageTabs;
+import com.mobiledi.appstrender.graph.PieChartActivity;
 import com.mobiledi.appstrender.graph.ShowPieChart;
 
 import android.content.Intent;
@@ -53,7 +54,14 @@ public class PersonalFragments extends Fragment {
 				public void onItemClick(AdapterView<?> arg0, View arg1,
 						int arg2, long arg3) {
 					  if(returnedList.get(arg2).getSent()!=0){ 
-						  ShowPieChart  showPie = new ShowPieChart(getActivity(),returnedList.get(arg2)); showPie.openChart(); } else {
+						  Intent s = new Intent(getActivity(),
+									PieChartActivity.class);
+							// returnedList.get(arg2).getAppName();
+							s.putExtra("SELECT", returnedList.get(arg2)
+									.getAppName());
+							startActivity(s);  
+					  } 
+					  else {
 					  Toast
 					  .makeText(getActivity(),returnedList.get(arg2).getAppName
 					 ()+" have no data Usage History",

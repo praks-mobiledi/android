@@ -51,7 +51,7 @@ public class MonthFragment extends Fragment {
 		}
 		else {
 			Toast.makeText(getActivity(),
-					"Not Connected to Appstrender Server",
+					"Not Connected to Remote Server",
 					Toast.LENGTH_LONG).show();
 		}
 	}

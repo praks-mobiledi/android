@@ -18,6 +18,7 @@ import android.view.Menu;
 import android.widget.Toast;
 
 import com.mobiledi.appstrender.adapters.TabsPagerAdapter;
+import com.mobiledi.appstrender.networkutil.NetworkUtil;
 import com.mobiledi.appstrender.servicepush.UploadService;
 
 public class Home extends FragmentActivity implements ActionBar.TabListener {
@@ -61,8 +62,6 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
 						actionBar.setSelectedNavigationItem(position);
 					}
 				});
-		
-
 	}
 
 	@Override
@@ -84,7 +83,7 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
 		public void onServiceConnected(ComponentName className, IBinder binder) {
 			UploadService.MyBinder b = (UploadService.MyBinder) binder;
 			s = b.getService();
-			Toast.makeText(Home.this, "Connected", Toast.LENGTH_SHORT).show();
+			Toast.makeText(Home.this, "Connected to Local Service", Toast.LENGTH_SHORT).show();
 		}
 
 		public void onServiceDisconnected(ComponentName className) {

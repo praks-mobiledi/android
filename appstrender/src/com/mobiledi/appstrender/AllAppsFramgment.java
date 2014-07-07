@@ -26,6 +26,7 @@ import com.mobiledi.appstrender.datausagetabs.DataUsageTabs;
 import com.mobiledi.appstrender.graph.PieChartActivity;
 import com.mobiledi.appstrender.graph.ShowBarChart;
 import com.mobiledi.appstrender.graph.ShowPieChart;
+import com.mobiledi.appstrender.networkutil.NetworkUtil;
 import com.mobiledi.appstrender.serviceget.GETRequest;
 
 public class AllAppsFramgment extends Fragment {
@@ -107,7 +108,7 @@ public class AllAppsFramgment extends Fragment {
 		MenuInflater inflater = getActivity().getMenuInflater();
 		inflater.inflate(R.menu.home, menu);
 	}
-
+/*
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
 
@@ -126,26 +127,28 @@ public class AllAppsFramgment extends Fragment {
 			return true;
 		}
 		return false;
-	}
+	}*/
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
 		GETRequest getRequest;
+		if(NetworkUtil.getConnectivityStatus(getActivity())!=0){
 		try {
 			getRequest = new GETRequest(Home.SERVER_URL_ADD
 					+ "readAll/Xperia_M", "Fetching Data from Appstrender Server..", "GETTING");
 			responseAppsList = getRequest.returnObject;
 			isSetResList = (responseAppsList.size() > 0 ? true : false);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			// Toast.makeText(getActivity(),
-			// "You are Not Connected to the Internet",
-			// Toast.LENGTH_LONG).show();
-			e.printStackTrace();
+		} catch (Exception e) {		
+			Toast.makeText(getActivity(), "Oops! Something went Wrong! Try again Later", Toast.LENGTH_LONG).show();
+		e.printStackTrace();
 		}
-
+		}
+		else{
+			Toast.makeText(getActivity(), "You are Not Connected to the Internet", Toast.LENGTH_LONG).show();
+			//responseAppsList=null;
+		}
 	}
 	
 	public static boolean getResponseStatus(){

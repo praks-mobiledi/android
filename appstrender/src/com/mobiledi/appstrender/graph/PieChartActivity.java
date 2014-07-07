@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.mobiledi.appstrender.AllAppsFramgment;
 import com.mobiledi.appstrender.AppObject;
@@ -24,6 +25,9 @@ static int selectedItem;
         Intent i= getIntent();
         String setSelected=i.getStringExtra("SELECT");
         Log.d("Selected Item ",setSelected);
+        
+        
+        if(AllAppsFramgment.isSetResList){
         for(AppObject app: AllAppsFramgment.getResponseAppsList()){
         	if(app.getSent()>0){
         		//Log.d("APP OBJECT ",app.getAppName());           
@@ -36,21 +40,6 @@ static int selectedItem;
         		}
         		}
         }
-        //listofApps = AllAppsFramgment.responseAppsList;
-/*         for(int i=0;i<6;i++)
-         {
-        AppObject s=new AppObject();
-         s.setAppName("app"+i);
-         s.setAppUid(random.nextInt());
-         s.setCarrier("airtel");
-         s.setCategory("downlaod");
-         s.setDeviceId(String.valueOf(random.nextLong()));
-         s.setIcon(null);
-         s.setPhoneNum(random.nextInt());
-         s.setRecieved(random.nextInt(29000)+1200);
-         s.setSent(random.nextInt(29000)+1200);
-         listofApps.add(s);
-         }*/
         /** Getting a reference to the ViewPager defined the layout file */        
         ViewPager pager = (ViewPager) findViewById(R.id.pager5);
         
@@ -65,7 +54,11 @@ static int selectedItem;
        
         /** Set Page*/
         pager.setCurrentItem(selectedItem-1);
-       
+        }
+        else{
+        	Toast.makeText(this, "No Data Available", Toast.LENGTH_LONG).show();
+			this.finish();
+        }
     }
 
    

@@ -13,9 +13,12 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.widget.Toast;
+
 import com.mobiledi.appstrender.AppObject;
 import com.mobiledi.appstrender.Home;
 import com.mobiledi.appstrender.PInfo;
+import com.mobiledi.appstrender.networkutil.NetworkUtil;
 
 public class UploadService extends Service {
 	private final IBinder mBinder = new MyBinder();
@@ -34,7 +37,7 @@ public class UploadService extends Service {
 
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE); 		
-		
+			
 		Log.d("Prakash :", "This is a Timed Service");
 		try {
 			ArrayList<AppObject> returnedList = new PInfo(getApplication()
@@ -57,9 +60,14 @@ public class UploadService extends Service {
 			Log.d("App Detail", +toSendJSON.length() + toSendJSON);
 
 			// SEND DATA TO SERVER UnCOMMENT WHEN  in PRODUCTION
+			if(NetworkUtil.getConnectivityStatus(UploadService.this)!=0){
+				
 			/*new PUSHRequest(Home.SERVER_URL_ADD+"insert/datas",
-					toSendJSON, "POSTING");*/
-
+					toSendJSON, "POSTING");*/}
+				else{
+					Toast.makeText(UploadService.this, "You are Not Connected to the Internet", Toast.LENGTH_LONG).show();
+					
+				return 0;}
 
 		} catch (Exception e) {
 			Log.d("ERROR", e.getMessage());
@@ -67,5 +75,7 @@ public class UploadService extends Service {
 	
 		return Service.START_NOT_STICKY;
 	}
+		
+	}
 
-}
+
