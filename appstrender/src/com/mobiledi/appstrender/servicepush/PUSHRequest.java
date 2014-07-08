@@ -30,6 +30,7 @@ public class PUSHRequest {
 		Log.d(_url, tosendJSON);
 	}
 
+	
 }
 
 class MakeRequest extends AsyncTask<String, Void, ArrayList<AppObject>> {
@@ -52,7 +53,7 @@ Log.d("Value of URL 1:" , url[1]);
 					urlConnection.setFixedLengthStreamingMode(url[1].getBytes().length);
 					Log.d("BYTES LENGTH", String.valueOf(url[1].getBytes().length));
 					urlConnection.setRequestProperty("Content-Type","application/json");
-					urlConnection.setReadTimeout(30 * 1000);
+					urlConnection.setReadTimeout(10 * 1000);
 					PrintWriter out;
 					out = new PrintWriter(urlConnection.getOutputStream());
 					out.print(url[1]);

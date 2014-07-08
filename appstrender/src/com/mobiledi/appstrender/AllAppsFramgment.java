@@ -3,10 +3,13 @@ package com.mobiledi.appstrender;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
+import android.provider.Telephony;
 import android.support.v4.app.Fragment;
+import android.telephony.TelephonyManager;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
@@ -32,6 +35,7 @@ import com.mobiledi.appstrender.serviceget.GETRequest;
 public class AllAppsFramgment extends Fragment {
 	public static ArrayList<AppObject> responseAppsList;
 	public static boolean isSetResList = false;
+	TelephonyManager tm; 
 	ImageButton allGraph;
 
 	@Override
@@ -134,11 +138,12 @@ public class AllAppsFramgment extends Fragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
+		tm=(TelephonyManager)getActivity().getSystemService(Context.TELEPHONY_SERVICE);
 		GETRequest getRequest;
 		if(NetworkUtil.getConnectivityStatus(getActivity())!=0){
 		try {
 			getRequest = new GETRequest(Home.SERVER_URL_ADD
-					+ "readAll/Xperia_M", "Fetching Data from Appstrender Server..", "GETTING");
+					+ "readAll/"+ tm.getDeviceId(), "Fetching Data from Appstrender Server..", "GETTING");
 			responseAppsList = getRequest.returnObject;
 			isSetResList = (responseAppsList.size() > 0 ? true : false);
 		} catch (Exception e) {		
