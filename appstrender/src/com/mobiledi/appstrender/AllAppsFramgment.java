@@ -3,6 +3,8 @@ package com.mobiledi.appstrender;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
+import org.joda.time.DateTime;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -10,6 +12,7 @@ import android.os.Bundle;
 import android.provider.Telephony;
 import android.support.v4.app.Fragment;
 import android.telephony.TelephonyManager;
+import android.text.format.Time;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
@@ -142,8 +145,11 @@ public class AllAppsFramgment extends Fragment {
 		GETRequest getRequest;
 		if(NetworkUtil.getConnectivityStatus(getActivity())!=0){
 		try {
-			getRequest = new GETRequest(Home.SERVER_URL_ADD
-					+ "readAll/"+ tm.getDeviceId(), "Fetching Data from Appstrender Server..", "GETTING");
+			Time now = new Time();
+			now.setToNow();
+			String endDate=now.year+"-"+now.month+"-"+now.monthDay+"%20"+now.hour+":"+now.minute+":"+now.second;
+					getRequest = new GETRequest(Home.SERVER_URL_ADD
+					+ "readAllById/"+ tm.getDeviceId()+ "/"+ endDate, "Fetching Data from Appstrender Server..", "GETTING");
 			responseAppsList = getRequest.returnObject;
 			isSetResList = (responseAppsList.size() > 0 ? true : false);
 		} catch (Exception e) {		

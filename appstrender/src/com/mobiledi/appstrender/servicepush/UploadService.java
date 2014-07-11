@@ -75,17 +75,17 @@ public class UploadService extends Service {
 				String formattedTime = output.format(d);
 				Log.d("LocalDate", formattedTime);
 				Log.d("TS LocalDate", ts.toString());*/
-				DateTime s=DateTime.now();
+				//DateTime s=DateTime.now();
 				String formattedTime=(ts.toString().substring(0, 10).concat("T")).concat(ts.toString().substring(11, ts.toString().length()));
 				Log.d("AFTERLocalDate", formattedTime);
-				
+			/*	
 				new PUSHRequest(Home.SERVER_URL_ADD + "insert/RebootRow",
 						"[{\"appName\":\"DEVICEREBOOTED\",\"timeStamp\":\""
 								+ formattedTime
 								+ "\",\"carrier\":\"NA\",\"category\":\"NA\",\"deviceId\":\""
 								+ "359609052536419"
 								+ "\",\"sent\":0,\"recieved\":0,\"phoneNum\":0,\"appUid\":0}]",
-						"POSTING");
+						"POSTING");*/
 					
 			}
 				else{
