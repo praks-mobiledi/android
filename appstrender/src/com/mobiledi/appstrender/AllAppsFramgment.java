@@ -1,15 +1,10 @@
 package com.mobiledi.appstrender;
 
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
-
-import org.joda.time.DateTime;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
-import android.provider.Telephony;
 import android.support.v4.app.Fragment;
 import android.telephony.TelephonyManager;
 import android.text.format.Time;
@@ -17,7 +12,6 @@ import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -26,12 +20,9 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
-
 import com.mobiledi.appstrender.adapters.CustomAdapter;
 import com.mobiledi.appstrender.datausagetabs.DataUsageTabs;
 import com.mobiledi.appstrender.graph.PieChartActivity;
-import com.mobiledi.appstrender.graph.ShowBarChart;
-import com.mobiledi.appstrender.graph.ShowPieChart;
 import com.mobiledi.appstrender.networkutil.NetworkUtil;
 import com.mobiledi.appstrender.serviceget.GETRequest;
 
@@ -147,8 +138,9 @@ public class AllAppsFramgment extends Fragment {
 		try {
 			Time now = new Time();
 			now.setToNow();
-			String endDate=now.year+"-"+now.month+"-"+now.monthDay+"%20"+now.hour+":"+now.minute+":"+now.second;
-					getRequest = new GETRequest(Home.SERVER_URL_ADD
+			//String endDate=now.year+"-"+now.month+"-"+now.monthDay+"%20"+now.hour+":"+now.minute+":"+now.second;
+			String endDate="1970-01-01%2001:00:00";		
+			getRequest = new GETRequest(Home.SERVER_URL_ADD
 					+ "readAllById/"+ tm.getDeviceId()+ "/"+ endDate, "Fetching Data from Appstrender Server..", "GETTING");
 			responseAppsList = getRequest.returnObject;
 			isSetResList = (responseAppsList.size() > 0 ? true : false);

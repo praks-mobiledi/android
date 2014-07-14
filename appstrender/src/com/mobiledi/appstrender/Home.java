@@ -3,7 +3,6 @@ package com.mobiledi.appstrender;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.FragmentTransaction;
-import android.app.ProgressDialog;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -12,20 +11,18 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
-import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.Menu;
 import android.widget.Toast;
 
 import com.mobiledi.appstrender.adapters.TabsPagerAdapter;
-import com.mobiledi.appstrender.networkutil.NetworkUtil;
 import com.mobiledi.appstrender.servicepush.UploadService;
 
 public class Home extends FragmentActivity implements ActionBar.TabListener {
 	private ViewPager viewPager;
 	private TabsPagerAdapter mAdapter;
 	private ActionBar actionBar;
-	public static String SERVER_URL_ADD="http://192.168.1.3:8080/appstrender_service/appstrender/appdata/";
+	public static String SERVER_URL_ADD="http://192.168.1.2:8080/appstrender_service/appstrender/appdata/";
 
 	private String[] tabs = { "All Apps", "Downloaded", "System" };
 	protected Object s;
