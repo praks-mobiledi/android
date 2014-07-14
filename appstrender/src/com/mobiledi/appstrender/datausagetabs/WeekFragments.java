@@ -38,12 +38,12 @@ public class WeekFragments extends Fragment {
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onViewCreated(view, savedInstanceState);
-		if (AllAppsFramgment.getResponseStatus()) {
+		if (AllAppsFramgment.getResponseStatus(3)) {
 		ArrayList<AppObject> toplot=new ArrayList<AppObject>();
-		for(AppObject x: AllAppsFramgment.getResponseAppsList()){
-			if(x.getTimeStamp().after(new Timestamp(new DateTime().minusWeeks(1).getMillis()))){			
+		for(AppObject x: AllAppsFramgment.getResponseAppsList(3)){
+			//if(x.getTimeStamp().after(new Timestamp(new DateTime().minusWeeks(1).getMillis()))){			
 			toplot.add(x);
-			}		
+			//}		
 		}
 		ShowBarChart s = new ShowBarChart(getActivity(),toplot);
 		GraphicalView Gv = s.openChart();

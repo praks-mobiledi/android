@@ -78,7 +78,7 @@ allGraph.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				if(AllAppsFramgment.getResponseStatus()){
+				if(AllAppsFramgment.getResponseStatus(1)){
 					Intent s = new Intent(getActivity(), DataUsageTabs.class);
 					startActivity(s);
 					}

@@ -35,9 +35,9 @@ public class AllDataFramgment extends Fragment {
 		 * objs=getRequest.returnObject;
 		 */
 
-			if (AllAppsFramgment.getResponseStatus()) {
+			if (AllAppsFramgment.getResponseStatus(1)) {
 				ShowBarChart s = new ShowBarChart(getActivity(),
-						AllAppsFramgment.getResponseAppsList());
+						AllAppsFramgment.getResponseAppsList(1));
 				GraphicalView Gv = s.openChart();
 				LinearLayout layout = (LinearLayout) getActivity()
 						.findViewById(R.id.dashboard_chart_layout);

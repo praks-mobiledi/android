@@ -28,7 +28,7 @@ static int selectedItem;
         
         
       //  if(AllAppsFramgment.isSetResList){
-        for(AppObject app: AllAppsFramgment.getResponseAppsList()){
+        for(AppObject app: AllAppsFramgment.getResponseAppsList(1)){
         	if(app.getSent()>0){
         		//Log.d("APP OBJECT ",app.getAppName());           
         		listofApps.add(app);

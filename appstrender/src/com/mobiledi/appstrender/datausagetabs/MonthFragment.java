@@ -32,15 +32,15 @@ public class MonthFragment extends Fragment {
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-		if (AllAppsFramgment.getResponseStatus()) {
+		if (AllAppsFramgment.getResponseStatus(2)) {
 		ArrayList<AppObject> toplot = new ArrayList<AppObject>();
-		for (AppObject x : AllAppsFramgment.getResponseAppsList()) {
-			if (x.getTimeStamp().after(
-					new Timestamp(new DateTime().minusMonths(1).getMillis()))) {
+		for (AppObject x : AllAppsFramgment.getResponseAppsList(2)) {
+			//if (x.getTimeStamp().after(
+					//new Timestamp(new DateTime().minusMonths(1).getMillis()))) {
 				toplot.add(x);
-				Log.d("t2", new Timestamp(new DateTime().minusMonths(1)
-						.getMillis()).toString());
-			}
+				//Log.d("t2", new Timestamp(new DateTime().minusMonths(1)
+						//.getMillis()).toString());
+			//}
 		}
 		ShowBarChart s = new ShowBarChart(getActivity(), toplot);
 		GraphicalView Gv = s.openChart();

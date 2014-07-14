@@ -27,8 +27,11 @@ import com.mobiledi.appstrender.networkutil.NetworkUtil;
 import com.mobiledi.appstrender.serviceget.GETRequest;
 
 public class AllAppsFramgment extends Fragment {
-	public static ArrayList<AppObject> responseAppsList;
+	public static ArrayList<AppObject> responseAppsList,responseAppsList2,responseAppsList3;
 	public static boolean isSetResList = false;
+	public static boolean isSetResList2 = false;
+	public static boolean isSetResList3 = false;
+	
 	TelephonyManager tm; 
 	ImageButton allGraph;
 
@@ -133,7 +136,7 @@ public class AllAppsFramgment extends Fragment {
 		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
 		tm=(TelephonyManager)getActivity().getSystemService(Context.TELEPHONY_SERVICE);
-		GETRequest getRequest;
+		GETRequest getRequest,getRequest2,getRequest3;
 		if(NetworkUtil.getConnectivityStatus(getActivity())!=0){
 		try {
 			Time now = new Time();
@@ -144,6 +147,27 @@ public class AllAppsFramgment extends Fragment {
 					+ "readAllById/"+ tm.getDeviceId()+ "/"+ endDate, "Fetching Data from Appstrender Server..", "GETTING");
 			responseAppsList = getRequest.returnObject;
 			isSetResList = (responseAppsList.size() > 0 ? true : false);
+		////
+			// endDate=now.year+"-"+now.month+"-"+now.monthDay+"%20"+now.hour+":"+now.minute+":"+now.second;		
+			endDate="2014-06-14%2001:00:00";		
+			
+			getRequest2 = new GETRequest(Home.SERVER_URL_ADD
+					+ "readAllById/"+ tm.getDeviceId()+ "/"+ endDate, "Fetching Data from Appstrender Server..", "GETTING");
+			responseAppsList2 = getRequest2.returnObject;
+			isSetResList2 = (responseAppsList2.size() > 0 ? true : false);
+			
+			////
+			
+			endDate="2014-07-07%2001:00:00";		
+			getRequest3 = new GETRequest(Home.SERVER_URL_ADD
+					+ "readAllById/"+ tm.getDeviceId()+ "/"+ endDate, "Fetching Data from Appstrender Server..", "GETTING");
+			responseAppsList3 = getRequest3.returnObject;
+			isSetResList3 = (responseAppsList3.size() > 0 ? true : false);
+			
+			////
+		
+		
+		
 		} catch (Exception e) {		
 			Toast.makeText(getActivity(), "Oops! Couldn't connect to Server", Toast.LENGTH_LONG).show();
 		e.printStackTrace();
@@ -165,11 +189,30 @@ public class AllAppsFramgment extends Fragment {
 		}
 	}
 	
-	public static boolean getResponseStatus(){
-		return (isSetResList==true?true:false);
+	public static boolean getResponseStatus(int from){
+		switch(from){
+		case(1):
+			return (isSetResList==true?true:false);	
+		case(2):
+			return (isSetResList2==true?true:false);	
+		case(3):
+			return (isSetResList3==true?true:false);	
+		}
+		return false;
+		
 	}
-	public static ArrayList<AppObject> getResponseAppsList() {
+	public static ArrayList<AppObject> getResponseAppsList(int from) {
+		
+		switch(from){
+			case(1):
 		return responseAppsList;
+			case(2):
+		return responseAppsList2;
+			case(3):
+		return responseAppsList3;
+					
+		}
+		return null;
 	}
 
 }
