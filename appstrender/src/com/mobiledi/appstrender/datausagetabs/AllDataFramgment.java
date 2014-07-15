@@ -1,6 +1,9 @@
 package com.mobiledi.appstrender.datausagetabs;
 
 import org.achartengine.GraphicalView;
+
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -26,28 +29,26 @@ public class AllDataFramgment extends Fragment {
 
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
-		super.onViewCreated(view, savedInstanceState);
-		/*
-		 * getRequest = new RestRequest(
-		 * "http://192.168.1.3:8080/appstrender_service/appstrender/appdata/readAll/Xperia_l"
-		 * , "JUST a messaghe","GETTING"); ArrayList<AppObject>
-		 * objs=getRequest.returnObject;
-		 */
 
-			if (AllAppsFramgment.getResponseStatus(1)) {
-				ShowBarChart s = new ShowBarChart(getActivity(),
-						AllAppsFramgment.getResponseAppsList(1));
-				GraphicalView Gv = s.openChart();
-				LinearLayout layout = (LinearLayout) getActivity()
-						.findViewById(R.id.dashboard_chart_layout);
-				layout.removeAllViews();
-				layout.addView(Gv, new LayoutParams(960,
-						LayoutParams.MATCH_PARENT));
-			} else {
-				Toast.makeText(getActivity(), "No Data to Display",
-						Toast.LENGTH_LONG).show();
-			}
+		BarGraphCalled bcg=new BarGraphCalled(getActivity());
+		bcg.callGraph();
+
+		if (bcg.getResponseStatus(1)) {
+			ShowBarChart s = new ShowBarChart(getActivity(),
+					bcg.getResponseAppsList(1));
+			GraphicalView Gv = s.openChart();
+			LinearLayout layout = (LinearLayout) getActivity()
+					.findViewById(R.id.dashboard_chart_layout);
+			layout.removeAllViews();
+			layout.addView(Gv, new LayoutParams(960,
+					LayoutParams.MATCH_PARENT));
+		} else {
+			Toast.makeText(getActivity(), "No Data to Display",
+					Toast.LENGTH_LONG).show();
+		}
+		
+		
+		
 		}
 	}
 

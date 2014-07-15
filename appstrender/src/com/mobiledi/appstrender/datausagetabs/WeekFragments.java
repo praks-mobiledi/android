@@ -12,6 +12,8 @@ import com.mobiledi.appstrender.PInfo;
 import com.mobiledi.appstrender.R;
 import com.mobiledi.appstrender.graph.ShowBarChart;
 
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -25,6 +27,7 @@ import android.widget.Toast;
 
 public class WeekFragments extends Fragment {
 
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -36,16 +39,11 @@ public class WeekFragments extends Fragment {
 
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
-		super.onViewCreated(view, savedInstanceState);
-		if (AllAppsFramgment.getResponseStatus(3)) {
-		ArrayList<AppObject> toplot=new ArrayList<AppObject>();
-		for(AppObject x: AllAppsFramgment.getResponseAppsList(3)){
-			//if(x.getTimeStamp().after(new Timestamp(new DateTime().minusWeeks(1).getMillis()))){			
-			toplot.add(x);
-			//}		
-		}
-		ShowBarChart s = new ShowBarChart(getActivity(),toplot);
+
+		BarGraphCalled bcg=new BarGraphCalled(getActivity());
+		bcg.callGraph();
+		if (bcg.getResponseStatus(3)) {
+		ShowBarChart s = new ShowBarChart(getActivity(),bcg.getResponseAppsList(3));
 		GraphicalView Gv = s.openChart();
 		LinearLayout layout = (LinearLayout) getActivity().findViewById(
 					R.id.dashboard_chart_layoutWeek);

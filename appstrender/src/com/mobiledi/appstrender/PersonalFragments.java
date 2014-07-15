@@ -3,9 +3,10 @@ package com.mobiledi.appstrender;
 import java.util.ArrayList;
 
 import com.mobiledi.appstrender.adapters.CustomAdapter;
+import com.mobiledi.appstrender.datausagetabs.BarGraphCalled;
 import com.mobiledi.appstrender.datausagetabs.DataUsageTabs;
 import com.mobiledi.appstrender.graph.PieChartActivity;
-import com.mobiledi.appstrender.graph.ShowPieChart;
+import com.mobiledi.appstrender.networkutil.NetworkUtil;
 
 import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -78,15 +79,16 @@ public class PersonalFragments extends Fragment {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				if(AllAppsFramgment.getResponseStatus(1)){
+			//	BarGraphCalled bcg= new BarGraphCalled(getActivity());
+				//bcg.callGraph();
+				if (NetworkUtil.getConnectivityStatus(getActivity())!=0) {
 					Intent s = new Intent(getActivity(), DataUsageTabs.class);
 					startActivity(s);
-					}
-					else{
-						Toast.makeText(getActivity(), "Not Connected to Appstrender Server", Toast.LENGTH_LONG).show();
-						
-					}
+				} else {
+					Toast.makeText(getActivity(),
+							"Not Connected to Appstrender Server",
+							Toast.LENGTH_LONG).show();
+				}
 			}
 		});
 		

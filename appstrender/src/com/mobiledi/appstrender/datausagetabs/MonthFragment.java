@@ -4,6 +4,9 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import org.achartengine.GraphicalView;
 import org.joda.time.DateTime;
+
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -21,6 +24,7 @@ import com.mobiledi.appstrender.graph.ShowBarChart;
 
 public class MonthFragment extends Fragment {
 
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -31,18 +35,12 @@ public class MonthFragment extends Fragment {
 
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
-		super.onViewCreated(view, savedInstanceState);
-		if (AllAppsFramgment.getResponseStatus(2)) {
-		ArrayList<AppObject> toplot = new ArrayList<AppObject>();
-		for (AppObject x : AllAppsFramgment.getResponseAppsList(2)) {
-			//if (x.getTimeStamp().after(
-					//new Timestamp(new DateTime().minusMonths(1).getMillis()))) {
-				toplot.add(x);
-				//Log.d("t2", new Timestamp(new DateTime().minusMonths(1)
-						//.getMillis()).toString());
-			//}
-		}
-		ShowBarChart s = new ShowBarChart(getActivity(), toplot);
+
+		BarGraphCalled bcg=new BarGraphCalled(getActivity());
+		bcg.callGraph();
+		if (bcg.getResponseStatus(2)) {
+		//ArrayList<AppObject> toplot = new ArrayList<AppObject>();
+		ShowBarChart s = new ShowBarChart(getActivity(), bcg.getResponseAppsList(2));
 		GraphicalView Gv = s.openChart();
 		LinearLayout layout = (LinearLayout) getActivity().findViewById(
 				R.id.dashboard_chart_layoutmonth);

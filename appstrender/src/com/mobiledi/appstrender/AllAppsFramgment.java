@@ -1,6 +1,10 @@
 package com.mobiledi.appstrender;
 
 import java.util.ArrayList;
+
+import org.achartengine.chart.BarChart;
+
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -21,18 +25,19 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 import com.mobiledi.appstrender.adapters.CustomAdapter;
+import com.mobiledi.appstrender.datausagetabs.BarGraphCalled;
 import com.mobiledi.appstrender.datausagetabs.DataUsageTabs;
 import com.mobiledi.appstrender.graph.PieChartActivity;
 import com.mobiledi.appstrender.networkutil.NetworkUtil;
 import com.mobiledi.appstrender.serviceget.GETRequest;
 
 public class AllAppsFramgment extends Fragment {
-	public static ArrayList<AppObject> responseAppsList,responseAppsList2,responseAppsList3;
+	/*public static ArrayList<AppObject> responseAppsList,responseAppsList2,responseAppsList3;
 	public static boolean isSetResList = false;
 	public static boolean isSetResList2 = false;
 	public static boolean isSetResList3 = false;
 	
-	TelephonyManager tm; 
+	TelephonyManager tm; */
 	ImageButton allGraph;
 
 	@Override
@@ -92,8 +97,9 @@ public class AllAppsFramgment extends Fragment {
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				if (isSetResList) {
+				/*BarGraphCalled bcg= new BarGraphCalled(getActivity());
+				bcg.callGraph();*/
+				if (NetworkUtil.getConnectivityStatus(getActivity())!=0) {
 					Intent s = new Intent(getActivity(), DataUsageTabs.class);
 					startActivity(s);
 				} else {
@@ -135,7 +141,7 @@ public class AllAppsFramgment extends Fragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
-		tm=(TelephonyManager)getActivity().getSystemService(Context.TELEPHONY_SERVICE);
+		/*tm=(TelephonyManager)getActivity().getSystemService(Context.TELEPHONY_SERVICE);
 		GETRequest getRequest,getRequest2,getRequest3;
 		if(NetworkUtil.getConnectivityStatus(getActivity())!=0){
 		try {
@@ -177,9 +183,9 @@ public class AllAppsFramgment extends Fragment {
 		else{
 			Toast.makeText(getActivity(), "You are Not Connected to the Internet", Toast.LENGTH_LONG).show();
 			updateWithDefault();
-		}
+		}*/
 	}
-	public void updateWithDefault(){
+	/*public void updateWithDefault(){
 		try {
 			responseAppsList= new PInfo(
 					getActivity()).getInstalledComponentList(0);
@@ -187,9 +193,9 @@ public class AllAppsFramgment extends Fragment {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
+	}*/
 	
-	public static boolean getResponseStatus(int from){
+	/*public static boolean getResponseStatus(int from){
 		switch(from){
 		case(1):
 			return (isSetResList==true?true:false);	
@@ -213,6 +219,6 @@ public class AllAppsFramgment extends Fragment {
 					
 		}
 		return null;
-	}
+	}*/
 
 }
