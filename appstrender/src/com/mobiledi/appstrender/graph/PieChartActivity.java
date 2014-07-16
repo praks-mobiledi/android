@@ -29,7 +29,7 @@ private ArrayList<AppObject> responseAppsList;
         Intent i= getIntent();
         String setSelected=i.getStringExtra("SELECT");
         Log.d("Selected Item ",setSelected); 
-        BarGraphCalled bcg= new BarGraphCalled(PieChartActivity.this);
+      //  BarGraphCalled bcg= new BarGraphCalled(PieChartActivity.this);
       //  if(AllAppsFramgment.isSetResList){
     //  bcg.callGraph();
       try {

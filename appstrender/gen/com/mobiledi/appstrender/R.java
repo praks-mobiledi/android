@@ -27,8 +27,8 @@ public final class R {
         public static final int stat=0x7f020002;
     }
     public static final class id {
-        public static final int action_settings=0x7f080016;
-        public static final int allApps=0x7f080017;
+        public static final int action_settings=0x7f080019;
+        public static final int allApps=0x7f08001a;
         public static final int btn_chart=0x7f080001;
         public static final int container=0x7f080003;
         public static final int dashboard_chart_layout=0x7f080006;
@@ -36,6 +36,7 @@ public final class R {
         public static final int dashboard_chart_layoutmonth=0x7f080007;
         public static final int expandableListView1=0x7f080008;
         public static final int grCats=0x7f08000f;
+        public static final int icons=0x7f080014;
         public static final int imageButton1=0x7f080005;
         public static final int imageButton2=0x7f08000a;
         public static final int imageButton3=0x7f08000c;
@@ -46,11 +47,13 @@ public final class R {
         public static final int pager2=0x7f080000;
         public static final int pager5=0x7f080010;
         public static final int pager_tab_strip=0x7f080011;
+        public static final int restWids=0x7f080013;
         public static final int showgraph=0x7f080012;
         public static final int spscreen=0x7f08000d;
-        public static final int srIv=0x7f080013;
-        public static final int srTv=0x7f080014;
-        public static final int srdata=0x7f080015;
+        public static final int srIv=0x7f080016;
+        public static final int srTv=0x7f080017;
+        public static final int srdata=0x7f080018;
+        public static final int tv1=0x7f080015;
     }
     public static final class layout {
         public static final int activity_datausage=0x7f030000;

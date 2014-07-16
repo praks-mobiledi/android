@@ -4,6 +4,7 @@ import org.achartengine.GraphicalView;
 
 import com.mobiledi.appstrender.R;
 
+import android.content.pm.PackageStats;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -11,7 +12,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 public class PieChartFragment extends Fragment{
 	
 	int mCurrentPage;
@@ -30,21 +34,22 @@ public class PieChartFragment extends Fragment{
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.piechart_layout, container,false);				
-		//TextView tv = (TextView ) v.findViewById(R.id.tv);
-		
+		TextView tv = (TextView) v.findViewById(R.id.tv1);
+		ImageView iv= (ImageView) v.findViewById(R.id.icons);
 		ShowPieChart sp = new ShowPieChart(getActivity(),
 				PieChartActivity.listofApps.get(mCurrentPage));
 		Log.d("Curr Sent Values", String.valueOf(mCurrentPage));
 		Log.d("Curr Sent Values", String.valueOf(PieChartActivity.listofApps.get(mCurrentPage).getSent()));
 		Log.d("Curr Rcv Values", String.valueOf(PieChartActivity.listofApps.get(mCurrentPage).getRecieved()));
-		
 		GraphicalView Gv = sp.openChart();
 		LinearLayout layout = (LinearLayout) v.findViewById(
 				R.id.showgraph);
 		layout.removeAllViews();
-		layout.addView(Gv, new LayoutParams(960, LayoutParams.MATCH_PARENT));
+		//1st parameter was 960
+		layout.addView(Gv, new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+		tv.setText("# " + (mCurrentPage+1) + "/"+PieChartActivity.listofApps.size()+ " Swipe Horizontally left / right");	
+		iv.setImageDrawable(PieChartActivity.listofApps.get(mCurrentPage).getIcon());
 		
-		//tv.setText("You are viewing the page #" + mCurrentPage + "\n\n" + "Swipe Horizontally left / right");	
 		return v;		
 	}
 }

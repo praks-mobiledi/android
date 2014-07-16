@@ -2,6 +2,10 @@ package com.mobiledi.appstrender.datausagetabs;
 
 import java.util.ArrayList;
 
+import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
+import org.joda.time.LocalTime;
+
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
@@ -9,6 +13,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.AsyncTask;
 import android.telephony.TelephonyManager;
 import android.text.format.Time;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.mobiledi.appstrender.AppObject;
@@ -35,17 +40,21 @@ public class BarGraphCalled {
 		if(NetworkUtil.getConnectivityStatus(con)!=0){
 			GETRequest getRequest,getRequest2,getRequest3;
 			try {
-			//	Time now = new Time();
-				//now.setToNow();
-				//String endDate=now.year+"-"+now.month+"-"+now.monthDay+"%20"+now.hour+":"+now.minute+":"+now.second;
-				String endDate="1970-01-01%2001:00:00";		
+				//String endDate="1970-01-01%2001:00:00";		
+				String endDate=LocalDate.now().toString()+"%20"+LocalTime.now();
+				Log.d("EndDate All Value", endDate);
+				
 				getRequest = new GETRequest(Home.SERVER_URL_ADD
 						+ "readAllById/"+ tm.getDeviceId()+ "/"+ endDate, "Fetching Data from Appstrender Server..", "GETTING");
 				responseAppsList = getRequest.returnObject;
 				isSetResList = (responseAppsList.size() > 0 ? true : false);
 			////
 				// endDate=now.year+"-"+now.month+"-"+now.monthDay+"%20"+now.hour+":"+now.minute+":"+now.second;		
-				endDate="2014-06-14%2001:00:00";		
+				//endDate="2014-06-14%2001:00:00";		
+				LocalDate dt=LocalDate.now();
+				dt=dt.minusMonths(1);
+				endDate=dt.toString()+"%20"+LocalTime.now();
+				Log.d("EndDate Month Value", endDate);
 				
 				getRequest2 = new GETRequest(Home.SERVER_URL_ADD
 						+ "readAllById/"+ tm.getDeviceId()+ "/"+ endDate, "Fetching Data from Appstrender Server..", "GETTING");
@@ -53,8 +62,11 @@ public class BarGraphCalled {
 				isSetResList2 = (responseAppsList2.size() > 0 ? true : false);
 				
 				////
-				
-				endDate="2014-07-07%2001:00:00";		
+				dt=LocalDate.now();
+				dt=dt.minusWeeks(1);
+				endDate=dt.toString()+"%20"+LocalTime.now();
+				Log.d("EndDate Week Value", endDate);
+				//endDate="2014-07-07%2001:00:00";		
 				getRequest3 = new GETRequest(Home.SERVER_URL_ADD
 						+ "readAllById/"+ tm.getDeviceId()+ "/"+ endDate, "Fetching Data from Appstrender Server..", "GETTING");
 				responseAppsList3 = getRequest3.returnObject;
@@ -114,7 +126,7 @@ public class BarGraphCalled {
 	protected void preExecute() {
 		ab= new Builder(con);
 		ab.setMessage("Loading Data Please Wait");
-		ab.setCancelable(false);
+		ab.setCancelable(true);
 		abs=ab.create();
 		abs.show();
 		tm=(TelephonyManager)con.getSystemService(Context.TELEPHONY_SERVICE);

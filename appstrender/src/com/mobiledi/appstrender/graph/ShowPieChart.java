@@ -11,12 +11,14 @@ import com.mobiledi.appstrender.AppObject;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.util.DisplayMetrics;
+import android.util.TypedValue;
 ///returns a pie chart
 public class ShowPieChart {
 	int dataUsage[] = { 0, 0 };
 	String AppName;
 	Context context;
-
+	
 	public ShowPieChart(Context context, AppObject s) {
 		this.context = context;
 		this.dataUsage[0] = (int) s.getSent();
@@ -27,6 +29,10 @@ public class ShowPieChart {
 
 	//public void openChart() {
 	public GraphicalView openChart() {
+		DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+		float val = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 16, metrics);
+		float val2 = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 18, metrics);
+		//float val3 = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 25, metrics);
 		CategorySeries series = new CategorySeries("pie"); 
 		series.add("Sent", dataUsage[0]);
 		series.add("Recieved", dataUsage[1]);
@@ -40,7 +46,7 @@ public class ShowPieChart {
 			r.setDisplayBoundingPoints(true);
 			r.setDisplayChartValuesDistance(5);
 			r.setDisplayChartValues(true);
-			r.setChartValuesTextSize(15);
+			r.setChartValuesTextSize(val);
 			renderer.addSeriesRenderer(r);
 		}
 		
@@ -60,10 +66,10 @@ public class ShowPieChart {
 					+ (x/1024 + "KB"));
 		}	
 		renderer.setLabelsColor(Color.BLACK);
-		renderer.setChartTitleTextSize((float) 25);
+		renderer.setChartTitleTextSize(val2);
 		renderer.setShowLabels(true);
-		renderer.setLabelsTextSize(20);
-		renderer.setLegendTextSize(25);
+		renderer.setLabelsTextSize(val);
+		renderer.setLegendTextSize(val);
 		renderer.setDisplayValues(true);
 		renderer.setPanEnabled(false);
 
