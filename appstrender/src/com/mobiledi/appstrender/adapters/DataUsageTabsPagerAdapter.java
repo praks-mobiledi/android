@@ -22,15 +22,15 @@ public class DataUsageTabsPagerAdapter extends FragmentPagerAdapter {
 	public Fragment getItem(int index) {
 
 		switch (index) {
-		case 0:
+		case 2:
 			// Top Rated fragment activity
 			Log.d("Called ALL Fragment GetIndex", String.valueOf(index));
 			return new AllDataFramgment();
-		case 1:
+		case 0:
 			// Games fragment activity
 			Log.d("Called Pers Fragment GetIndex", String.valueOf(index));
 			return new WeekFragments();
-		case 2:
+		case 1:
 			// Movies fragment activity
 			Log.d("Called Soc Fragment GetIndex", String.valueOf(index));
 			return new MonthFragment();

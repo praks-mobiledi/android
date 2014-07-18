@@ -79,18 +79,20 @@ public class ShowBarChart {
 		XYSeriesRenderer sentRenderer = new XYSeriesRenderer();
 		sentRenderer.setColor(Color.parseColor("#0d90d1"));
 		sentRenderer.setFillPoints(true);
-		sentRenderer.setLineWidth(4);
+		sentRenderer.setLineWidth(2);
 		sentRenderer.setDisplayChartValues(true);
 
 		// Creating XYSeriesRenderer to customize expenseSeries
 		XYSeriesRenderer recievedRenderer = new XYSeriesRenderer();
 		recievedRenderer.setColor(Color.parseColor("#ee5a56"));
 		recievedRenderer.setFillPoints(true);
-		recievedRenderer.setLineWidth(4);
+		recievedRenderer.setLineWidth(2);
 		recievedRenderer.setDisplayChartValues(true);
 
 		// Creating a XYMultipleSeriesRenderer to customize the whole chart
 		XYMultipleSeriesRenderer multiRenderer = new XYMultipleSeriesRenderer();
+		multiRenderer.setBackgroundColor(Color.parseColor("#fcf8e3"));
+		multiRenderer.setApplyBackgroundColor(true);
 		multiRenderer.setLabelsTextSize(13);
 		multiRenderer.setChartTitle("Data Usage");
 		multiRenderer.setXTitle("All Application");
@@ -98,10 +100,10 @@ public class ShowBarChart {
 		//multiRenderer.setXLabelsColor();
 		multiRenderer.setLabelsColor(Color.parseColor("#e3e3e4"));
 		multiRenderer.setPanEnabled(true, false);
-		multiRenderer.setXLabelsPadding(15);
+		multiRenderer.setXLabelsPadding(5);
 		//multiRenderer.setScale(1.5f);
 		multiRenderer.setXLabelsAngle(45);
-		multiRenderer.setBackgroundColor(Color.parseColor("#b3bfce"));
+		//multiRenderer.setBackgroundColor(Color.parseColor("#b3bfce"));
 		multiRenderer.setShowGrid(true);
 		for (int i = 0; i < count.length; i++) {
 			multiRenderer.addXTextLabel(i, appName[i]);

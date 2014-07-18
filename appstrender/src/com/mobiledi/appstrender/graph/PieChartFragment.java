@@ -38,18 +38,14 @@ public class PieChartFragment extends Fragment{
 		ImageView iv= (ImageView) v.findViewById(R.id.icons);
 		ShowPieChart sp = new ShowPieChart(getActivity(),
 				PieChartActivity.listofApps.get(mCurrentPage));
-		Log.d("Curr Sent Values", String.valueOf(mCurrentPage));
-		Log.d("Curr Sent Values", String.valueOf(PieChartActivity.listofApps.get(mCurrentPage).getSent()));
-		Log.d("Curr Rcv Values", String.valueOf(PieChartActivity.listofApps.get(mCurrentPage).getRecieved()));
 		GraphicalView Gv = sp.openChart();
 		LinearLayout layout = (LinearLayout) v.findViewById(
 				R.id.showgraph);
 		layout.removeAllViews();
 		//1st parameter was 960
 		layout.addView(Gv, new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-		tv.setText("# " + (mCurrentPage+1) + "/"+PieChartActivity.listofApps.size()+ " Swipe Horizontally left / right");	
+		tv.setText("# " + (mCurrentPage+1) + "/"+PieChartActivity.listofApps.size()+ " Swipe Left/Right");	
 		iv.setImageDrawable(PieChartActivity.listofApps.get(mCurrentPage).getIcon());
-		
 		return v;		
 	}
 }

@@ -17,7 +17,7 @@ public class DataUsageTabs extends FragmentActivity implements
 	private ViewPager viewPager;
 	private DataUsageTabsPagerAdapter mAdapter;
 	private ActionBar actionBar;
-	private String[] tabs = { "Total", "Week", "Month" };
+	private String[] tabs = { "Week", "Month", "Total" };
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +35,7 @@ public class DataUsageTabs extends FragmentActivity implements
 					.setTabListener(this));
 		}
 
-		viewPager
-				.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+		viewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
 					@Override
 					public void onPageSelected(int position) {
 						actionBar.setSelectedNavigationItem(position);

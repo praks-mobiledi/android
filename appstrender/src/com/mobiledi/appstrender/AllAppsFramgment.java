@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.achartengine.chart.BarChart;
 
 import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -32,12 +33,6 @@ import com.mobiledi.appstrender.networkutil.NetworkUtil;
 import com.mobiledi.appstrender.serviceget.GETRequest;
 
 public class AllAppsFramgment extends Fragment {
-	/*public static ArrayList<AppObject> responseAppsList,responseAppsList2,responseAppsList3;
-	public static boolean isSetResList = false;
-	public static boolean isSetResList2 = false;
-	public static boolean isSetResList3 = false;
-	
-	TelephonyManager tm; */
 	ImageButton allGraph;
 
 	@Override
@@ -56,7 +51,6 @@ public class AllAppsFramgment extends Fragment {
 		ListView mainLV = (ListView) getView().findViewById(R.id.mainLv);
 		registerForContextMenu(mainLV);
 		allGraph = (ImageButton) getView().findViewById(R.id.imageButton1);
-
 		// setHasOptionsMenu(true);
 		try {
 			final ArrayList<AppObject> returnedList = new PInfo(getActivity())
@@ -93,12 +87,24 @@ public class AllAppsFramgment extends Fragment {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		Builder ab = new Builder(getActivity());
+		ab.setMessage("Connecting to Server...");
+		ab.setCancelable(true);
+		ab.setTitle("Info");
+		ab.setIcon(R.drawable.loading);
+		final AlertDialog abs = ab.create();
+		
 		allGraph.setOnClickListener(new OnClickListener() {
-
+			
 			@Override
 			public void onClick(View v) {
-				/*BarGraphCalled bcg= new BarGraphCalled(getActivity());
-				bcg.callGraph();*/
+				abs.show();
+				(new Thread() {	public void run() {	
+					try {sleep(3000);abs.dismiss();	} 
+				catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+						abs.dismiss();}}}).start();
 				if (NetworkUtil.getConnectivityStatus(getActivity())!=0) {
 					Intent s = new Intent(getActivity(), DataUsageTabs.class);
 					startActivity(s);
@@ -151,8 +157,8 @@ public class AllAppsFramgment extends Fragment {
 			String endDate="1970-01-01%2001:00:00";		
 			getRequest = new GETRequest(Home.SERVER_URL_ADD
 					+ "readAllById/"+ tm.getDeviceId()+ "/"+ endDate, "Fetching Data from Appstrender Server..", "GETTING");
-			responseAppsList = getRequest.returnObject;
-			isSetResList = (responseAppsList.size() > 0 ? true : false);
+			allResponseAppsList = getRequest.returnObject;
+			isSetResListAll = (allResponseAppsList.size() > 0 ? true : false);
 		////
 			// endDate=now.year+"-"+now.month+"-"+now.monthDay+"%20"+now.hour+":"+now.minute+":"+now.second;		
 			endDate="2014-06-14%2001:00:00";		
@@ -160,15 +166,15 @@ public class AllAppsFramgment extends Fragment {
 			getRequest2 = new GETRequest(Home.SERVER_URL_ADD
 					+ "readAllById/"+ tm.getDeviceId()+ "/"+ endDate, "Fetching Data from Appstrender Server..", "GETTING");
 			responseAppsList2 = getRequest2.returnObject;
-			isSetResList2 = (responseAppsList2.size() > 0 ? true : false);
+			isSetResListMonth = (responseAppsList2.size() > 0 ? true : false);
 			
 			////
 			
 			endDate="2014-07-07%2001:00:00";		
 			getRequest3 = new GETRequest(Home.SERVER_URL_ADD
 					+ "readAllById/"+ tm.getDeviceId()+ "/"+ endDate, "Fetching Data from Appstrender Server..", "GETTING");
-			responseAppsList3 = getRequest3.returnObject;
-			isSetResList3 = (responseAppsList3.size() > 0 ? true : false);
+			responseAppsListWeek = getRequest3.returnObject;
+			isSetResListWeek = (responseAppsListWeek.size() > 0 ? true : false);
 			
 			////
 		
@@ -187,7 +193,7 @@ public class AllAppsFramgment extends Fragment {
 	}
 	/*public void updateWithDefault(){
 		try {
-			responseAppsList= new PInfo(
+			allResponseAppsList= new PInfo(
 					getActivity()).getInstalledComponentList(0);
 		} catch (NameNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -198,11 +204,11 @@ public class AllAppsFramgment extends Fragment {
 	/*public static boolean getResponseStatus(int from){
 		switch(from){
 		case(1):
-			return (isSetResList==true?true:false);	
+			return (isSetResListAll==true?true:false);	
 		case(2):
-			return (isSetResList2==true?true:false);	
+			return (isSetResListMonth==true?true:false);	
 		case(3):
-			return (isSetResList3==true?true:false);	
+			return (isSetResListWeek==true?true:false);	
 		}
 		return false;
 		
@@ -211,11 +217,11 @@ public class AllAppsFramgment extends Fragment {
 		
 		switch(from){
 			case(1):
-		return responseAppsList;
+		return allResponseAppsList;
 			case(2):
 		return responseAppsList2;
 			case(3):
-		return responseAppsList3;
+		return responseAppsListWeek;
 					
 		}
 		return null;

@@ -9,6 +9,8 @@ import com.mobiledi.appstrender.graph.PieChartActivity;
 import com.mobiledi.appstrender.graph.ShowPieChart;
 import com.mobiledi.appstrender.networkutil.NetworkUtil;
 
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
@@ -74,14 +76,24 @@ public class SocialFragment extends Fragment {
 		} catch (NameNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-allGraph.setOnClickListener(new OnClickListener() {
+		}		Builder ab = new Builder(getActivity());
+		ab.setMessage("Connecting to Server...");
+		ab.setCancelable(true);
+		ab.setTitle("Info");
+		ab.setIcon(R.drawable.loading);
+		final AlertDialog abs = ab.create();
+		
+		allGraph.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				//BarGraphCalled bcg= new BarGraphCalled(getActivity());				
-				//bcg.callGraph();
+				abs.show();
+				(new Thread() {	public void run() {	
+					try {sleep(3000);abs.dismiss();	} 
+				catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+						abs.dismiss();}}}).start();
 				if (NetworkUtil.getConnectivityStatus(getActivity())!=0) {
 					Intent s = new Intent(getActivity(), DataUsageTabs.class);
 					startActivity(s);
