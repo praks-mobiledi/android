@@ -27,9 +27,9 @@ public class AllDataFramgment extends Fragment {
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 	
-		 bcg=new BarGraphCalled(getActivity());
+		bcg=new BarGraphCalled(getActivity());
 		bcg.callGraphAll();
-
+/*
 		if (bcg.getResponseStatus(1)) {
 			ShowBarChart s = new ShowBarChart(getActivity(),
 					bcg.getResponseAppsList(1));
@@ -42,7 +42,7 @@ public class AllDataFramgment extends Fragment {
 		} else {
 			Toast.makeText(getActivity(), "No Data to Display",
 					Toast.LENGTH_LONG).show();
-		}
+		}*/
 		
 		
 		

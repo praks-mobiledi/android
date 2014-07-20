@@ -25,9 +25,9 @@ public class MonthFragment extends Fragment {
 
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
-		 bcg=new BarGraphCalled(getActivity());			
+		bcg=new BarGraphCalled(getActivity());			
 		bcg.callGraphMonth();
-		if (bcg.getResponseStatus(2)) {
+/*		if (bcg.getResponseStatus(2)) {
 		ShowBarChart s = new ShowBarChart(getActivity(), bcg.getResponseAppsList(2));
 		GraphicalView Gv = s.openChart();
 		LinearLayout layout = (LinearLayout) getActivity().findViewById(
@@ -39,6 +39,6 @@ public class MonthFragment extends Fragment {
 			Toast.makeText(getActivity(),
 					"No Data to Display",
 					Toast.LENGTH_LONG).show();
-		}
+		}*/
 	}
 }

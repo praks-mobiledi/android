@@ -32,7 +32,7 @@ public class WeekFragments extends Fragment {
 		 bcg=new BarGraphCalled(getActivity());
 			
 		bcg.callGraphWeek();
-		if (bcg.getResponseStatus(3)) {
+/*		if (bcg.getResponseStatus(3)) {
 		ShowBarChart s = new ShowBarChart(getActivity(),bcg.getResponseAppsList(3));
 		GraphicalView Gv = s.openChart();
 		LinearLayout layout = (LinearLayout) getActivity().findViewById(
@@ -44,6 +44,6 @@ public class WeekFragments extends Fragment {
 			Toast.makeText(getActivity(),
 					"No Data to Display",
 					Toast.LENGTH_LONG).show();
-	}
+	}*/
 }
 }

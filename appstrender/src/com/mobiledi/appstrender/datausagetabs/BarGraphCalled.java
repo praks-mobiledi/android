@@ -28,10 +28,10 @@ public class BarGraphCalled {
 	AlertDialog abs;
 	public BarGraphCalled(Context con) {
 		this.con = con;
+		tm=(TelephonyManager)con.getSystemService(Context.TELEPHONY_SERVICE);
 	}	
 
 	public void callGraphAll() {
-		preExecute();
 		if(NetworkUtil.getConnectivityStatus(con)!=0){
 			GETRequest getRequestAll;
 			try {		
@@ -39,21 +39,19 @@ public class BarGraphCalled {
 				System.out.println("ALL: " + endDate);
 				
 				getRequestAll = new GETRequest(Home.SERVER_URL_ADD
-						+ "readAllById/"+ tm.getDeviceId()+ "/"+ endDate, "Fetching Data from Appstrender Server..", "GETTING");
-				responseAppsListAll = getRequestAll.returnObject;
-				isSetResListAll = (responseAppsListAll==null? false : true);
-				
+						+ "readAllById/"+ tm.getDeviceId()+ "/"+ endDate, "Fetching Data from Appstrender Server..", "GETTING",con,3);
+				//responseAppsListAll = getRequestAll.returnObject;
+				//isSetResListAll = (responseAppsListAll==null? false : true);			
 			
 			} catch (Exception e) {		
-				//Toast.makeText(con, "Oops! Couldn't connect to Server", Toast.LENGTH_LONG).show();
 			e.printStackTrace();
+			return;
 			}
 			}
-		abs.dismiss();
+		return;
 	}
 	
 	public void callGraphMonth(){
-		preExecute();
 		if(NetworkUtil.getConnectivityStatus(con)!=0){
 			GETRequest getRequestMonth;
 			LocalDate dt=LocalDate.now();
@@ -62,43 +60,41 @@ public class BarGraphCalled {
 			Log.d("EndDate Month Value", endDate);		
 			try {
 				getRequestMonth = new GETRequest(Home.SERVER_URL_ADD
-						+ "readAllById/"+ tm.getDeviceId()+ "/"+ endDate, "Fetching Data from Appstrender Server..", "GETTING");
-				responseAppsListMonth = getRequestMonth.returnObject;
-				isSetResListMonth = (responseAppsListMonth==null ? false : true);
+						+ "readAllById/"+ tm.getDeviceId()+ "/"+ endDate, "Fetching Data from Appstrender Server..", "GETTING",con,2);
+				//responseAppsListMonth = getRequestMonth.returnObject;
+				//isSetResListMonth = (responseAppsListMonth==null ? false : true);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
+				return;
 			} catch (ExecutionException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
+				return;
 			}			
 	}
-		abs.dismiss();
+		//abs.dismiss();
+		return;
 	}
 
 	public void callGraphWeek(){
-		preExecute();
 		LocalDate dt = LocalDate.now();
 		dt=dt.minusWeeks(1);
 		String endDate = dt.toString()+"%20"+LocalTime.now();
 		System.out.println("Week: " + endDate);
-		//endDate="2014-07-07%2001:00:00";		
 		GETRequest getRequestWeek;
 		try {
 			getRequestWeek = new GETRequest(Home.SERVER_URL_ADD
-					+ "readAllById/"+ tm.getDeviceId()+ "/"+ endDate, "Fetching Data from Appstrender Server..", "GETTING");
-			responseAppsListWeek = getRequestWeek.returnObject;
-			isSetResListWeek = (responseAppsListWeek==null ? false : true);
+					+ "readAllById/"+ tm.getDeviceId()+ "/"+ endDate, "Fetching Data from Appstrender Server..", "GETTING",con,1);
+			//responseAppsListWeek = getRequestWeek.returnObject;
+			//isSetResListWeek = (responseAppsListWeek==null ? false : true);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ExecutionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return;
 		}	
-		abs.dismiss();
+		return;
 	}
-
+/*
 	public  boolean getResponseStatus(int from){
 		switch(from){
 		case(1):return isSetResListAll;	
@@ -115,13 +111,5 @@ public class BarGraphCalled {
 			case(3):return responseAppsListWeek;				
 		}
 		return null;
-	}
-	protected void preExecute() {
-		ab= new Builder(con);
-		ab.setMessage("Loading Data Please Wait");
-		ab.setCancelable(true);
-		abs=ab.create();
-		abs.show();
-		tm=(TelephonyManager)con.getSystemService(Context.TELEPHONY_SERVICE);
-	}
+	}*/
 }
