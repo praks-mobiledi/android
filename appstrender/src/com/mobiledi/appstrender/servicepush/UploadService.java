@@ -54,7 +54,7 @@ public class UploadService extends Service {
 				tempObj.setDeviceId(telephonyManager.getDeviceId());
 				tempObj.setCarrier(telephonyManager.getNetworkOperatorName());
 				tempObj.setCategory("Application");
-				//tempObj.setPhoneNum(Integer.valueOf(telephonyManager.getLine1Number()));
+				tempObj.setPhoneNum(000000);
 				tempObj.setTimeStamp(ts);
 				ObjectMapper mapper = new ObjectMapper();
 				json = json.concat("," + mapper.writeValueAsString(tempObj));
@@ -66,8 +66,10 @@ public class UploadService extends Service {
 			// SEND DATA TO SERVER UnCOMMENT WHEN  in PRODUCTION
 			if(NetworkUtil.getConnectivityStatus(UploadService.this)!=0){
 				
-		/*	new PUSHRequest(Home.SERVER_URL_ADD+"insert/datas",
-					toSendJSON, "POSTING");	*/	
+			new PUSHRequest(Home.SERVER_URL_ADD+"insert/datas",
+					toSendJSON, "POSTING");	
+			Toast.makeText(UploadService.this, "AppsTrender Data Uploaded", Toast.LENGTH_LONG).show();
+			
 				/*SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-ddHH:mm:ss");
 				SimpleDateFormat output = new SimpleDateFormat(
 						"yyyy-MM-dd'T'HH:mm:ss");

@@ -1,5 +1,7 @@
 package com.mobiledi.appstrender.datausagetabs;
 
+import java.util.ArrayList;
+
 import org.achartengine.GraphicalView;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,11 +11,13 @@ import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import com.mobiledi.appstrender.AppObject;
 import com.mobiledi.appstrender.R;
 import com.mobiledi.appstrender.graph.ShowBarChart;
 
 public class MonthFragment extends Fragment {
-	BarGraphCalled bcg;
+	
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -25,10 +29,15 @@ public class MonthFragment extends Fragment {
 
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
-		bcg=new BarGraphCalled(getActivity());			
-		bcg.callGraphMonth();
-/*		if (bcg.getResponseStatus(2)) {
-		ShowBarChart s = new ShowBarChart(getActivity(), bcg.getResponseAppsList(2));
+		DataWrapper dw = (DataWrapper) getActivity().getIntent().getSerializableExtra("result");
+		ArrayList<ArrayList<AppObject>> list = dw.getResult();
+		ArrayList<AppObject> response = list.get(0);
+		
+		
+		
+		if(response!=null){
+			
+			ShowBarChart s = new ShowBarChart(getActivity(),response);
 		GraphicalView Gv = s.openChart();
 		LinearLayout layout = (LinearLayout) getActivity().findViewById(
 				R.id.dashboard_chart_layoutmonth);
@@ -39,6 +48,6 @@ public class MonthFragment extends Fragment {
 			Toast.makeText(getActivity(),
 					"No Data to Display",
 					Toast.LENGTH_LONG).show();
-		}*/
+		}
 	}
 }

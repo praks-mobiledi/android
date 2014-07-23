@@ -22,18 +22,16 @@ public class DataUsageTabs extends FragmentActivity implements
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_datausage);
+		setContentView(R.layout.activity_datausage);	
 		viewPager = (ViewPager) findViewById(R.id.pager2);
 		actionBar = getActionBar();
 		mAdapter = new DataUsageTabsPagerAdapter(getSupportFragmentManager());
-
 		viewPager.setAdapter(mAdapter);
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		// Adding Tabs
 		for (String tab_name : tabs) {
 			actionBar.addTab(actionBar.newTab().setText(tab_name)
-					.setTabListener(this));
-		}
+					.setTabListener(this));}
 
 		viewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
 					@Override

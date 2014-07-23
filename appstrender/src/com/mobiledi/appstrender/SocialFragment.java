@@ -5,10 +5,12 @@ import java.util.concurrent.ExecutionException;
 
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +23,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.mobiledi.appstrender.adapters.CustomAdapter;
+import com.mobiledi.appstrender.datausagetabs.BarGraphCalled;
 import com.mobiledi.appstrender.datausagetabs.DataUsageTabs;
 import com.mobiledi.appstrender.graph.PieChartActivity;
 import com.mobiledi.appstrender.networkutil.NetworkUtil;
@@ -89,10 +92,19 @@ public class SocialFragment extends Fragment {
 				}
 				else{
 					
-					PingIP tester= new PingIP(getActivity());
+					//PingIP tester= new PingIP(getActivity());
 					try {
-						tester.execute("google.com");	
-						} catch(Exception e){
+						
+						BarGraphCalled bgc= new	BarGraphCalled(getActivity());
+						bgc.execute();
+						//Intent s = new Intent(getActivity(), DataUsageTabs.class);
+						///getActivity().startActivity(s);
+						//Log.d("TESTURL Soc",Home.SERVER_URL_ADD.substring(7));
+						
+						//TelephonyManager tm = (TelephonyManager)getActivity().getSystemService(Context.TELEPHONY_SERVICE); 	
+						//tester.execute("192.168.43.180:8080/appstrender_service/appstrender/appdata/readServerState/"+tm.getDeviceId());
+						//Log.d("TESTURL",Home.SERVER_URL_ADD.substring(7));
+					} catch(Exception e){
 								e.printStackTrace();
 							
 						}

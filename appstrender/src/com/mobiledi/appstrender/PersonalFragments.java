@@ -5,10 +5,13 @@ import java.util.concurrent.ExecutionException;
 
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
+import android.provider.Telephony;
 import android.support.v4.app.Fragment;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +24,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.mobiledi.appstrender.adapters.CustomAdapter;
+import com.mobiledi.appstrender.datausagetabs.BarGraphCalled;
 import com.mobiledi.appstrender.datausagetabs.DataUsageTabs;
 import com.mobiledi.appstrender.graph.PieChartActivity;
 import com.mobiledi.appstrender.networkutil.NetworkUtil;
@@ -28,9 +32,7 @@ import com.mobiledi.appstrender.networkutil.PingIP;
 
 public class PersonalFragments extends Fragment {
 	ImageButton allGraph;
-	//static Boolean result = false;
-
-	// public static boolean isSetResListAll=false;
+	TelephonyManager tm;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -94,10 +96,11 @@ public class PersonalFragments extends Fragment {
 				} 
 				else {
 
-					PingIP tester = new PingIP(getActivity());
+					//PingIP tester = new PingIP(getActivity());
 					try {
-						tester.execute(Home.SERVER_URL_ADD);
-					} catch (Exception e) {
+						BarGraphCalled bgc= new	BarGraphCalled(getActivity());
+						bgc.execute();
+						} catch (Exception e) {
 						e.printStackTrace();
 					}
 				}

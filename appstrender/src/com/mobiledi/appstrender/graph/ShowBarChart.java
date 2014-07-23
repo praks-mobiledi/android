@@ -12,6 +12,7 @@ import org.achartengine.renderer.XYSeriesRenderer;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.widget.Toast;
 
 import com.mobiledi.appstrender.AppObject;
 
@@ -28,7 +29,7 @@ public class ShowBarChart {
 
 	public ShowBarChart(Context context, ArrayList<AppObject> filledList) {
 		// TODO Auto-generated constructor stub
-		this.basecon = context;
+		this.basecon = context;	
 		for (AppObject x : filledList) {
 			if (x.getSent() != 0) {
 				this.returnedList.add(x);

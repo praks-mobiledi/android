@@ -5,10 +5,12 @@ import java.util.concurrent.ExecutionException;
 
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -24,6 +26,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.mobiledi.appstrender.adapters.CustomAdapter;
+import com.mobiledi.appstrender.datausagetabs.BarGraphCalled;
 import com.mobiledi.appstrender.datausagetabs.DataUsageTabs;
 import com.mobiledi.appstrender.graph.PieChartActivity;
 import com.mobiledi.appstrender.networkutil.NetworkUtil;
@@ -99,10 +102,10 @@ allGraph.setOnClickListener(new OnClickListener() {
 				}
 				else{
 					
-					PingIP tester= new PingIP(getActivity());
+					//PingIP tester= new PingIP(getActivity());
 					try {
-						tester.execute(Home.SERVER_URL_ADD);
-						
+					BarGraphCalled bgc= new	BarGraphCalled(getActivity());
+					bgc.execute();
 						} catch(Exception e){
 								e.printStackTrace();
 		

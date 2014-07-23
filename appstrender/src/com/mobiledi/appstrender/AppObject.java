@@ -1,13 +1,15 @@
 package com.mobiledi.appstrender;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 import android.graphics.drawable.Drawable;
 
+@SuppressWarnings("serial")
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class AppObject {
+public class AppObject implements Serializable {
 
 	@JsonIgnore
 	int id = 0;
