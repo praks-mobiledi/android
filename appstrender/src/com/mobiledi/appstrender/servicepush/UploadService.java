@@ -68,7 +68,7 @@ public class UploadService extends Service {
 				
 			new PUSHRequest(Home.SERVER_URL_ADD+"insert/datas",
 					toSendJSON, "POSTING");	
-			Toast.makeText(UploadService.this, "AppsTrender Data Uploaded", Toast.LENGTH_LONG).show();
+			//Toast.makeText(UploadService.this, "AppsTrender Data Uploaded", Toast.LENGTH_LONG).show();
 			
 				/*SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-ddHH:mm:ss");
 				SimpleDateFormat output = new SimpleDateFormat(
@@ -80,14 +80,6 @@ public class UploadService extends Service {
 				//DateTime s=DateTime.now();
 				String formattedTime=(ts.toString().substring(0, 10).concat("T")).concat(ts.toString().substring(11, ts.toString().length()));
 				Log.d("AFTERLocalDate", formattedTime);
-			/*	
-				new PUSHRequest(Home.SERVER_URL_ADD + "insert/RebootRow",
-						"[{\"appName\":\"DEVICEREBOOTED\",\"timeStamp\":\""
-								+ formattedTime
-								+ "\",\"carrier\":\"NA\",\"category\":\"NA\",\"deviceId\":\""
-								+ "359609052536419"
-								+ "\",\"sent\":0,\"recieved\":0,\"phoneNum\":0,\"appUid\":0}]",
-						"POSTING");*/
 					
 			}
 				else{

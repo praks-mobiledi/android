@@ -2,13 +2,12 @@
     xmlns:sord.ids_connect="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.mobiledi.appstrender.Home" >
-
+ 		
+ 		<item android:id="@+id/about" 
+        android:title="About" />
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/exit"
         android:orderInCategory="100"
-        android:showAsAction="withText"
-        android:title="@string/action_settings"/>
-    <item android:id="@+id/allApps" 
-        android:title="All Apps Usage" />
+        android:title="Exit"/>
 
 </menu>

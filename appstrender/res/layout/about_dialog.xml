@@ -1,0 +1,107 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/Theme_Dialog"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:padding="3dp" >
+        <TableRow
+            android:id="@+id/tableRow1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+             android:layout_gravity="center" >
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_launcher" 
+                android:paddingLeft="15dp"/>
+       
+            <TextView
+                android:id="@+id/TextView04"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="AppsTrender v1.0"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                 android:paddingLeft="20dp"  />
+        </TableRow>
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+             android:layout_gravity="center"
+             android:padding="1dp" 
+             android:background="#0d90d1"></TableRow>
+        <TableRow
+            android:id="@+id/tableRow3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+             android:layout_gravity="center"
+               android:paddingLeft="5dp" >
+            <TextView
+                android:id="@+id/TextView01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Contact"  />
+             <TextView
+                    android:id="@+id/TextView03"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="apps@mobiledi.com"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                     android:paddingLeft="15dp" />
+             
+        </TableRow>
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+             android:layout_gravity="center"
+             android:padding="1dp" 
+             android:background="#0d90d1"></TableRow>
+        <TableRow
+            android:id="@+id/tableRow4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+             android:layout_gravity="center"
+             android:paddingLeft="5dp" >
+             
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                   
+                    android:text="Company Name" />
+                <TextView
+                    android:id="@+id/TextView02"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mobile-Di"
+                    android:textAppearance="?android:attr/textAppearanceMedium" 
+                      android:paddingLeft="15dp"/>
+        </TableRow>
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+             android:layout_gravity="center"
+             android:padding="1dp"
+              android:background="#0d90d1"></TableRow>
+        <TableRow
+            android:id="@+id/tableRow5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+             android:layout_gravity="center" 
+             >
+            <Button
+                android:id="@+id/dialogok"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Back"
+                 android:layout_span="2"
+                android:layout_gravity="center" />
+        </TableRow>
+    </TableLayout>
+</RelativeLayout>

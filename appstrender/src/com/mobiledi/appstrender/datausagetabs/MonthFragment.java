@@ -34,8 +34,10 @@ public class MonthFragment extends Fragment {
 		ArrayList<AppObject> response = list.get(0);
 		
 		
-		
-		if(response!=null){
+		if(list!=null && response!=null){		
+				//if(response!=null){
+			String status=(list.get(1).get(0).getAppName()==null?"NODATA":list.get(1).get(0).getAppName());
+				if(status.equals("ERROR")==false){
 			
 			ShowBarChart s = new ShowBarChart(getActivity(),response);
 		GraphicalView Gv = s.openChart();
@@ -46,8 +48,16 @@ public class MonthFragment extends Fragment {
 		}
 		else {
 			Toast.makeText(getActivity(),
-					"No Data to Display",
-					Toast.LENGTH_LONG).show();
+					"No utilization data available at this time",
+					Toast.LENGTH_SHORT).show();
 		}
+}
+else {
+	Toast.makeText(getActivity(),
+			"No utilization data available at this time",
+			Toast.LENGTH_SHORT).show();	
+							}
+
+
 	}
 }

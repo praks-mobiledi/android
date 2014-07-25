@@ -3,6 +3,7 @@ package com.mobiledi.appstrender.datausagetabs;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.ConnectException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -12,7 +13,6 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.conn.ConnectTimeoutException;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
@@ -26,24 +26,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.telephony.TelephonyManager;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.mobiledi.appstrender.AppObject;
 import com.mobiledi.appstrender.Home;
 import com.mobiledi.appstrender.R;
 
-/*public class BarGraphCalled {
- Context con;
- private TelephonyManager tm;
- public static ArrayList<AppObject> responseAppsListAll,responseAppsListMonth,responseAppsListWeek;
- public  boolean isSetResListAll = false;
- public  boolean isSetResListMonth = false;
- public  boolean isSetResListWeek = false;
- AlertDialog.Builder ab;
- AlertDialog abs;
- public BarGraphCalled(Context con) {
- this.con = con;
- tm=(TelephonyManager)con.getSystemService(Context.TELEPHONY_SERVICE);
- }*/
 public class BarGraphCalled extends
 		AsyncTask<Void, Integer, ArrayList<ArrayList<AppObject>>> {
 
@@ -70,10 +59,10 @@ public class BarGraphCalled extends
 		dialog.setMessage("Fetching Data ...");
 		dialog.setIcon(R.drawable.loading);
 		dialog.setTitle("#");
-		dialog.setIndeterminate(false);
+		dialog.setIndeterminate(true);
 		dialog.setMax(100);
-		dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-		dialog.setProgress(3);
+		dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+		//dialog.setProgress(3);
 		dialog.show();
 
 		String endDate = "2014-01-01%2000:00:00";
@@ -95,16 +84,16 @@ public class BarGraphCalled extends
 	@Override
 	protected ArrayList<ArrayList<AppObject>> doInBackground(Void... args) {
 		int total = 1;
-		
+		HttpGet request = new HttpGet();
+        
 		for(String date:dates){
 
 		try {
-			  	HttpGet request = new HttpGet();
-		        HttpParams httpParameters = new BasicHttpParams();
-		        HttpConnectionParams.setConnectionTimeout(httpParameters, 4000);
-		        HttpConnectionParams.setSoTimeout(httpParameters, 6000);
-		        HttpClient httpclient = new DefaultHttpClient(httpParameters);
-		        URI website;
+			HttpParams httpParameters = new BasicHttpParams();
+	        HttpConnectionParams.setConnectionTimeout(httpParameters, 8000);
+	        //HttpConnectionParams.setSoTimeout(httpParameters,8000);
+	        HttpClient httpclient = new DefaultHttpClient(httpParameters);
+	        URI website;	
 			website = new URI(Home.SERVER_URL_ADD + "readById/"
 					+ tm.getDeviceId() + "/"+ date);//2014-01-01%2000:00:00");
 			request.setURI(website);
@@ -122,32 +111,58 @@ public class BarGraphCalled extends
 			}
 			// Append Server Response To Content String
 			String Content=  sb.toString();	
-			publishProgress(total);
-			
+			publishProgress(total);		
 			ObjectMapper mapper = new ObjectMapper();
+			 Log.d("CONTENT VALUE",Content);//.toString()
+			
 			ArrayList<AppObject> myObjects = mapper.readValue(
 					Content,
 					mapper.getTypeFactory().constructCollectionType(
 							List.class, AppObject.class));
 			finalList.add(myObjects);
-		} catch (URISyntaxException e1) {
+			/* ArrayList<AppObject> myObjects = mapper.readValue(
+						Content,
+						mapper.getTypeFactory().constructCollectionType(
+								List.class, DataWrapper.class));
+				finalList.add(myObjects);*/
+			
+		}
+		catch(ConnectException e){
+			e.printStackTrace();
+			fillErrorObject();	
+		}
+		catch (URISyntaxException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-			finalList.add(null);
+			fillErrorObject();
 					
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			finalList.add(null);
+			fillErrorObject();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			finalList.add(null);			
+			fillErrorObject();		
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			fillErrorObject();
 		}
 		
 		}
 		return finalList;
 	}
+	
+	private void  fillErrorObject(){
+		ArrayList<AppObject> tempAl= new ArrayList<AppObject>();
+		AppObject temp= new AppObject();
+		temp.setAppName("ERROR");
+		temp.setCategory("Server error: Unable to calculate network utilization at this time");
+		tempAl.add(temp);
+		finalList.add(tempAl);
+	}
+	
 
 	@Override
 	protected void onPostExecute(ArrayList<ArrayList<AppObject>> result) {		

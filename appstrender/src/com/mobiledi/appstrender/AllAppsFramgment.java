@@ -49,7 +49,6 @@ public class AllAppsFramgment extends Fragment {
 		// TODO Auto-generated method stub
 		super.onViewCreated(view, savedInstanceState);
 		ListView mainLV = (ListView) getView().findViewById(R.id.mainLv);
-		registerForContextMenu(mainLV);
 		allGraph = (ImageButton) getView().findViewById(R.id.imageButton1);
 		// setHasOptionsMenu(true);
 		try {

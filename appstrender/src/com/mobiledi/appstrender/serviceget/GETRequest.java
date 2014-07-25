@@ -81,15 +81,7 @@ class MakeRequest extends AsyncTask<String, Void, ArrayList<AppObject>> {
 	}
 	*/
 	@Override
-	protected void onPreExecute() {
-		/*super.onPreExecute();	
-		dialog = new ProgressDialog(context);
-	    dialog.setMessage("Fetching Data ...");
-	    dialog.setIcon(R.drawable.loading);
-	    dialog.setTitle(" ");
-	    dialog.setIndeterminate(true);
-	    dialog.show();   */ 
-		
+	protected void onPreExecute() {		
 		Log.d("GET RESQUEST", "REACHED HERE");
 	    }   
 	@Override

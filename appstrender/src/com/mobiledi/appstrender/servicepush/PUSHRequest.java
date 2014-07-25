@@ -26,7 +26,7 @@ public class PUSHRequest {
 
 		final MakeRequest request = new MakeRequest();
 		request.execute(url, tosendJSON, MODE);
-		returnObject = request.get();
+		//returnObject = request.get();
 		Log.d(_url, tosendJSON);
 	}
 

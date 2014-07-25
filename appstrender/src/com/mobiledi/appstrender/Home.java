@@ -2,6 +2,7 @@ package com.mobiledi.appstrender;
 
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
+import android.app.Dialog;
 import android.app.FragmentTransaction;
 import android.content.ComponentName;
 import android.content.Context;
@@ -13,8 +14,11 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.Menu;
-import android.widget.Toast;
-
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import com.mobiledi.appstrender.adapters.TabsPagerAdapter;
 import com.mobiledi.appstrender.servicepush.UploadService;
 
@@ -22,7 +26,7 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
 	private ViewPager viewPager;
 	private TabsPagerAdapter mAdapter;
 	private ActionBar actionBar;
-	public static String SERVER_IP="192.168.1.2:8080";
+	public static String SERVER_IP="192.168.1.4:8080";
 	public static String SERVER_URL_ADD="http://"+ SERVER_IP +"/appstrender_service/appstrender/appdata/";
 
 	private String[] tabs = { "All Apps", "Downloaded", "System" };
@@ -32,9 +36,12 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home);
-		Intent i = new Intent(Home.this, UploadService.class);
-		startService(i);
 		UpdateTabs();
+		// get action bar   
+        ActionBar actionBar = getActionBar();
+ 
+        // Enabling Up / Back navigation
+        actionBar.setDisplayHomeAsUpEnabled(true);
 		}
 
 	public void UpdateTabs() {
@@ -110,8 +117,51 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		return super.onCreateOptionsMenu(menu);
+	protected void onStart() {
+		// TODO Auto-generated method stub
+		super.onStart();
+		Intent i = new Intent(Home.this, UploadService.class);
+		startService(i);
+		
 	}
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+	    MenuInflater mi = getMenuInflater();
+	    mi.inflate(R.menu.home , menu);
+	    return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch(item.getItemId()){
+		case(R.id.exit):
+		{
+		finish();	
+		break;	
+		}
+		case(R.id.about):
+		final Dialog dialog=new Dialog(Home.this);	
+		dialog.setContentView(R.layout.about_dialog);
+		dialog.setCanceledOnTouchOutside(true);
+		dialog.setTitle("About us");
+		dialog.show();
+		Button bok=(Button) dialog.findViewById(R.id.dialogok);
+		bok.setOnClickListener(new OnClickListener() {
+		
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				dialog.dismiss();
+			}
+		});
+
+		break;
+		}
+		return true;
+		
+	}
+	
+	
+	
 
 }

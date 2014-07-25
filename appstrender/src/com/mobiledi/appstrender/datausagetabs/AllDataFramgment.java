@@ -34,11 +34,11 @@ public class AllDataFramgment extends Fragment{
 		DataWrapper dw = (DataWrapper) getActivity().getIntent().getSerializableExtra("result");
 		ArrayList<ArrayList<AppObject>> list = dw.getResult();
 		ArrayList<AppObject> response = list.get(2);
-		
-		
-		
-		if(response!=null){
-			
+		if(list!=null && response!=null){		
+			//if(response!=null){
+			String status=(list.get(1).get(0).getAppName()==null?"NODATA":list.get(1).get(0).getAppName());
+				if(status.equals("ERROR")==false){
+				
 			ShowBarChart s = new ShowBarChart(getActivity(),response);
 			GraphicalView Gv = s.openChart();
 			LinearLayout layout = (LinearLayout) getActivity().findViewById(
@@ -46,91 +46,17 @@ public class AllDataFramgment extends Fragment{
 			layout.removeAllViews();
 			layout.addView(Gv, new LayoutParams(960, LayoutParams.MATCH_PARENT));
 			}
-			else {
-				Toast.makeText(getActivity(),
-						"No Data to Display",
-						Toast.LENGTH_LONG).show();
-		}	
-		//while()
-/*	      try {
-	    	  ArrayList<AppObject> listofApps = null; 
-	  		ArrayList<AppObject> responseAppsList = new PInfo(
-	  					getActivity()).getInstalledComponentList(0);
-	  	    for(AppObject app: responseAppsList){
-	          	if(app.getSent()>0){
-	          		      
-	          		listofApps.add(app);
-	       
-	          		}
-	          }
-	  	    
-	  	  ShowBarChart s = new ShowBarChart(getActivity(),
-					listofApps);
-			GraphicalView Gv = s.openChart();
-			LinearLayout layout = (LinearLayout) getActivity()
-					.findViewById(R.id.dashboard_chart_layout);
-			layout.removeAllViews();
-			layout.addView(Gv, new LayoutParams(960,
-					LayoutParams.MATCH_PARENT));
-		} 
-	  	    		
-	  		
-	  catch (NameNotFoundException e) {
-	  		// TODO Auto-generated catch block
-	  		e.printStackTrace();
-	  	}
-		
-		
-		
-	*/	
-		
-		
-		
-		
-		
-		
-		
-		
-		
-
-		/*if (bcg.getResponseStatus(1)) {
-			ShowBarChart s = new ShowBarChart(getActivity(),
-					bcg.getResponseAppsList(1));
-			GraphicalView Gv = s.openChart();
-			LinearLayout layout = (LinearLayout) getActivity()
-					.findViewById(R.id.dashboard_chart_layout);
-			layout.removeAllViews();
-			layout.addView(Gv, new LayoutParams(960,
-					LayoutParams.MATCH_PARENT));
-		} else {
-			Toast.makeText(getActivity(), "No Data to Display",
-					Toast.LENGTH_LONG).show();
-		}
-		*/
-		
-		
+		else {	
+						Toast.makeText(getActivity(),
+								"No utilization data available at this time",
+						Toast.LENGTH_SHORT).show();	
+			}	
 	}
+	else {
+		Toast.makeText(getActivity(),
+				"No utilization data available at this time",
+				Toast.LENGTH_SHORT).show();	
+								}
 
-
-	
-/*	public void loadView(ArrayList<AppObject> returnObj){
-		
-		if(returnObj!=null){
-			ShowBarChart s = new ShowBarChart(getActivity(),
-				returnObj);
-		GraphicalView Gv = s.openChart();
-		LinearLayout layout = (LinearLayout) getActivity()
-				.findViewById(R.id.dashboard_chart_layout);
-		layout.removeAllViews();
-		layout.addView(Gv, new LayoutParams(960,
-				LayoutParams.MATCH_PARENT));
-	} else {
-		Toast.makeText(getActivity(), "No Data to Display",
-				Toast.LENGTH_LONG).show();
-		
-	}
-	
-	
-	}*/
 }
-
+}

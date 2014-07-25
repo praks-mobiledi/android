@@ -2,6 +2,8 @@ package com.mobiledi.appstrender.graph;
 
 import java.util.ArrayList;
 
+import android.app.ActionBar;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
@@ -9,6 +11,12 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.mobiledi.appstrender.AllAppsFramgment;
@@ -17,6 +25,7 @@ import com.mobiledi.appstrender.PInfo;
 import com.mobiledi.appstrender.R;
 import com.mobiledi.appstrender.adapters.PieChartPagerAdapter;
 import com.mobiledi.appstrender.datausagetabs.BarGraphCalled;
+import com.mobiledi.appstrender.datausagetabs.DataUsageTabs;
 
 public class PieChartActivity extends FragmentActivity {
 public static  ArrayList<AppObject> listofApps=new ArrayList<AppObject>();
@@ -28,51 +37,26 @@ private ArrayList<AppObject> responseAppsList;
         setContentView(R.layout.piechart_activity);
         Intent i= getIntent();
         String setSelected=i.getStringExtra("SELECT");
-        Log.d("Selected Item ",setSelected); 
-      //  BarGraphCalled bcg= new BarGraphCalled(PieChartActivity.this);
-      //  if(AllAppsFramgment.isSetResList){
-    //  bcg.callGraph();
+     // get action bar   
+        ActionBar actionBar = this.getActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeButtonEnabled(true);
+        
       try {
 		responseAppsList= new PInfo(
 					PieChartActivity.this).getInstalledComponentList(0);
 	    for(AppObject app: responseAppsList){
-        	if(app.getSent()>0){
-        		//Log.d("APP OBJECT ",app.getAppName());           
+        	if(app.getSent()>0){           
         		listofApps.add(app);
-        		//Log.d("Selected Item ",String.valueOf(listofApps.size()));
         		if(app.getAppName().equals(setSelected)){
         			selectedItem=listofApps.size();
-        			//Log.d("Selected Item Number",String.valueOf(selectedItem));
-        			//Log.d("Selected Item ",app.getAppName());
+    
         		}
         		}
-        }
-		
-		
-		
-		
+        }	
 	} catch (NameNotFoundException e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
-    //  if(bcg.getResponseStatus(1)){
-/*        for(AppObject app: bcg.getResponseAppsList(1)){
-        	if(app.getSent()>0){
-        		//Log.d("APP OBJECT ",app.getAppName());           
-        		listofApps.add(app);
-        		//Log.d("Selected Item ",String.valueOf(listofApps.size()));
-        		if(app.getAppName().equals(setSelected)){
-        			selectedItem=listofApps.size();
-        			//Log.d("Selected Item Number",String.valueOf(selectedItem));
-        			//Log.d("Selected Item ",app.getAppName());
-        		}
-        		}
-        }}
-      else{
-    	  
-    	  
-    	  Toast.makeText(getApplicationContext(), "No Data To Display", Toast.LENGTH_LONG).show();
-      }*/
         /** Getting a reference to the ViewPager defined the layout file */        
         ViewPager pager = (ViewPager) findViewById(R.id.pager5);
         
@@ -87,12 +71,47 @@ private ArrayList<AppObject> responseAppsList;
        
         /** Set Page*/
         pager.setCurrentItem(selectedItem-1);
-        /*}
-        else{
-        	Toast.makeText(this, "No Data Available", Toast.LENGTH_LONG).show();
-			this.finish();
-        }*/
+      
     }
+@Override
+public boolean onCreateOptionsMenu(Menu menu) {
+    MenuInflater mi = getMenuInflater();
+    mi.inflate(R.menu.home , menu);
+    return true;
+}
 
-   
+@Override
+public boolean onOptionsItemSelected(MenuItem item) {
+	switch(item.getItemId()){
+	
+	case(android.R.id.home):{
+		onBackPressed();
+       // return true;
+	}
+	
+	break;
+	case(R.id.exit):
+	{
+	finish();
+	break;
+	}
+	case(R.id.about):
+	final Dialog dialog=new Dialog(PieChartActivity.this);	
+	dialog.setContentView(R.layout.about_dialog);
+	dialog.setCanceledOnTouchOutside(true);
+	dialog.setTitle("About us");
+	dialog.show();
+	Button bok=(Button) dialog.findViewById(R.id.dialogok);
+	bok.setOnClickListener(new OnClickListener() {
+		
+		@Override
+		public void onClick(View arg0) {
+			dialog.dismiss();
+		}
+	});
+	break;
+	}
+	return true;
+	
+}
 }
