@@ -6,9 +6,11 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
-import com.mobiledi.appstrender.AppObject;
 import android.os.AsyncTask;
 import android.util.Log;
+import com.mobiledi.appstrender.AppObject;
+///import org.apache.http.client.HttpClient;
+//import org.apache.http.client.methods.HttpPost;
 
 //do this wherever you are wanting to POST
 public class PUSHRequest {
@@ -28,9 +30,7 @@ public class PUSHRequest {
 		request.execute(url, tosendJSON, MODE);
 		//returnObject = request.get();
 		Log.d(_url, tosendJSON);
-	}
-
-	
+	}	
 }
 
 class MakeRequest extends AsyncTask<String, Void, ArrayList<AppObject>> {
@@ -42,25 +42,26 @@ class MakeRequest extends AsyncTask<String, Void, ArrayList<AppObject>> {
 		// super.onPostExecute(result)
 Log.d("Value of URL 1:" , url[1]);
 		if (url[2] == "POSTING") { // POST OPERATION
-
 			try {
 				URL urlToRequest = new URL(url[0]);
 				
 				urlConnection = (HttpURLConnection) urlToRequest.openConnection();
 				if (url[1] != null) {
+					urlConnection.setDoInput(true);
 					urlConnection.setDoOutput(true);
 					urlConnection.setRequestMethod("POST");
 					urlConnection.setFixedLengthStreamingMode(url[1].getBytes().length);
-					Log.d("BYTES LENGTH", String.valueOf(url[1].getBytes().length));
+					//Log.d("BYTES LENGTH", String.valueOf(url[1].getBytes().length));
 					urlConnection.setRequestProperty("Content-Type","application/json");
-					urlConnection.setReadTimeout(10 * 1000);
+					//urlConnection.setReadTimeout(10 * 1000);
+					urlConnection.setConnectTimeout(5000);
 					PrintWriter out;
 					out = new PrintWriter(urlConnection.getOutputStream());
 					out.print(url[1]);
 					out.flush();
 					int statusCode = urlConnection.getResponseCode(); 
 					if(statusCode != HttpURLConnection.HTTP_OK) {
-						Log.d("ASync Task", "Something Wrong"); // throw some  exception 
+						Log.d("ASync Task", "Alert"); // throw some  exception 
 					  }
 					 
 				}
@@ -75,10 +76,8 @@ Log.d("Value of URL 1:" , url[1]);
 			// handle issues
 			//return null;
 		} // / END POST OPERATION
-		return null;
-		
+		return null;	
 	}
-
 	@Override
 	protected void onPostExecute(ArrayList<AppObject> result) {
 		if (urlConnection != null) {

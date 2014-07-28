@@ -7,6 +7,7 @@ import org.achartengine.GraphicalView;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,13 +29,40 @@ public class AllDataFramgment extends Fragment{
 				false);
 		return rootView;
 	}
-
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		DataWrapper dw = (DataWrapper) getActivity().getIntent().getSerializableExtra("result");
+		/*ArrayList<ArrayList<AppObject>> list = dw.getResult();
+		ArrayList<AppObject> response = list.get(1);*/
+			ArrayList<AppObject> response = dw.getResult().get(2);
+			if(response!=null){
+			ShowBarChart s = new ShowBarChart(getActivity(),response);
+			GraphicalView Gv = s.openChart();
+			LinearLayout layout = (LinearLayout) getActivity().findViewById(
+						R.id.dashboard_chart_layout);
+			layout.removeAllViews();
+			layout.addView(Gv, new LayoutParams(960, LayoutParams.MATCH_PARENT));
+			}
+			else {
+				Toast.makeText(getActivity(),
+						"No utilization data available at this time",
+				Toast.LENGTH_SHORT).show();	
+			}
+}
+}		
+	/*@Override
+	public void onViewCreated(View view, Bundle savedInstanceState) {
+		DataWrapper dw = (DataWrapper) getActivity().getIntent().getSerializableExtra("result");
 		ArrayList<ArrayList<AppObject>> list = dw.getResult();
-		ArrayList<AppObject> response = list.get(2);
-		if(list!=null && response!=null){		
+		ArrayList<AppObject> response = dw.getResult().get(2);
+		for(AppObject x: response){
+			Log.d("All Data", x.getAppName());
+		}
+		
+		
+		
+		try{
+	//	if(list!=null && response!=null){		
 			//if(response!=null){
 			String status=(list.get(1).get(0).getAppName()==null?"NODATA":list.get(1).get(0).getAppName());
 				if(status.equals("ERROR")==false){
@@ -57,6 +85,15 @@ public class AllDataFramgment extends Fragment{
 				"No utilization data available at this time",
 				Toast.LENGTH_SHORT).show();	
 								}
+		}
+		catch(IndexOutOfBoundsException e){
+			Toast.makeText(getActivity(),
+					"No utilization data available at this time",
+					Toast.LENGTH_SHORT).show();	
+		}
+		
 
-}
-}
+	
+	}
+	}		
+*/

@@ -78,8 +78,8 @@ public class UploadService extends Service {
 				Log.d("LocalDate", formattedTime);
 				Log.d("TS LocalDate", ts.toString());*/
 				//DateTime s=DateTime.now();
-				String formattedTime=(ts.toString().substring(0, 10).concat("T")).concat(ts.toString().substring(11, ts.toString().length()));
-				Log.d("AFTERLocalDate", formattedTime);
+			//	String formattedTime=(ts.toString().substring(0, 10).concat("T")).concat(ts.toString().substring(11, ts.toString().length()));
+			//	Log.d("AFTERLocalDate", formattedTime);
 					
 			}
 				else{

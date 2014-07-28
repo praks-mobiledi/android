@@ -86,18 +86,20 @@ public class BarGraphCalled extends
 		int total = 1;
 		HttpGet request = new HttpGet();
         
-		for(String date:dates){
+	for(String date:dates){
 
 		try {
 			HttpParams httpParameters = new BasicHttpParams();
 	        HttpConnectionParams.setConnectionTimeout(httpParameters, 8000);
 	        //HttpConnectionParams.setSoTimeout(httpParameters,8000);
 	        HttpClient httpclient = new DefaultHttpClient(httpParameters);
-	        URI website;	
-			website = new URI(Home.SERVER_URL_ADD + "readById/"
+	        URI website = new URI(Home.SERVER_URL_ADD + "readById/"
 					+ tm.getDeviceId() + "/"+ date);//2014-01-01%2000:00:00");
-			request.setURI(website);
-	
+					
+		/*	website = new URI(Home.SERVER_URL_ADD + "readAllById/"
+		+ tm.getDeviceId() + "/"+ dates.get(0)+"/"+dates.get(1)+"/"+dates.get(2));//2014-01-01%2000:00:00");
+		*/
+	        request.setURI(website);
 	        HttpResponse response = httpclient.execute(request);
 	        
 	        BufferedReader in = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
@@ -113,19 +115,19 @@ public class BarGraphCalled extends
 			String Content=  sb.toString();	
 			publishProgress(total);		
 			ObjectMapper mapper = new ObjectMapper();
-			 Log.d("CONTENT VALUE",Content);//.toString()
-			
+			 Log.d("CONTENT VALUE",Content);//.toString()			
 			ArrayList<AppObject> myObjects = mapper.readValue(
 					Content,
 					mapper.getTypeFactory().constructCollectionType(
 							List.class, AppObject.class));
 			finalList.add(myObjects);
-			/* ArrayList<AppObject> myObjects = mapper.readValue(
+			/* ArrayList<ArrayList<AppObject>> myObjects = mapper.readValue(
 						Content,
 						mapper.getTypeFactory().constructCollectionType(
 								List.class, DataWrapper.class));
-				finalList.add(myObjects);*/
 			
+			 		return	myObjects;
+		*/
 		}
 		catch(ConnectException e){
 			e.printStackTrace();
@@ -150,8 +152,9 @@ public class BarGraphCalled extends
 			fillErrorObject();
 		}
 		
-		}
+}
 		return finalList;
+		//return null;
 	}
 	
 	private void  fillErrorObject(){
@@ -167,22 +170,27 @@ public class BarGraphCalled extends
 	@Override
 	protected void onPostExecute(ArrayList<ArrayList<AppObject>> result) {		
 		
+		
+		
+		
 		if(dialog!=null || dialog.isShowing()){
 			
 			dialog.dismiss();
 			
 		}
-			
+		for(ArrayList<AppObject> x: result){
+			for(AppObject y: x){
+				if(y!=null)
+					Log.d("result in post up:", y.getAppName());
+			}	
+		}
+	
 		Intent i = new Intent(context,DataUsageTabs.class);
 		i.putExtra("result", new DataWrapper(result));	
+		
 		context.startActivity(i);	
 	}
 
-	@Override
-	protected void onProgressUpdate(Integer...values) {
-		// TODO Auto-generated method stub
-		dialog.setProgress(values[0]);
-	}
 
 }
 

@@ -33,15 +33,10 @@ public class WeekFragments extends Fragment {
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		DataWrapper dw = (DataWrapper) getActivity().getIntent().getSerializableExtra("result");
-		ArrayList<ArrayList<AppObject>> list = dw.getResult();
-		ArrayList<AppObject> response = list.get(1);
-		
-		if(list!=null && response!=null){		
-		//if(response!=null){
-			Log.d("DW and response", list.size() + " resp " + response.size() );
-			String status=(list.get(1).get(0).getAppName()==null?"NODATA":list.get(1).get(0).getAppName());
-				//String status =list.get(1).get(0).getAppName();
-			if(status.equals("ERROR")==false){
+		/*ArrayList<ArrayList<AppObject>> list = dw.getResult();
+		ArrayList<AppObject> response = list.get(1);*/
+			ArrayList<AppObject> response = dw.getResult().get(1);
+			if(response!=null){
 			ShowBarChart s = new ShowBarChart(getActivity(),response);
 			GraphicalView Gv = s.openChart();
 			LinearLayout layout = (LinearLayout) getActivity().findViewById(
@@ -49,19 +44,10 @@ public class WeekFragments extends Fragment {
 			layout.removeAllViews();
 			layout.addView(Gv, new LayoutParams(960, LayoutParams.MATCH_PARENT));
 			}
-			else { 
+			else {
 				Toast.makeText(getActivity(),
 						"No utilization data available at this time",
-						Toast.LENGTH_SHORT).show();
-		}	
-		
-		}else {
-			Toast.makeText(getActivity(),
-					"No utilization data available at this time",
-					Toast.LENGTH_SHORT).show();	
-									}
-	}
-	
-
+				Toast.LENGTH_SHORT).show();	
+			}
 }
-		
+}		
