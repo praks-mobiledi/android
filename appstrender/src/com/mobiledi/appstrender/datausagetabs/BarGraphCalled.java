@@ -169,25 +169,11 @@ public class BarGraphCalled extends
 
 	@Override
 	protected void onPostExecute(ArrayList<ArrayList<AppObject>> result) {		
-		
-		
-		
-		
-		if(dialog!=null || dialog.isShowing()){
-			
-			dialog.dismiss();
-			
+		if(dialog!=null || dialog.isShowing()){		
+			dialog.dismiss();	
 		}
-		for(ArrayList<AppObject> x: result){
-			for(AppObject y: x){
-				if(y!=null)
-					Log.d("result in post up:", y.getAppName());
-			}	
-		}
-	
 		Intent i = new Intent(context,DataUsageTabs.class);
 		i.putExtra("result", new DataWrapper(result));	
-		
 		context.startActivity(i);	
 	}
 

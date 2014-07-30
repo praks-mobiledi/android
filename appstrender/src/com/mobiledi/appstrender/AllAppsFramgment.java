@@ -1,17 +1,13 @@
 package com.mobiledi.appstrender;
 
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
+import java.util.Collections;
+import java.util.Comparator;
 
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.telephony.TelephonyManager;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
@@ -27,10 +23,8 @@ import android.widget.Toast;
 
 import com.mobiledi.appstrender.adapters.CustomAdapter;
 import com.mobiledi.appstrender.datausagetabs.BarGraphCalled;
-import com.mobiledi.appstrender.datausagetabs.DataUsageTabs;
 import com.mobiledi.appstrender.graph.PieChartActivity;
 import com.mobiledi.appstrender.networkutil.NetworkUtil;
-import com.mobiledi.appstrender.networkutil.PingIP;
 
 public class AllAppsFramgment extends Fragment {
 	ImageButton allGraph;
@@ -54,6 +48,11 @@ public class AllAppsFramgment extends Fragment {
 		try {
 			final ArrayList<AppObject> returnedList = new PInfo(getActivity())
 					.getInstalledComponentList(0);
+			Collections.sort(returnedList, new Comparator<AppObject>(){
+			    public int compare(AppObject s1, AppObject s2) {
+			        return s1.getAppName().compareToIgnoreCase(s2.getAppName());
+			    }
+			});
 			CustomAdapter adapter = new CustomAdapter(getActivity(),
 					returnedList, R.layout.single_row);
 			mainLV.setAdapter(adapter);
@@ -75,7 +74,7 @@ public class AllAppsFramgment extends Fragment {
 						Toast.makeText(
 								getActivity(),
 								returnedList.get(arg2).getAppName()
-										+ " have no data Usage History",
+										+ "  has not used data so far",
 								Toast.LENGTH_LONG).show();
 
 					}
@@ -95,7 +94,7 @@ allGraph.setOnClickListener(new OnClickListener() {
 				
 				if(NetworkUtil.getConnectivityStatus(getActivity())==0) {
 					Toast.makeText(getActivity(),
-							"Check Your Internet",
+							"Unable to connect to the internet, please ensure your data or wifi is turned on",
 							Toast.LENGTH_LONG).show();
 					return;
 				}

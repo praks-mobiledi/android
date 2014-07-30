@@ -1,6 +1,8 @@
 package com.mobiledi.appstrender;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.concurrent.ExecutionException;
 
 import android.app.AlertDialog;
@@ -54,6 +56,11 @@ public class PersonalFragments extends Fragment {
 		try {
 			final ArrayList<AppObject> returnedList = new PInfo(getActivity())
 					.getInstalledComponentList(2);
+			Collections.sort(returnedList, new Comparator<AppObject>(){
+			    public int compare(AppObject s1, AppObject s2) {
+			        return s1.getAppName().compareToIgnoreCase(s2.getAppName());
+			    }
+			});
 			CustomAdapter adapter = new CustomAdapter(getActivity(),
 					returnedList, R.layout.single_row);
 			mainLV.setAdapter(adapter);
@@ -73,7 +80,7 @@ public class PersonalFragments extends Fragment {
 						Toast.makeText(
 								getActivity(),
 								returnedList.get(arg2).getAppName()
-										+ " have no data Usage History",
+										+ "  has not used data so far",
 								Toast.LENGTH_LONG).show();
 					}
 
@@ -90,7 +97,7 @@ public class PersonalFragments extends Fragment {
 			public void onClick(View v) {
 				
 				if (NetworkUtil.getConnectivityStatus(getActivity()) == 0) {
-					Toast.makeText(getActivity(), "Check Your Internet",
+					Toast.makeText(getActivity(), "Unable to connect to the internet, please ensure your data or wifi is turned on",
 							Toast.LENGTH_LONG).show();
 					return;
 				} 

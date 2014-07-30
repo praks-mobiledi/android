@@ -53,7 +53,8 @@ private ArrayList<AppObject> responseAppsList;
     
         		}
         		}
-        }	
+        }
+	    
 	} catch (NameNotFoundException e) {
 		e.printStackTrace();
 	}

@@ -83,12 +83,12 @@ public class UploadService extends Service {
 					
 			}
 				else{
-					Toast.makeText(UploadService.this, "You are Not Connected to the Internet", Toast.LENGTH_LONG).show();
+					Toast.makeText(UploadService.this, "Unable to connect to the internet, please ensure your data or wifi is turned on", Toast.LENGTH_LONG).show();
 					
 				return 0;}
 
 		} catch (Exception e) {
-			Toast.makeText(UploadService.this, "Server not responding", Toast.LENGTH_LONG).show();
+			Toast.makeText(UploadService.this, "No utilization data available at this time", Toast.LENGTH_LONG).show();
 			
 			Log.d("ERROR @Upload Service", e.getMessage());
 		}
