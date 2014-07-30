@@ -80,7 +80,7 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
 				});
 	}
 
-	/*@Override
+	@Override
 	protected void onResume() {
 		super.onResume();
 
@@ -92,7 +92,7 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
 	protected void onPause() {
 		super.onPause();
 		unbindService(mConnection);
-	}*/
+	}
 
 	private ServiceConnection mConnection = new ServiceConnection() {
 
