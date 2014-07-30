@@ -27,7 +27,6 @@ import com.mobiledi.appstrender.networkutil.NetworkUtil;
 @SuppressLint("SimpleDateFormat")
 public class UploadService extends Service {
 	private final IBinder mBinder = new MyBinder();
-
 	@Override
 	public IBinder onBind(Intent arg0) {
 		return mBinder;
@@ -47,7 +46,7 @@ public class UploadService extends Service {
 			ArrayList<AppObject> returnedList = new PInfo(getApplication()
 					.getApplicationContext()).getInstalledComponentList(0);
 			Timestamp ts=new Timestamp(new DateTime().getMillis());
-			 Log.d("TimeStampValue",ts.toString());
+			 //Log.d("TimeStampValue",ts.toString());
 			String json = "[";
 			for (int i = 0; i < returnedList.size(); i++) {
 				AppObject tempObj = returnedList.get(i);
@@ -66,8 +65,10 @@ public class UploadService extends Service {
 			// SEND DATA TO SERVER UnCOMMENT WHEN  in PRODUCTION
 			if(NetworkUtil.getConnectivityStatus(UploadService.this)!=0){
 				
-			new PUSHRequest(Home.SERVER_URL_ADD+"insert/datas",
-					toSendJSON, "POSTING");	
+			/*new PUSHRequest(Home.SERVER_URL_ADD+"insert/datas",
+					toSendJSON, "POSTING");	*/
+				new PUSHRequest(Home.SERVER_URL_ADD+"insert/datas",
+						toSendJSON).sendRequest();	
 			//Toast.makeText(UploadService.this, "AppsTrender Data Uploaded", Toast.LENGTH_LONG).show();
 			
 				/*SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-ddHH:mm:ss");

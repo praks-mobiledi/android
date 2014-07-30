@@ -2,12 +2,23 @@ package com.mobiledi.appstrender.servicepush;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
+
+import org.apache.http.Header;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.message.BasicHeader;
+import org.apache.http.protocol.HTTP;
+
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.mobiledi.appstrender.AppObject;
 ///import org.apache.http.client.HttpClient;
 //import org.apache.http.client.methods.HttpPost;
@@ -17,22 +28,58 @@ public class PUSHRequest {
 	public ArrayList<AppObject> returnObject;
 	private String tosendJSON;
 	private String url;
-	private String MODE; // 1=post,2=get,3=put,4=delete;
+	//private Context context; // 1=post,2=get,3=put,4=delete;
 
-	public PUSHRequest(String _url, String _tosendJSON, String _MODE)
+	public PUSHRequest(String _url, String _tosendJSON)//, Context _context)
 			throws InterruptedException, ExecutionException {
 
 		this.url = _url;
 		this.tosendJSON = _tosendJSON;
-		this.MODE = _MODE;
+		//this.context = _context;
 
-		final MakeRequest request = new MakeRequest();
-		request.execute(url, tosendJSON, MODE);
+		//final MakeRequest request = new MakeRequest();
+		//request.execute(url, tosendJSON, MODE);
 		//returnObject = request.get();
-		Log.d(_url, tosendJSON);
+		//Log.d(_url, tosendJSON);
+	}	
+	
+	public void sendRequest(){
+		AsyncHttpClient client=new AsyncHttpClient();
+		StringEntity se= null;
+			try {
+				se=new StringEntity(this.tosendJSON.toString());
+				se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE,
+						"application/json"));
+				client.post(null,this.url, se,"application/json", new JsonHttpResponseHandler(){
+
+					@Override
+					public void onFailure(int statusCode, Header[] headers,
+							String responseString, Throwable throwable) {
+						// TODO Auto-generated method stub
+
+						Log.d("REsponse from Server: ", "UPLOAD FAILED");
+						}
+
+					@Override
+					public void onSuccess(int statusCode, Header[] headers,
+							String responseString) {
+						// TODO Auto-generated method stub
+						Log.d("REsponse from Server: ", "SUCCESSFULLY UPLOADED");
+					}		
+				
+				
+				
+				
+				
+				});	
+			
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	}	
 }
-
+/*
 class MakeRequest extends AsyncTask<String, Void, ArrayList<AppObject>> {
 	HttpURLConnection urlConnection = null;
 	ArrayList<AppObject> returnObject;
@@ -85,4 +132,4 @@ Log.d("Value of URL 1:" , url[1]);
 		}
 	}
 
-}
+}*/

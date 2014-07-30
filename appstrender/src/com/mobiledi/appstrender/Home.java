@@ -1,5 +1,14 @@
 package com.mobiledi.appstrender;
 
+import java.io.IOException;
+import java.sql.Timestamp;
+import java.util.concurrent.ExecutionException;
+
+import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.joda.time.DateTime;
+
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.Dialog;
@@ -20,13 +29,14 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import com.mobiledi.appstrender.adapters.TabsPagerAdapter;
+import com.mobiledi.appstrender.servicepush.PUSHRequest;
 import com.mobiledi.appstrender.servicepush.UploadService;
 
 public class Home extends FragmentActivity implements ActionBar.TabListener {
 	private ViewPager viewPager;
 	private TabsPagerAdapter mAdapter;
 	private ActionBar actionBar;
-	public static String SERVER_IP="10.204.120.38:8080";
+	public static String SERVER_IP="192.168.1.4:8080";
 	public static String SERVER_URL_ADD="http://"+ SERVER_IP +"/appstrender_service/appstrender/appdata/";
 
 	private String[] tabs = { "All Apps", "Downloaded", "System" };
@@ -43,6 +53,7 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
         // Enabling Up / Back navigation
         actionBar.setDisplayHomeAsUpEnabled(true);
 		}
+	
 
 	public void UpdateTabs() {
 
@@ -69,7 +80,7 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
 				});
 	}
 
-	@Override
+	/*@Override
 	protected void onResume() {
 		super.onResume();
 
@@ -81,7 +92,7 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
 	protected void onPause() {
 		super.onPause();
 		unbindService(mConnection);
-	}
+	}*/
 
 	private ServiceConnection mConnection = new ServiceConnection() {
 
