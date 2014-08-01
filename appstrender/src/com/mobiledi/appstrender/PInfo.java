@@ -99,8 +99,8 @@ public class PInfo {
 					}
 					break;
 				}
-				Log.d("New Pack Info",
-						tempObj.getAppUid() + " " + tempObj.getAppName());
+				/*Log.d("New Pack Info",
+						tempObj.getAppUid() + " " + tempObj.getAppName());*/
 				// ////////Check for system packages
 
 			}

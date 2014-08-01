@@ -65,9 +65,9 @@ public class UploadService extends Service {
 			// SEND DATA TO SERVER UnCOMMENT WHEN  in PRODUCTION
 			if(NetworkUtil.getConnectivityStatus(UploadService.this)!=0){
 				
-			/*new PUSHRequest(Home.SERVER_URL_ADD+"insert/datas",
+			/*new PushRequest(Home.SERVER_URL_ADD+"insert/datas",
 					toSendJSON, "POSTING");	*/
-				new PUSHRequest(Home.SERVER_URL_ADD+"insert/datas",
+				new PushRequest(Home.SERVER_URL_ADD+"insert/datas",
 						toSendJSON).sendRequest();	
 			//Toast.makeText(UploadService.this, "AppsTrender Data Uploaded", Toast.LENGTH_LONG).show();
 			

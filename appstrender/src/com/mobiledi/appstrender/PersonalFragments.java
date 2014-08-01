@@ -102,14 +102,8 @@ public class PersonalFragments extends Fragment {
 					return;
 				} 
 				else {
-
-					//PingIP tester = new PingIP(getActivity());
-					try {
-						BarGraphCalled bgc= new	BarGraphCalled(getActivity());
-						bgc.execute();
-						} catch (Exception e) {
-						e.printStackTrace();
-					}
+					BarGraphCalled bgc= new BarGraphCalled(getActivity());
+					bgc.getBarGraphData();
 				}
 				return;
 			}

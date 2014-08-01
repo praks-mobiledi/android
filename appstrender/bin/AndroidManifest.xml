@@ -43,16 +43,16 @@
         </receiver>
         <activity
             android:name="com.mobiledi.appstrender.datausagetabs.DataUsageTabs"
-            android:label="Usage Graph"
+            android:label="@string/app_name"
             android:parentActivityName="com.mobiledi.appstrender.Home" />
         <activity
             android:name="com.mobiledi.appstrender.graph.ShowBarChart"
-            android:label="Usage Graph"
+            android:label="@string/app_name"
             android:parentActivityName="com.mobiledi.appstrender.Home" />
         <activity android:name="org.achartengine.GraphicalActivity" />
         <activity
             android:name="com.mobiledi.appstrender.graph.PieChartActivity"
-            android:label="Data Usage"
+            android:label="@string/app_name"
             android:parentActivityName="com.mobiledi.appstrender.Home"> 
             <meta-data
       android:name="android.support.PARENT_ACTIVITY"

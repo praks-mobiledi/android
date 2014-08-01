@@ -1,10 +1,6 @@
 package com.mobiledi.appstrender.servicepush;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
@@ -13,8 +9,6 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.protocol.HTTP;
 
-import android.content.Context;
-import android.os.AsyncTask;
 import android.util.Log;
 
 import com.loopj.android.http.AsyncHttpClient;
@@ -24,13 +18,13 @@ import com.mobiledi.appstrender.AppObject;
 //import org.apache.http.client.methods.HttpPost;
 
 //do this wherever you are wanting to POST
-public class PUSHRequest {
+public class PushRequest {
 	public ArrayList<AppObject> returnObject;
 	private String tosendJSON;
 	private String url;
 	//private Context context; // 1=post,2=get,3=put,4=delete;
 
-	public PUSHRequest(String _url, String _tosendJSON)//, Context _context)
+	public PushRequest(String _url, String _tosendJSON)//, Context _context)
 			throws InterruptedException, ExecutionException {
 
 		this.url = _url;

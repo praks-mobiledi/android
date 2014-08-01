@@ -99,22 +99,8 @@ public class SocialFragment extends Fragment {
 				}
 				else{
 					
-					//PingIP tester= new PingIP(getActivity());
-					try {
-						
-						BarGraphCalled bgc= new	BarGraphCalled(getActivity());
-						bgc.execute();
-						//Intent s = new Intent(getActivity(), DataUsageTabs.class);
-						///getActivity().startActivity(s);
-						//Log.d("TESTURL Soc",Home.SERVER_URL_ADD.substring(7));
-						
-						//TelephonyManager tm = (TelephonyManager)getActivity().getSystemService(Context.TELEPHONY_SERVICE); 	
-						//tester.execute("192.168.43.180:8080/appstrender_service/appstrender/appdata/readServerState/"+tm.getDeviceId());
-						//Log.d("TESTURL",Home.SERVER_URL_ADD.substring(7));
-					} catch(Exception e){
-								e.printStackTrace();
-							
-						}
+					BarGraphCalled bgc= new BarGraphCalled(getActivity());
+					bgc.getBarGraphData();
 
 			}
 	return;

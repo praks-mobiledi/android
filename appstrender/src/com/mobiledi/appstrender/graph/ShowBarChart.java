@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.achartengine.ChartFactory;
 import org.achartengine.GraphicalView;
 import org.achartengine.chart.BarChart.Type;
+import org.achartengine.chart.PointStyle;
 import org.achartengine.model.XYMultipleSeriesDataset;
 import org.achartengine.model.XYSeries;
 import org.achartengine.renderer.XYMultipleSeriesRenderer;
@@ -60,72 +61,71 @@ public class ShowBarChart {
 	public GraphicalView openChart() {
 		// Creating an XYSeries for Income
 		// CategorySeries incomeSeries = new CategorySeries("Income");
-		XYSeries incomeSeries = new XYSeries("Sent in  %");
+		XYSeries sentSeries = new XYSeries("Sent in  %");
 		// Creating an XYSeries for Income
-		XYSeries expenseSeries = new XYSeries("Recieved in %");
+		XYSeries recievedSeries = new XYSeries("Recieved in %");
 		// Adding data to Income and Expense Series
 		for (int i = 0; i < count.length; i++) {
-			incomeSeries.add(i, sent[i]);
-			expenseSeries.add(i, recieved[i]);
+			sentSeries.add(i, sent[i]);
+			recievedSeries.add(i, recieved[i]);
 		}
 
 		// Creating a dataset to hold each series
 		XYMultipleSeriesDataset dataset = new XYMultipleSeriesDataset();
 		// Adding Income Series to the dataset
-		dataset.addSeries(incomeSeries);
+		dataset.addSeries(sentSeries);
 		// Adding Expense Series to dataset
-		dataset.addSeries(expenseSeries);
+		dataset.addSeries(recievedSeries);
 
 		// Creating XYSeriesRenderer to customize incomeSeries
 		XYSeriesRenderer sentRenderer = new XYSeriesRenderer();
 		sentRenderer.setColor(Color.parseColor("#0d90d1"));
 		sentRenderer.setFillPoints(true);
 		sentRenderer.setLineWidth(2);
+		sentRenderer.setPointStyle(PointStyle.DIAMOND);
 		sentRenderer.setDisplayChartValues(true);
+		sentRenderer.setChartValuesSpacing((float) 0);
+		sentRenderer.setLineWidth((float)0);
 
 		// Creating XYSeriesRenderer to customize expenseSeries
 		XYSeriesRenderer recievedRenderer = new XYSeriesRenderer();
 		recievedRenderer.setColor(Color.parseColor("#ee5a56"));
 		recievedRenderer.setFillPoints(true);
-		recievedRenderer.setLineWidth(2);
+		recievedRenderer.setPointStyle(PointStyle.SQUARE);
 		recievedRenderer.setDisplayChartValues(true);
+		recievedRenderer.setChartValuesSpacing((float) 0);
+		recievedRenderer.setLineWidth(2);
+		recievedRenderer.setLineWidth((float) 0);
 
 		// Creating a XYMultipleSeriesRenderer to customize the whole chart
 		XYMultipleSeriesRenderer multiRenderer = new XYMultipleSeriesRenderer();
 		multiRenderer.setBackgroundColor(Color.parseColor("#fcf8e3"));
 		multiRenderer.setApplyBackgroundColor(true);
-		multiRenderer.setLabelsTextSize(13);
+		multiRenderer.setLabelsTextSize(15);
 		multiRenderer.setChartTitle("Data Usage");
 		multiRenderer.setXTitle("All Application");
 		multiRenderer.setYTitle("Data Usage in %");
-		//multiRenderer.setXLabelsColor();
 		multiRenderer.setLabelsColor(Color.parseColor("#e3e3e4"));
 		multiRenderer.setPanEnabled(true, false);
-		multiRenderer.setXLabelsPadding(5);
-		//multiRenderer.setScale(1.5f);
-		multiRenderer.setXLabelsAngle(45);
-		//multiRenderer.setBackgroundColor(Color.parseColor("#b3bfce"));
+		//multiRenderer.setXLabelsPadding(2);
+		//multiRenderer.setXLabelsAngle(45);
 		multiRenderer.setShowGrid(true);
+	//	multiRenderer.setBarWidth(100);
+		//multiRenderer.setZoomRate(1.1f);
+		multiRenderer.setZoomEnabled(false);
+		multiRenderer.setBarSpacing(0.1);  
+		multiRenderer.setBarWidth(50f);
+		//multiRenderer.setInScroll(true);
+		multiRenderer.setXAxisMin(0);
+		multiRenderer.setXAxisMax(appName.length);
+		multiRenderer.setYAxisMin(0);
+		multiRenderer.setYAxisMax(100);
+		multiRenderer.setScale(1);
 		for (int i = 0; i < count.length; i++) {
 			multiRenderer.addXTextLabel(i, appName[i]);
 		}
-
-		// Adding incomeRenderer and expenseRenderer to multipleRenderer
-		// Note: The order of adding dataseries to dataset and renderers to
-		// multipleRenderer
-		// should be same
 		multiRenderer.addSeriesRenderer(sentRenderer);
 		multiRenderer.addSeriesRenderer(recievedRenderer);
-		// ChartFactory.getBarChartView(context, dataset, multiRenderer, type)
-		// Creating an intent to plot bar chart using dataset and
-		// multipleRenderer
-		// ///Intent intent = ChartFactory.getBarChartIntent(basecon, dataset,
-		// multiRenderer, Type.DEFAULT);
-
-		// /// Start Activity
-		// ///basecon.startActivity(intent);
-		// multiRenderer.set`
-		// ChartFactory.
 		return ChartFactory.getBarChartView(basecon, dataset, multiRenderer,
 				Type.DEFAULT);
 	}

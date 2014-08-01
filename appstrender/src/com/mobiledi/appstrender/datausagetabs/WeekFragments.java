@@ -33,8 +33,7 @@ public class WeekFragments extends Fragment {
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		DataWrapper dw = (DataWrapper) getActivity().getIntent().getSerializableExtra("result");
-		/*ArrayList<ArrayList<AppObject>> list = dw.getResult();
-		ArrayList<AppObject> response = list.get(1);*/
+try{
 			ArrayList<AppObject> response = dw.getResult().get(1);
 			if(response!=null){
 			ShowBarChart s = new ShowBarChart(getActivity(),response);
@@ -49,5 +48,12 @@ public class WeekFragments extends Fragment {
 						"No utilization data available at this time",
 				Toast.LENGTH_SHORT).show();	
 			}
+}
+catch(IndexOutOfBoundsException e){
+	
+	Toast.makeText(getActivity(),
+			"No utilization data available at this time",
+	Toast.LENGTH_SHORT).show();	
+}
 }
 }		

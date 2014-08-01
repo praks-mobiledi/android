@@ -9,8 +9,8 @@
          android:orientation="vertical" 
 		android:id="@+id/dashboard_chart_layout"
 		 android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-		android:layout_weight="1" 
-		android:gravity="center"
-	/>  
+        android:layout_height="fill_parent"/>
+		<!-- android:layout_weight="1" 
+		android:gravity="center" -->
+	  
 </LinearLayout>
