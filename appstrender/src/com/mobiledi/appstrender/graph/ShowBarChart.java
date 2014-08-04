@@ -81,11 +81,11 @@ public class ShowBarChart {
 		XYSeriesRenderer sentRenderer = new XYSeriesRenderer();
 		sentRenderer.setColor(Color.parseColor("#0d90d1"));
 		sentRenderer.setFillPoints(true);
-		sentRenderer.setLineWidth(2);
+		sentRenderer.setLineWidth(1);
 		sentRenderer.setPointStyle(PointStyle.DIAMOND);
 		sentRenderer.setDisplayChartValues(true);
 		sentRenderer.setChartValuesSpacing((float) 0);
-		sentRenderer.setLineWidth((float)0);
+		//sentRenderer.setLineWidth((float)0);
 
 		// Creating XYSeriesRenderer to customize expenseSeries
 		XYSeriesRenderer recievedRenderer = new XYSeriesRenderer();
@@ -94,10 +94,10 @@ public class ShowBarChart {
 		recievedRenderer.setPointStyle(PointStyle.SQUARE);
 		recievedRenderer.setDisplayChartValues(true);
 		recievedRenderer.setChartValuesSpacing((float) 0);
-		recievedRenderer.setLineWidth(2);
-		recievedRenderer.setLineWidth((float) 0);
+		recievedRenderer.setLineWidth(1);
+		//recievedRenderer.setLineWidth((float) 0);
 
-		// Creating a XYMultipleSeriesRenderer to customize the whole chart
+		//Creating a XYMultipleSeriesRenderer to customize the whole chart
 		XYMultipleSeriesRenderer multiRenderer = new XYMultipleSeriesRenderer();
 		multiRenderer.setBackgroundColor(Color.parseColor("#fcf8e3"));
 		multiRenderer.setApplyBackgroundColor(true);
@@ -107,20 +107,21 @@ public class ShowBarChart {
 		multiRenderer.setYTitle("Data Usage in %");
 		multiRenderer.setLabelsColor(Color.parseColor("#e3e3e4"));
 		multiRenderer.setPanEnabled(true, false);
-		//multiRenderer.setXLabelsPadding(2);
-		//multiRenderer.setXLabelsAngle(45);
+	//  multiRenderer.setXLabelsPadding(2);
+	//  multiRenderer.setXLabelsAngle(45);
 		multiRenderer.setShowGrid(true);
 	//	multiRenderer.setBarWidth(100);
-		//multiRenderer.setZoomRate(1.1f);
+	//  multiRenderer.setZoomRate(1.1f);
 		multiRenderer.setZoomEnabled(false);
-		multiRenderer.setBarSpacing(0.1);  
+	multiRenderer.setPointSize(1);
 		multiRenderer.setBarWidth(50f);
-		//multiRenderer.setInScroll(true);
+	//  multiRenderer.setInScroll(true);
 		multiRenderer.setXAxisMin(0);
 		multiRenderer.setXAxisMax(appName.length);
 		multiRenderer.setYAxisMin(0);
 		multiRenderer.setYAxisMax(100);
-		multiRenderer.setScale(1);
+		//multiRenderer.setScale(1);
+		multiRenderer.setBarSpacing(1);  
 		for (int i = 0; i < count.length; i++) {
 			multiRenderer.addXTextLabel(i, appName[i]);
 		}

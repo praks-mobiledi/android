@@ -51,7 +51,7 @@ public class BarGraphCalled {
 	}
 
 	public ArrayList<ArrayList<AppObject>> getBarGraphData(){
-	String url="http://192.168.1.4:8080/appstrender_service/appstrender/appdata/readAllById/" +tm.getDeviceId()+"/" + dates.get(0) + "/" + dates.get(1) + "/" +dates.get(2) ;
+	String url="http://192.168.1.3:8080/appstrender_service/appstrender/appdata/readAllById/" +tm.getDeviceId()+"/" + dates.get(0) + "/" + dates.get(1) + "/" +dates.get(2) ;
 	AsyncHttpClient client= new AsyncHttpClient();
 	client.get(context, url, new JsonHttpResponseHandler(){
 
@@ -149,7 +149,9 @@ public class BarGraphCalled {
 		}
 
 		});	
-	
+	/*if(barGraphData.size()==0){
+		Toast.makeText(context,  "Unable to calculate network utilization at this time", Toast.LENGTH_SHORT).show();
+	}*/
 	return barGraphData;	
 }
 }

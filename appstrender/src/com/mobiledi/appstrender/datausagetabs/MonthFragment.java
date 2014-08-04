@@ -38,8 +38,9 @@ try{
 			LinearLayout layout = (LinearLayout) getActivity().findViewById(
 						R.id.dashboard_chart_layoutmonth);
 			layout.removeAllViews();
-			layout.addView(Gv, new LayoutParams(960, LayoutParams.MATCH_PARENT));
-			}
+			//960
+			layout.addView(Gv, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+				}
 			else {
 				Toast.makeText(getActivity(),
 						"No utilization data available at this time",

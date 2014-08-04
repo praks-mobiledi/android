@@ -41,7 +41,7 @@ public class AllDataFramgment extends Fragment{
 			LinearLayout layout = (LinearLayout) getActivity().findViewById(
 						R.id.dashboard_chart_layout);
 			layout.removeAllViews();
-			layout.addView(Gv, new LayoutParams(960, LayoutParams.MATCH_PARENT));
+			layout.addView(Gv, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
 			}
 			else {
 				Toast.makeText(getActivity(),
