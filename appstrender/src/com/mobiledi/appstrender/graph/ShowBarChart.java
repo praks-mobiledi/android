@@ -107,8 +107,8 @@ public class ShowBarChart {
 		multiRenderer.setYTitle("Data Usage in %");
 		multiRenderer.setLabelsColor(Color.parseColor("#e3e3e4"));
 		multiRenderer.setPanEnabled(true, false);
-	//  multiRenderer.setXLabelsPadding(2);
-	//  multiRenderer.setXLabelsAngle(45);
+	  multiRenderer.setXLabelsPadding(2);
+	 multiRenderer.setXLabelsAngle(45);
 		multiRenderer.setShowGrid(true);
 	//	multiRenderer.setBarWidth(100);
 	//  multiRenderer.setZoomRate(1.1f);

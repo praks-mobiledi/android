@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.mobiledi.appstrender.AppObject;
+import com.mobiledi.appstrender.Home;
 import com.mobiledi.appstrender.R;
 
 public class BarGraphCalled {
@@ -51,8 +52,9 @@ public class BarGraphCalled {
 	}
 
 	public ArrayList<ArrayList<AppObject>> getBarGraphData(){
-	String url="http://192.168.1.3:8080/appstrender_service/appstrender/appdata/readAllById/" +tm.getDeviceId()+"/" + dates.get(0) + "/" + dates.get(1) + "/" +dates.get(2) ;
-	AsyncHttpClient client= new AsyncHttpClient();
+	//String url="http://192.168.1.3:8080/appstrender_service/appstrender/appdata/readAllById/" +tm.getDeviceId()+"/" + dates.get(0) + "/" + dates.get(1) + "/" +dates.get(2) ;
+	String url=Home.SERVER_URL_ADD + "readAllById/"+tm.getDeviceId()+"/" + dates.get(0) + "/" + dates.get(1) + "/" +dates.get(2) ;
+		AsyncHttpClient client= new AsyncHttpClient();
 	client.get(context, url, new JsonHttpResponseHandler(){
 
 	
@@ -68,8 +70,11 @@ public class BarGraphCalled {
 		try {		
 		//for(int i=0;i<response.length();i++){
 			if(response.getJSONArray(0).length()!=0){
-					for(int k=0;k<response.getJSONArray(0).length()+1;k++){							
-					try {
+					for(int k=0;k<3;k++){							
+				//for(int k=0;k<response.getJSONArray(0).length()+1;k++){							
+					
+					System.out.println("Also k = "+ response.getJSONArray(0).length() +"  "+ response.getJSONArray(k).toString());
+						try {
 						ObjectMapper mapper=new ObjectMapper();
 						ArrayList<AppObject> myObjects = mapper.readValue(
 								response.getJSONArray(k).toString(),
