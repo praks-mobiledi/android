@@ -7,15 +7,44 @@
         android:id="@+id/showgraph"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_weight="60"
         android:gravity="center"
-        android:orientation="vertical" 
-        android:layout_weight="60"/>
+        android:orientation="vertical" />
 	<RelativeLayout
-	    android:id="@+id/restWids"
+        android:id="@+id/srrlayout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-          android:layout_weight="40"
-          android:background="#29a1cb">
+        android:layout_weight="1"
+        android:padding="1dp"> 
+          <View android:id="@+id/fakeView"
+       android:layout_width="0dp"
+       android:layout_height="0dp" 
+       android:layout_centerInParent="true"/>
+        <TextView
+            android:id="@+id/tvsent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#ee5f5b"
+            android:text="Medium Text"
+             android:layout_toLeftOf="@+id/fakeView"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            />
+        <TextView
+            android:id="@+id/tvrecieved"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#29a1cb"
+            android:text="Medium Text"
+            android:textAppearance="?android:attr/textAppearanceSmall" 
+            android:layout_toRightOf="@+id/fakeView"/>
+  </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/restWids"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="40"
+        android:background="#29a1cb" >
+           
         <ImageView
             android:id="@+id/icons"
             android:layout_width="wrap_content"
@@ -23,12 +52,13 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:src="@drawable/ic_launcher" />
+        <!-- android:layout_alignParentTop="true" -->
         <TextView
             android:id="@+id/tv1"
-            android:layout_toRightOf="@+id/icons"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/icons"
             android:text="Medium Text"
             android:textAppearance="?android:attr/textAppearanceSmall" />
     </RelativeLayout>
