@@ -34,10 +34,14 @@ public class WeekFragments extends Fragment {
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		DataWrapper dw = (DataWrapper) getActivity().getIntent().getSerializableExtra("result");
 try{
-			ArrayList<AppObject> response = dw.getResult().get(1);
+			//ArrayList<AppObject> response = dw.getResult().get(1);			
+	ArrayList<AppObject> response = dw.getResult().get(2);
 			if(response!=null){
+				GetTopApps gtp= new GetTopApps(response, 5);
+				response=gtp.getTop();
+
 			ShowBarChart s = new ShowBarChart(getActivity(),response);
-			GraphicalView Gv = s.openChart();
+			GraphicalView Gv = s.openChart(1,5.0f,false);
 			LinearLayout layout = (LinearLayout) getActivity().findViewById(
 						R.id.dashboard_chart_layoutWeek);
 			layout.removeAllViews();

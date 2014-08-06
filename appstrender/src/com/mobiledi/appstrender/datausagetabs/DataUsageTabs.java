@@ -25,7 +25,7 @@ public class DataUsageTabs extends FragmentActivity implements
 	private ViewPager viewPager;
 	private DataUsageTabsPagerAdapter mAdapter;
 	private ActionBar actionBar;
-	private String[] tabs = { "Week", "Month", "Total" };
+	private String[] tabs = { "Top 5", "Top 10", "All" };
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

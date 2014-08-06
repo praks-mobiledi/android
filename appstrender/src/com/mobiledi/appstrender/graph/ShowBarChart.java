@@ -59,7 +59,7 @@ public class ShowBarChart {
 		// openChart();
 	}
 
-	public GraphicalView openChart() {
+	public GraphicalView openChart(int chartType,float max,boolean pan) {
 		// Creating an XYSeries for Income
 		// CategorySeries incomeSeries = new CategorySeries("Income");
 		XYSeries sentSeries = new XYSeries("Sent in  %");
@@ -82,56 +82,71 @@ public class ShowBarChart {
 		XYSeriesRenderer sentRenderer = new XYSeriesRenderer();
 		sentRenderer.setColor(Color.parseColor("#0d90d1"));
 		sentRenderer.setFillPoints(true);
-		sentRenderer.setLineWidth(10);
+		sentRenderer.setPointStrokeWidth(1);
+		//10
+		sentRenderer.setLineWidth(1);
 		sentRenderer.setPointStyle(PointStyle.DIAMOND);
 		sentRenderer.setDisplayChartValues(true);
 		sentRenderer.setChartValuesSpacing((float) 2);
+		sentRenderer.setDisplayBoundingPoints(true);
+		sentRenderer.setHighlighted(true);
+		//sentRenderer.
 
 		// Creating XYSeriesRenderer to customize expenseSeries
 		XYSeriesRenderer recievedRenderer = new XYSeriesRenderer();
 		recievedRenderer.setColor(Color.parseColor("#ee5a56"));
 		recievedRenderer.setFillPoints(true);
 		recievedRenderer.setPointStyle(PointStyle.SQUARE);
+		recievedRenderer.setPointStrokeWidth(1);
 		recievedRenderer.setDisplayChartValues(true);
 		recievedRenderer.setChartValuesSpacing((float)2);
-		recievedRenderer.setLineWidth(10);
-
+		recievedRenderer.setLineWidth(1);
+		recievedRenderer.setDisplayBoundingPoints(true);
 		//Creating a XYMultipleSeriesRenderer to customize the whole chart
 		XYMultipleSeriesRenderer multiRenderer = new XYMultipleSeriesRenderer();
 		multiRenderer.setBackgroundColor(Color.parseColor("#fcf8e3"));
-		 multiRenderer.setYLabelsAlign(Align.RIGHT);
+		multiRenderer.setAxesColor(Color.RED);
+		 multiRenderer.setYLabelsAlign(Align.LEFT);
 		multiRenderer.setApplyBackgroundColor(true);
 		multiRenderer.setLabelsTextSize(15);
 		multiRenderer.setChartTitle("All time usage");
-		multiRenderer.setXTitle("All applications");
 		multiRenderer.setYTitle("Data Usage in %");
-		//multiRenderer.setYLabelsColor(1, Color.BLUE);
-		//multiRenderer.setLabelsColor(Color.parseColor("#e3e3e4"));
-		
-		multiRenderer.setXLabelsPadding(3);
-		multiRenderer.setXLabelsAngle(35);
-		multiRenderer.setXLabelsColor(Color.LTGRAY);
+		multiRenderer.setXLabelsAngle(30);
+		//multiRenderer.setXLabelsColor(Color.parseColor("#0d90d1"));
+		multiRenderer.setXLabelsColor(Color.BLACK);
+	//multiRenderer.setYLabelsColor(0, Color.parseColor("#ee5a56"));
+		multiRenderer.setYLabelsColor(0,Color.BLACK);
 		multiRenderer.setShowGrid(true);
-	//	multiRenderer.setBarWidth(100);
-	//  multiRenderer.setZoomRate(1.1f);
-		multiRenderer.setZoomEnabled(true);
-		multiRenderer.setPanEnabled(true, true);
-		multiRenderer.setPointSize(30);
-		multiRenderer.setBarWidth(60f);
+		multiRenderer.setZoomEnabled(pan,pan);
+		multiRenderer.setPanEnabled(true, pan);
+		multiRenderer.setPointSize(3);
+		//multiRenderer.setMarginsColor(Color.TRANSPARENT);
+		multiRenderer.setBarWidth(50f);
 		multiRenderer.setInScroll(true);
-		multiRenderer.setXAxisMin(0);
-		multiRenderer.setXAxisMax(appName.length);
-		/*int[] x={5,10,5,20};
-		multiRenderer.setMargins(x);*/
-		//multiRenderer.setScale(1);
-		multiRenderer.setBarSpacing(10);  
+		multiRenderer.setXAxisMin(-0.50);
+		multiRenderer.setXAxisMax(max);	
+		multiRenderer.setYAxisMax(95);
+		multiRenderer.setYAxisMin(0.0);
+		multiRenderer.setXLabelsAlign(Align.LEFT);
+		
+		//multiRenderer.setScale(1.5f);
+		multiRenderer.setBarSpacing(30);
+		multiRenderer.setMarginsColor(Color.WHITE);
+		multiRenderer.setMargins(new int[] {1,1,50,1});
 		for (int i = 0; i < count.length; i++) {
 			multiRenderer.addXTextLabel(i, appName[i]); 
 		}
 		multiRenderer.addSeriesRenderer(sentRenderer);
 		multiRenderer.addSeriesRenderer(recievedRenderer);
-		return ChartFactory.getBarChartView(basecon, dataset, multiRenderer,
-				Type.STACKED);
+		multiRenderer.setXLabels(0);
+		if(chartType==1){
+			return ChartFactory.getBarChartView(basecon, dataset, multiRenderer,
+					Type.STACKED);
+		}
+		else 
+			return ChartFactory.getLineChartView(basecon, dataset, multiRenderer);				
+		
 	}
+	
 
 }

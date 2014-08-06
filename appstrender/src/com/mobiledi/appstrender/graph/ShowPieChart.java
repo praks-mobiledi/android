@@ -78,7 +78,8 @@ public class ShowPieChart {
 			renderer.addSeriesRenderer(r);
 		}
 		
-		renderer.setBackgroundColor(Color.parseColor("#fcf8e3"));
+		//renderer.setBackgroundColor(Color.parseColor("#fcf8e3"));
+		renderer.setBackgroundColor(Color.TRANSPARENT);
 		renderer.setShowAxes(true);
 		renderer.isInScroll();
 		//renderer.setZoomButtonsVisible(true); // set zoom button in Graph
