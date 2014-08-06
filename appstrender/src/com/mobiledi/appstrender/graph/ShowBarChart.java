@@ -13,6 +13,7 @@ import org.achartengine.renderer.XYSeriesRenderer;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Paint.Align;
 import android.widget.Toast;
 
 import com.mobiledi.appstrender.AppObject;
@@ -81,11 +82,10 @@ public class ShowBarChart {
 		XYSeriesRenderer sentRenderer = new XYSeriesRenderer();
 		sentRenderer.setColor(Color.parseColor("#0d90d1"));
 		sentRenderer.setFillPoints(true);
-		sentRenderer.setLineWidth(1);
+		sentRenderer.setLineWidth(10);
 		sentRenderer.setPointStyle(PointStyle.DIAMOND);
 		sentRenderer.setDisplayChartValues(true);
-		sentRenderer.setChartValuesSpacing((float) 0);
-		//sentRenderer.setLineWidth((float)0);
+		sentRenderer.setChartValuesSpacing((float) 2);
 
 		// Creating XYSeriesRenderer to customize expenseSeries
 		XYSeriesRenderer recievedRenderer = new XYSeriesRenderer();
@@ -93,42 +93,45 @@ public class ShowBarChart {
 		recievedRenderer.setFillPoints(true);
 		recievedRenderer.setPointStyle(PointStyle.SQUARE);
 		recievedRenderer.setDisplayChartValues(true);
-		recievedRenderer.setChartValuesSpacing((float) 0);
-		recievedRenderer.setLineWidth(1);
-		//recievedRenderer.setLineWidth((float) 0);
+		recievedRenderer.setChartValuesSpacing((float)2);
+		recievedRenderer.setLineWidth(10);
 
 		//Creating a XYMultipleSeriesRenderer to customize the whole chart
 		XYMultipleSeriesRenderer multiRenderer = new XYMultipleSeriesRenderer();
 		multiRenderer.setBackgroundColor(Color.parseColor("#fcf8e3"));
+		 multiRenderer.setYLabelsAlign(Align.RIGHT);
 		multiRenderer.setApplyBackgroundColor(true);
 		multiRenderer.setLabelsTextSize(15);
-		multiRenderer.setChartTitle("Data Usage");
-		multiRenderer.setXTitle("All Application");
+		multiRenderer.setChartTitle("All time usage");
+		multiRenderer.setXTitle("All applications");
 		multiRenderer.setYTitle("Data Usage in %");
-		multiRenderer.setLabelsColor(Color.parseColor("#e3e3e4"));
-		multiRenderer.setPanEnabled(true, false);
-	  multiRenderer.setXLabelsPadding(2);
-	 multiRenderer.setXLabelsAngle(45);
+		//multiRenderer.setYLabelsColor(1, Color.BLUE);
+		//multiRenderer.setLabelsColor(Color.parseColor("#e3e3e4"));
+		
+		multiRenderer.setXLabelsPadding(3);
+		multiRenderer.setXLabelsAngle(35);
+		multiRenderer.setXLabelsColor(Color.LTGRAY);
 		multiRenderer.setShowGrid(true);
 	//	multiRenderer.setBarWidth(100);
 	//  multiRenderer.setZoomRate(1.1f);
-		multiRenderer.setZoomEnabled(false);
-	multiRenderer.setPointSize(1);
-		multiRenderer.setBarWidth(50f);
-	//  multiRenderer.setInScroll(true);
+		multiRenderer.setZoomEnabled(true);
+		multiRenderer.setPanEnabled(true, true);
+		multiRenderer.setPointSize(30);
+		multiRenderer.setBarWidth(60f);
+		multiRenderer.setInScroll(true);
 		multiRenderer.setXAxisMin(0);
 		multiRenderer.setXAxisMax(appName.length);
-		multiRenderer.setYAxisMin(0);
-		multiRenderer.setYAxisMax(100);
+		/*int[] x={5,10,5,20};
+		multiRenderer.setMargins(x);*/
 		//multiRenderer.setScale(1);
-		multiRenderer.setBarSpacing(1);  
+		multiRenderer.setBarSpacing(10);  
 		for (int i = 0; i < count.length; i++) {
-			multiRenderer.addXTextLabel(i, appName[i]);
+			multiRenderer.addXTextLabel(i, appName[i]); 
 		}
 		multiRenderer.addSeriesRenderer(sentRenderer);
 		multiRenderer.addSeriesRenderer(recievedRenderer);
 		return ChartFactory.getBarChartView(basecon, dataset, multiRenderer,
-				Type.DEFAULT);
+				Type.STACKED);
 	}
 
 }

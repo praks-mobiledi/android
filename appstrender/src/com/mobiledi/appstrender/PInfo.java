@@ -10,7 +10,6 @@ import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.net.TrafficStats;
-import android.util.Log;
 
 public class PInfo {
 	Context con;

@@ -15,27 +15,16 @@ import android.util.Log;
 public class PushTimerService extends BroadcastReceiver {
 
 	// restart service every 30 minutes
-	private static final long REPEAT_TIME =  1800000;
-
+	//private static final long REPEAT_TIME =  1800000;
+	private static final long REPEAT_TIME =  3600000;//1 hour
 	@Override
 	public void onReceive(Context context, Intent intent) {
-		/*
-		  AlarmManager service = (AlarmManager) context
-		  .getSystemService(Context.ALARM_SERVICE); Intent i = new
-		 Intent(context, PushServiceStarter.class); PendingIntent pending
-		  = PendingIntent.getBroadcast(context, 0, i,
-		  PendingIntent.FLAG_CANCEL_CURRENT); Calendar cal =
-		  Calendar.getInstance(); // start 30 seconds after boot completed
-		 cal.add(Calendar.SECOND, 3); // fetch every 30 seconds //
-	//	  InexactRepeating allows Android to optimize the energy consumption
-		  service.setInexactRepeating(AlarmManager.RTC_WAKEUP,
-		  cal.getTimeInMillis(), REPEAT_TIME, pending);*/
-		 
-
-		// service.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(),
-		// REPEAT_TIME, pending);
-		//Log.d("REBOOT:", "a reboot has occured @" + new Timestamp(new DateTime().getMillis()).toString());
-
+		Log.d("PUSH TIMER SERVICE ", "START");
+		if ("android.intent.action.BOOT_COMPLETED".equals(intent.getAction())){
+			Log.d("REBOOT:", "a reboot has occured @" + new Timestamp(new DateTime().getMillis()).toString());
+			NotifyReboot add_reboot_info = new NotifyReboot(context);
+			add_reboot_info.addRebootRow();
+		}
 		Calendar cur_cal = Calendar.getInstance();
 		Intent intent1 = new Intent(context, PushServiceStarter.class);
 		PendingIntent pintent = PendingIntent.getBroadcast(context, 0, intent1,
@@ -44,10 +33,6 @@ public class PushTimerService extends BroadcastReceiver {
 				.getSystemService(Context.ALARM_SERVICE);
 		alarm.setRepeating(AlarmManager.RTC_WAKEUP, cur_cal.getTimeInMillis(),
 				REPEAT_TIME, pintent);
-		Log.d("REBOOT:", "a reboot has occured @" + new Timestamp(new DateTime().getMillis()).toString());
-		NotifyReboot add_reboot_info = new NotifyReboot(context);
-		add_reboot_info.addRebootRow();
-	
-	
-	}
+
+}
 }

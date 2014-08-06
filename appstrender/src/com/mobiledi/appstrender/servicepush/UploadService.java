@@ -60,7 +60,7 @@ public class UploadService extends Service {
 			}
 			json = json.concat("]");
 			String toSendJSON = json.substring(0, 1) + json.substring(1 + 1);
-			Log.d("App Detail", +toSendJSON.length() + toSendJSON);
+			//Log.d("App Detail", +toSendJSON.length() + toSendJSON);
 
 			// SEND DATA TO SERVER UnCOMMENT WHEN  in PRODUCTION
 			if(NetworkUtil.getConnectivityStatus(UploadService.this)!=0){
@@ -69,18 +69,7 @@ public class UploadService extends Service {
 					toSendJSON, "POSTING");	*/
 				new PushRequest(Home.SERVER_URL_ADD+"insert/datas",
 						toSendJSON).sendRequest();	
-			//Toast.makeText(UploadService.this, "AppsTrender Data Uploaded", Toast.LENGTH_LONG).show();
-			
-				/*SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-ddHH:mm:ss");
-				SimpleDateFormat output = new SimpleDateFormat(
-						"yyyy-MM-dd'T'HH:mm:ss");
-				Date d = sdf.parse(ts.toString());
-				String formattedTime = output.format(d);
-				Log.d("LocalDate", formattedTime);
-				Log.d("TS LocalDate", ts.toString());*/
-				//DateTime s=DateTime.now();
-			//	String formattedTime=(ts.toString().substring(0, 10).concat("T")).concat(ts.toString().substring(11, ts.toString().length()));
-			//	Log.d("AFTERLocalDate", formattedTime);
+
 					
 			}
 				else{

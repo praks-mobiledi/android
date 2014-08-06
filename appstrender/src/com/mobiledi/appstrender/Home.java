@@ -30,13 +30,14 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import com.mobiledi.appstrender.adapters.TabsPagerAdapter;
 import com.mobiledi.appstrender.servicepush.PushRequest;
+import com.mobiledi.appstrender.servicepush.PushTimerService;
 import com.mobiledi.appstrender.servicepush.UploadService;
 
 public class Home extends FragmentActivity implements ActionBar.TabListener {
 	private ViewPager viewPager;
 	private TabsPagerAdapter mAdapter;
 	private ActionBar actionBar;
-	public static String SERVER_IP="192.168.1.3:8080";
+	public static String SERVER_IP="192.168.1.4:8080";
 	public static String SERVER_URL_ADD="http://"+ SERVER_IP +"/appstrender_service/appstrender/appdata/";
 
 	private String[] tabs = { "All Apps", "Downloaded", "System" };
@@ -52,6 +53,14 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
  
         // Enabling Up / Back navigation
         actionBar.setDisplayHomeAsUpEnabled(false);
+        
+        
+        
+        //start the upload service
+        Intent i = new Intent(Home.this, PushTimerService.class);
+		sendBroadcast(i);
+
+		Log.d("Service binded", "Bound");
 		}
 	
 
@@ -80,7 +89,7 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
 				});
 	}
 
-	@Override
+/*	@Override
 	protected void onResume() {
 		super.onResume();
 
@@ -92,7 +101,7 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
 	protected void onPause() {
 		super.onPause();
 		unbindService(mConnection);
-	}
+	}*/
 
 	private ServiceConnection mConnection = new ServiceConnection() {
 
@@ -127,14 +136,27 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
 
 	}
 
-	@Override
+/*	@Override
 	protected void onStart() {
 		// TODO Auto-generated method stub
 		super.onStart();
 		Intent i = new Intent(Home.this, UploadService.class);
+		//
+		bindService(i, mConnection, Context.BIND_AUTO_CREATE);
+		//
 		startService(i);
+
+		Log.d("Service binded", "Bound");
 		
-	}
+	}*/
+/*	@Override
+	protected void onStop() {
+		// TODO Auto-generated method stub
+		super.onStop();
+		unbindService(mConnection);
+		Log.d("Service Unbinded", "Unbound");
+	}*/
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 	    MenuInflater mi = getMenuInflater();
@@ -171,6 +193,17 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
 		return true;
 		
 	}
+
+
+/*	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		unbindService(mConnection);
+		Log.d("Service Unbinded", "Unbound");
+	}*/
+
+
 	
 	
 	

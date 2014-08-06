@@ -56,9 +56,7 @@ public class BarGraphCalled {
 	String url=Home.SERVER_URL_ADD + "readAllById/"+tm.getDeviceId()+"/" + dates.get(0) + "/" + dates.get(1) + "/" +dates.get(2) ;
 		AsyncHttpClient client= new AsyncHttpClient();
 	client.get(context, url, new JsonHttpResponseHandler(){
-
 	
-		
 		private ProgressDialog dialog;
 
 		@Override

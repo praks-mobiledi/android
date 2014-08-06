@@ -112,9 +112,9 @@ class MakeRequest extends AsyncTask<String, Void, ArrayList<AppObject>> {
 						Content,
 						mapper.getTypeFactory().constructCollectionType(
 								List.class, AppObject.class));
-				for(AppObject x: myObjects){
+				/*for(AppObject x: myObjects){
 					Log.d("App Loaded"+x.getAppName(),String.valueOf("Recieved"+x.getRecieved()));
-				}
+				}*/
 				return myObjects;
 				}	
 			} catch (Exception e) {

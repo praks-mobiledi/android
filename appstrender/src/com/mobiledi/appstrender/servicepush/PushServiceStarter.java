@@ -9,7 +9,7 @@ public class PushServiceStarter extends BroadcastReceiver {
 	@Override
 	public void onReceive(Context context, Intent intent) {
 	Intent service = new Intent(context, UploadService.class);
-		context.startService(service);
+	context.startService(service);
 		
 	}
 }
