@@ -41,7 +41,7 @@ try{
 				response=gtp.getTop();
 
 			ShowBarChart s = new ShowBarChart(getActivity(),response);
-			GraphicalView Gv = s.openChart(1,5.0f,false);
+			GraphicalView Gv = s.openChart(1,4.0f,false);
 			LinearLayout layout = (LinearLayout) getActivity().findViewById(
 						R.id.dashboard_chart_layoutWeek);
 			layout.removeAllViews();

@@ -40,7 +40,7 @@ public class AllDataFramgment extends Fragment{
 				gtp.getTop();*/
 
 			ShowBarChart s = new ShowBarChart(getActivity(),response);
-			GraphicalView Gv = s.openChart(2,15.0f,true);
+			GraphicalView Gv = s.openChart(2,12.0f,true);
 			LinearLayout layout = (LinearLayout) getActivity().findViewById(
 						R.id.dashboard_chart_layout);
 			layout.removeAllViews();

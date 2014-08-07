@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.Header;
+import org.apache.http.protocol.HTTP;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -55,6 +56,7 @@ public class BarGraphCalled {
 	//String url="http://192.168.1.3:8080/appstrender_service/appstrender/appdata/readAllById/" +tm.getDeviceId()+"/" + dates.get(0) + "/" + dates.get(1) + "/" +dates.get(2) ;
 	String url=Home.SERVER_URL_ADD + "readAllById/"+tm.getDeviceId()+"/" + dates.get(0) + "/" + dates.get(1) + "/" +dates.get(2) ;
 		AsyncHttpClient client= new AsyncHttpClient();
+		client.setTimeout(15000);	//System.out.println();	
 	client.get(context, url, new JsonHttpResponseHandler(){
 	
 		private ProgressDialog dialog;
@@ -121,8 +123,9 @@ public class BarGraphCalled {
 		@Override
 		public void onFailure(int statusCode, Header[] headers,
 				Throwable throwable, JSONObject errorResponse) {
-			//System.out.println("Failed: " + responseString);
-			Toast.makeText(context,  "Unable to calculate network utilization at this time", Toast.LENGTH_SHORT).show();
+			System.out.println("Failed: " + statusCode);
+			if(statusCode==0)
+				Toast.makeText(context,  "The connection timed-out, Please try later.", Toast.LENGTH_SHORT).show();
 		
 		}
 
